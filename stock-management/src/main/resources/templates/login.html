@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<th:block th:include="fragments/head :: head" />
+
+<body class="animated fadeInUp">
+
+<!-- MESSAGE WHEN LOG IN ERROR-->
+<div th:if="${param.error}" class="alert alert-danger fade in">
+    <button class="close" data-dismiss="alert">
+        ×
+    </button>
+    <i class="fa-fw fa fa-times"></i>
+    <strong>Error</strong> The Username or Password is not correct.
+</div>
+<!-- MESSAGE WHEN LOG OUT-->
+<div th:if="${param.logout}" class="alert alert-success fade in">
+    <button class="close" data-dismiss="alert">
+        ×
+    </button>
+    <i class="fa-fw fa fa-check"></i>
+    <strong>Success</strong> You have logged out.
+</div>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+        <div class="row">
+            <img src="img/anachak.png" alt="Anachak" style="display: block; margin-left: auto; margin-right: auto; width:20%; height: 20%" >
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-3">
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6">
+                <div class="well no-padding">
+                    <form th:action="@{/login}" method="post" id="login-form" class="smart-form client-form">
+                        <header>
+                            LOG IN
+                        </header>
+
+                        <fieldset>
+                            <section>
+                                <label class="label">Username</label>
+                                <label class="input"> <i class="icon-append fa fa-user"></i>
+                                    <input type="text" name="username">
+                                    <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i>
+                                        Please input your username.</b></label>
+                            </section>
+                            <section>
+                                <label class="label">Password</label>
+                                <label class="input"> <i class="icon-append fa fa-lock"></i>
+                                    <input type="password" name="password">
+                                    <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i>
+                                        Enter your password.</b>
+                                </label>
+                            </section>
+                            <section>
+                                <label class="checkbox">
+                                    <input type="checkbox" name="remember">
+                                    <i></i>Keep logged in</label>
+                            </section>
+                        </fieldset>
+                        <footer>
+                            <button type="submit" class="btn btn-success">
+                                LOG IN <i class="fa fa-sign-in"></i>
+                            </button>
+                        </footer>
+                    </form>
+
+                </div>
+
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-3">
+            </div>
+        </div>
+    </div>
+    <!-- END MAIN CONTENT -->
+<!--</div>-->
+<!-- END MAIN -->
+<th:block th:include="fragments/foot :: foot" />
+</body>
+
+</html>

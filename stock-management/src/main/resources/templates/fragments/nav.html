@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en-us"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="nav">
+    <nav>
+        <ul>
+            <li>
+                <a th:href="@{/home}"><i class="fa fa-lg fa-fw fa-home"></i><span
+                        class="menu-item-parent">Home</span></a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span
+                        class="menu-item-parent">Stocks</span></a>
+                <ul>
+                    <li th:classappend="${active_page == 'customers'} ? 'active'">
+                        <a th:href="@{/customers}">Customers <span class="label label-success">done</span></a>
+                    </li>
+                    <li th:classappend="${active_page == 'unit-measures'} ? 'active'">
+                        <a th:href="@{/unit-measures}">Unit Measures <span class="label label-success">done</span> </a>
+                    </li>
+                    <li th:classappend="${active_page == 'pos'} ? 'active'">
+                        <a th:href="@{/pos}">POS <span class="label label-success">done</span></a>
+                    </li>
+                    <li th:classappend="${active_page == 'categories'} ? 'active'">
+                        <a th:href="@{/categories}">Categories <span class="label label-success">done</span> </a>
+                    </li>
+                    <li th:classappend="${active_page == 'items'} ? 'active'">
+                        <a th:href="@{/items}">Items <span class="label label-success">done</span></a>
+                    </li>
+                    <li th:classappend="${active_page == 'vendors'} ? 'active'">
+                        <a th:href="@{/vendors}">Vendors <span class="label label-success">done</span> </a>
+                    </li>
+                    <li th:classappend="${active_page == 'vendor-types'} ? 'active'">
+                        <a th:href="@{/vendor-types}">Vendor Types <span class="label label-success">done</span> </a>
+                    </li>
+                    <li th:classappend="${active_page == 'stock-in'} ? 'active'">
+                        <a th:href="@{/stock-in}">Stock In <span class="label label-success">done</span> </a>
+                    </li>
+                    <li th:classappend="${active_page == 'exchange-rate'} ? 'active'">
+                        <a th:href="@{/exchange-rate}">Exchange Rate</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-lg fa-fw fa-cog"></i> <span
+                        class="menu-item-parent">Administration</span></a>
+                <ul>
+                    <li th:classappend="${active_page == 'users'} ? 'active'">
+                        <a th:href="@{/users}">Users <span class="label label-success">done</span> </a>
+                    </li>
+                    <li th:classappend="${active_page == 'profiles'} ? 'active'">
+                        <a th:href="@{/profiles}">Profiles <span class="label label-success">done</span> </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/login}">Login screen</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</th:block>

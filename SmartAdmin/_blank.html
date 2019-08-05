@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="utf-8">
+    <title> SmartAdmin </title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- #CSS Links -->
+    <!-- Basic Styles -->
+    <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/font-awesome.min.css">
+
+    <!-- SmartAdmin Styles : Caution! DO NOT change the order -->
+    <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production-plugins.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-skins.min.css">
+
+    <!-- SmartAdmin RTL Support -->
+    <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-rtl.min.css">
+
+    <!-- We recommend you use "your_style.css" to override SmartAdmin
+             specific styles this will also ensure you retrain your customization with each SmartAdmin update.
+        <link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css"> -->
+
+    <!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
+    <link rel="stylesheet" type="text/css" media="screen" href="css/demo.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="la-controls.css">
+
+    <!-- #FAVICONS -->
+    <link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon">
+
+    <!-- #GOOGLE FONT -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+
+
+</head>
+
+<body class="">
+
+    <!-- #HEADER -->
+    <header id="header">
+        <div id="logo-group">
+            <!-- PLACE YOUR LOGO HERE -->
+            <span id="logo"> <img src="img/logo.png" alt="SmartAdmin"> </span>
+            <!-- END LOGO PLACEHOLDER -->
+
+            <!-- Note: The activity badge color changes when clicked and resets the number to 0
+                 Suggestion: You may want to set a flag when this happens to tick off all checked messages / notifications -->
+            <span id="activity" class="activity-dropdown"> <i class="fa fa-user"></i> <b class="badge"> 21 </b> </span>
+
+            <!-- AJAX-DROPDOWN : control this dropdown height, look and feel from the LESS variable file -->
+            <div class="ajax-dropdown">
+
+                <!-- the ID links are fetched via AJAX to the ajax container "ajax-notifications" -->
+                <div class="btn-group btn-group-justified" data-toggle="buttons">
+                    <label class="btn btn-default">
+                        <input type="radio" name="activity" id="ajax/notify/mail.html">
+                        Msgs (14) </label>
+                    <label class="btn btn-default">
+                        <input type="radio" name="activity" id="ajax/notify/notifications.html">
+                        notify (3) </label>
+                    <label class="btn btn-default">
+                        <input type="radio" name="activity" id="ajax/notify/tasks.html">
+                        Tasks (4) </label>
+                </div>
+
+                <!-- notification content -->
+                <div class="ajax-notifications custom-scroll">
+
+                    <div class="alert alert-transparent">
+                        <h4>Click a button to show messages here</h4>
+                        This blank page message helps protect your privacy, or you can show the first message here
+                        automatically.
+                    </div>
+
+                    <i class="fa fa-lock fa-4x fa-border"></i>
+
+                </div>
+                <!-- end notification content -->
+
+                <!-- footer: refresh area -->
+                <span> Last updated on: 12/12/2013 9:43AM
+                    <button type="button" data-loading-text="<i class='fa fa-refresh fa-spin'></i> Loading..."
+                        class="btn btn-xs btn-default pull-right">
+                        <i class="fa fa-refresh"></i>
+                    </button> </span>
+                <!-- end footer -->
+
+            </div>
+            <!-- END AJAX-DROPDOWN -->
+        </div>
+
+        <!-- #PROJECTS: projects dropdown -->
+        <div class="project-context hidden-xs">
+
+            <span class="label">Projects:</span>
+            <span class="project-selector dropdown-toggle" data-toggle="dropdown">Recent projects <i
+                    class="fa fa-angle-down"></i></span>
+
+            <!-- Suggestion: populate this list with fetch and push technique -->
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="javascript:void(0);">Online e-merchant management system - attaching integration with the
+                        iOS</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);">Notes on pipeline upgradee</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);">Assesment Report for merchant account</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="javascript:void(0);"><i class="fa fa-power-off"></i> Clear</a>
+                </li>
+            </ul>
+            <!-- end dropdown-menu-->
+
+        </div>
+        <!-- end projects dropdown -->
+
+        <!-- #TOGGLE LAYOUT BUTTONS -->
+        <!-- pulled right: nav area -->
+        <div class="pull-right">
+
+            <!-- collapse menu button -->
+            <div id="hide-menu" class="btn-header pull-right">
+                <span> <a href="javascript:void(0);" data-action="toggleMenu" title="Collapse Menu"><i
+                            class="fa fa-reorder"></i></a>
+                </span>
+            </div>
+            <!-- end collapse menu -->
+
+            <!-- #MOBILE -->
+            <!-- Top menu profile link : this shows only when top menu is active -->
+            <ul id="mobile-profile-img" class="header-dropdown-list hidden-xs padding-5">
+                <li class="">
+                    <a href="#" class="dropdown-toggle no-margin userdropdown" data-toggle="dropdown">
+                        <img src="img/avatars/sunny.png" alt="John Doe" class="online" />
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                        <li>
+                            <a href="javascript:void(0);" class="padding-10 padding-top-0 padding-bottom-0"><i
+                                    class="fa fa-cog"></i>
+                                Setting</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="profile.html" class="padding-10 padding-top-0 padding-bottom-0"> <i
+                                    class="fa fa-user"></i> <u>P</u>rofile</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="javascript:void(0);" class="padding-10 padding-top-0 padding-bottom-0"
+                                data-action="toggleShortcut"><i class="fa fa-arrow-down"></i> <u>S</u>hortcut</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="javascript:void(0);" class="padding-10 padding-top-0 padding-bottom-0"
+                                data-action="launchFullscreen"><i class="fa fa-arrows-alt"></i> Full <u>S</u>creen</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="login.html" class="padding-10 padding-top-5 padding-bottom-5"
+                                data-action="userLogout"><i class="fa fa-sign-out fa-lg"></i>
+                                <strong><u>L</u>ogout</strong></a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <!-- logout button -->
+            <div id="logout" class="btn-header transparent pull-right">
+                <span> <a href="login.html" title="Sign Out" data-action="userLogout"
+                        data-logout-msg="You can improve your security further after logging out by closing this opened browser"><i
+                            class="fa fa-sign-out"></i></a> </span>
+            </div>
+            <!-- end logout button -->
+
+            <!-- search mobile button (this is hidden till mobile view port) -->
+            <div id="search-mobile" class="btn-header transparent pull-right">
+                <span> <a href="javascript:void(0)" title="Search"><i class="fa fa-search"></i></a> </span>
+            </div>
+            <!-- end search mobile button -->
+
+            <!-- #SEARCH -->
+            <!-- input: search field -->
+            <form action="search.html" class="header-search pull-right">
+                <input id="search-fld" type="text" name="param" placeholder="Find reports and more">
+                <button type="submit">
+                    <i class="fa fa-search"></i>
+                </button>
+                <a href="javascript:void(0);" id="cancel-search-js" title="Cancel Search"><i
+                        class="fa fa-times"></i></a>
+            </form>
+            <!-- end input: search field -->
+
+            <!-- fullscreen button -->
+            <div id="fullscreen" class="btn-header transparent pull-right">
+                <span> <a href="javascript:void(0);" data-action="launchFullscreen" title="Full Screen"><i
+                            class="fa fa-arrows-alt"></i></a>
+                </span>
+            </div>
+            <!-- end fullscreen button -->
+
+            <!-- #Voice Command: Start Speech -->
+            <div id="speech-btn" class="btn-header transparent pull-right hidden-sm hidden-xs">
+                <div>
+                    <a href="javascript:void(0)" title="Voice Command" data-action="voiceCommand"><i
+                            class="fa fa-microphone"></i></a>
+                    <div class="popover bottom">
+                        <div class="arrow"></div>
+                        <div class="popover-content">
+                            <h4 class="vc-title">Voice command activated <br>
+                                <small>Please speak clearly into the mic</small>
+                            </h4>
+                            <h4 class="vc-title-error text-center">
+                                <i class="fa fa-microphone-slash"></i> Voice command failed
+                                <br>
+                                <small class="txt-color-red">Must <strong>"Allow"</strong> Microphone</small>
+                                <br>
+                                <small class="txt-color-red">Must have <strong>Internet Connection</strong></small>
+                            </h4>
+                            <a href="javascript:void(0);" class="btn btn-success" onclick="commands.help()">See
+                                Commands</a>
+                            <a href="javascript:void(0);" class="btn bg-color-purple txt-color-white"
+                                onclick="$('#speech-btn .popover').fadeOut(50);">Close
+                                Popup</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end voice command -->
+
+            <!-- multiple lang dropdown : find all flags in the flags page -->
+            <ul class="header-dropdown-list hidden-xs">
+                <li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="img/blank.gif"
+                            class="flag flag-us" alt="United States">
+                        <span> English (US) </span> <i class="fa fa-angle-down"></i> </a>
+                    <ul class="dropdown-menu pull-right">
+                        <li class="active">
+                            <a href="javascript:void(0);"><img src="img/blank.gif" class="flag flag-us"
+                                    alt="United States">
+                                English (US)</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);"><img src="img/blank.gif" class="flag flag-fr" alt="France">
+                                Français</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);"><img src="img/blank.gif" class="flag flag-es" alt="Spanish">
+                                Español</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);"><img src="img/blank.gif" class="flag flag-de" alt="German">
+                                Deutsch</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);"><img src="img/blank.gif" class="flag flag-jp" alt="Japan">
+                                日本語</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);"><img src="img/blank.gif" class="flag flag-cn" alt="China">
+                                中文</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);"><img src="img/blank.gif" class="flag flag-it" alt="Italy">
+                                Italiano</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);"><img src="img/blank.gif" class="flag flag-pt" alt="Portugal">
+                                Portugal</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);"><img src="img/blank.gif" class="flag flag-ru" alt="Russia">
+                                Русский язык</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);"><img src="img/blank.gif" class="flag flag-kr" alt="Korea">
+                                한국어</a>
+                        </li>
+
+                    </ul>
+                </li>
+            </ul>
+            <!-- end multiple lang -->
+
+        </div>
+        <!-- end pulled right: nav area -->
+
+    </header>
+    <!-- END HEADER -->
+
+    <!-- #NAVIGATION -->
+    <!-- Left panel : Navigation area -->
+    <!-- Note: This width of the aside area can be adjusted through LESS variables -->
+    <aside id="left-panel">
+
+        <!-- User info -->
+        <div class="login-info">
+            <span>
+                <!-- User image size is adjusted inside CSS, it should stay as it -->
+
+                <a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
+                    <img src="img/avatars/sunny.png" alt="me" class="online" />
+                    <span>
+                        john.doe
+                    </span>
+                    <i class="fa fa-angle-down"></i>
+                </a>
+
+            </span>
+        </div>
+        <!-- end user info -->
+
+        <nav>
+            <!--
+            NOTE: Notice the gaps after each icon usage <i></i>..
+            Please note that these links work a bit different than
+            traditional href="" links. See documentation for details.
+            -->
+            <ul>
+                <li>
+                    <a href="root.html"><i class="fa fa-lg fa-fw fa-inbox"></i> <span
+                            class="menu-item-parent">Home</span></a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span
+                            class="menu-item-parent">Stocks</span></a>
+                    <ul>
+                        <li>
+                            <a href="create-invoice.html">Create Invoice</a>
+                        </li>
+                        <li>
+                            <a href="create-category.html">Create Catagory</a>
+                        </li>
+                        <li>
+                            <a href="create-item.html">Create Item</a>
+                        </li>
+                        <li>
+                            <a href="create-vendor.html">Create Vendor</a>
+                        </li>
+                        <li>
+                            <a href="stock-in.html">Stock In</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+
+        <span class="minifyme" data-action="minifyMenu">
+            <i class="fa fa-arrow-circle-left hit"></i>
+        </span>
+
+    </aside>
+    <!-- END NAVIGATION -->
+
+    <!-- MAIN PANEL -->
+    <div id="main" role="main">
+
+        <!-- RIBBON -->
+        <div>
+            <ol class="breadcrumb">
+                <li><a id="btn-new-item" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> New</a></li>
+                <li><a id="btn-save-item" class="btn btn-sm btn-success"><i class="fa fa-check"></i> Commmit</a></li>
+                <li><a id="btn-find-item" class="btn btn-sm btn-primary" data-toggle="modal"
+                        data-target="#find-item-modal"><i class="fa fa-search"></i> Find</a></li>
+            </ol>
+        </div>
+        <!-- END RIBBON -->
+
+
+        <!-- MAIN CONTENT -->
+        <div id="content">
+            <!-- widget grid -->
+            <section id="widget-grid">
+                <!-- row -->
+                <div class="row">
+                    <article class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false"
+                            data-widget-colorbutton="false" data-widget-editbutton="false"
+                            data-widget-togglebutton="false">
+                            <header>
+                                <span class="widget-icon"> <i class="fa fa-list-alt"></i> </span>
+                                <h2>Listing</h2>
+                            </header>
+                            <div>
+                                <div class="jarviswidget-editbox">
+                                    <input class="form-control" type="text">
+                                </div>
+                                <div class="widget-body no-padding">
+                                    <div class="table-responsive padding-5">
+                                        <table id="tblListing1" class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Item ID</th>
+                                                    <th>Item Name</th>
+                                                    <th>Stock Type</th>
+                                                    <th>Category</th>
+                                                    <th>Cost Method</th>
+                                                    <th>Cost</th>
+                                                    <th>Sale Price</th>
+                                                    <th>Min Balance</th>
+                                                    <th>Max Balance</th>
+                                                    <th>Inactive</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr th:each="data: ${vendors}">
+                                                    <td th:text="${data.vendor_id}">101</td>
+                                                    <td th:text="${data.company_name}">iPhone 6s</td>
+                                                    <td th:text="${data.company_name_khmer}">Stock Parts</td>
+                                                    <td th:text="${data.contact}">​Phones</td>
+                                                    <td th:text="${data.phone}">FIFO</td>
+                                                    <td th:text="${data.phone}">45.00$</td>
+                                                    <td th:text="${data.phone}">100.00$</td>
+                                                    <td th:text="${data.phone}">2</td>
+                                                    <td th:text="${data.phone}">20</td>
+                                                    <td>
+                                                        <span th:if="${data.inactive} == false"
+                                                            class="label label-success">active</span>
+                                                    </td>
+                                                    <td>
+                                                        <a th:href="${'/vendors/view/' + data.vendor_id}"
+                                                            class="btn btn-xs btn-primary">EDIT</a>
+                                                    </td>
+                                                </tr>
+                                                <tr th:each="data: ${vendors}">
+                                                    <td th:text="${data.vendor_id}">101</td>
+                                                    <td th:text="${data.company_name}">iPhone 6s</td>
+                                                    <td th:text="${data.company_name_khmer}">Stock Parts</td>
+                                                    <td th:text="${data.contact}">​Phones</td>
+                                                    <td th:text="${data.phone}">FIFO</td>
+                                                    <td th:text="${data.phone}">45.00$</td>
+                                                    <td th:text="${data.phone}">100.00$</td>
+                                                    <td th:text="${data.phone}">2</td>
+                                                    <td th:text="${data.phone}">20</td>
+                                                    <td>
+                                                        <span th:if="${data.inactive} == false"
+                                                            class="label label-success">active</span>
+                                                    </td>
+                                                    <td>
+                                                        <a th:href="${'/vendors/view/' + data.vendor_id}"
+                                                            class="btn btn-xs btn-primary">EDIT</a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <!-- end row -->
+
+                <!-- row -->
+                <div class="row">
+                    <article class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="jarviswidget" id="wid-id-1">
+                            <header>
+                                <span class="widget-icon"> <i class="fa fa-comments"></i> </span>
+                                <h2>widget</h2>
+                            </header>
+                            <!-- widget div-->
+                            <div>
+                                <!-- widget edit box -->
+                                <div class="jarviswidget-editbox">
+                                    <input class="form-control" type="text">
+                                </div>
+                                <!-- end widget edit box -->
+
+                                <!-- widget content -->
+                                <div class="well no-margin no-padding">
+                                    <div class="widget-body">
+                                        <div class="form-group">
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+
+                                                        <!-- START CONTROL -->
+                                                        <div id="vendor_id" class="input-group">
+                                                            <div class="input-group-btn">
+                                                                <label class="form-control ctl_label cLabel"> Vendor ID:
+                                                                </label>
+                                                            </div>
+                                                            <input class="form-control ctl_textbox cCode" type="text"
+                                                                value="">
+                                                            <div class="input-group-btn">
+                                                                <button id="btnVendor" class="btn btn-default"
+                                                                    type="button" data-toggle="modal"
+                                                                    data-target="#find-vendor-modal">
+                                                                    <i class="fa fa-fw fa-list"></i>
+                                                                </button>
+                                                            </div>
+                                                            <div class="input-group-btn">
+                                                                <label class="form-control ctl_label cText"> Vendor Name
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <!-- END CONTROL -->
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+
+                                                    <!-- START CONTROL -->
+                                                    <div id="customer_id" class="input-group">
+                                                        <div class="input-group-btn">
+                                                            <label class="form-control ctl_label cLabel"> Customer ID:
+                                                            </label>
+                                                        </div>
+                                                        <input class="form-control ctl_textbox cCode" type="text"
+                                                            value="">
+                                                        <div class="input-group-btn">
+                                                            <button id="btnCustomer" class="btn btn-default"
+                                                                type="button" data-toggle="modal"
+                                                                data-target="#find-customer-modal">
+                                                                <i class="fa fa-fw fa-list"></i>
+                                                            </button>
+                                                        </div>
+                                                        <div class="input-group-btn">
+                                                            <label class="form-control ctl_label cText"> Customer Name
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <!-- END CONTROL -->
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end widget content -->
+
+                            </div>
+                            <!-- end widget div -->
+
+                        </div>
+                        <!-- end widget -->
+
+                    </article>
+                    <!-- WIDGET END -->
+
+                </div>
+
+                <!-- end row -->
+            </section>
+            <!-- end widget grid -->
+
+            <!-- Vendor Modal -->
+            <div class="modal" id="find-vendor-modal" tabindex="-1" role="dialog" aria-labelledby="modal-label"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                &times;
+                            </button>
+                            <h4 class="modal-title" id="modal-label">Fiplus Khmer</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="table-responsive">
+                                    <table id="tblVendors" data-target="vendor_id"
+                                        class="table table-bordered table-hover">
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+
+            <!-- Customer Modal -->
+            <div class="modal" id="find-customer-modal" tabindex="-1" role="dialog" aria-labelledby="modal-label"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                &times;
+                            </button>
+                            <h4 class="modal-title" id="modal-label">Fiplus Khmer</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="table-responsive">
+                                    <table id="tblCustomers" data-target="customer_id"
+                                        class="table table-bordered table-hover">
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+
+            <!-- Find Item Modal -->
+            <div class="modal fade" id="find-item-modal" tabindex="-1" role="dialog" aria-labelledby="modal-label"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                &times;
+                            </button>
+                            <h4 class="modal-title" id="modal-label">Finding Items</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="item_id"> Item ID</label>
+                                        <input id="item_id" type="text" class="form-control" value="" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="item_name">Item Name</label>
+                                        <input id="item_name" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="stock_type">Stock Type</label>
+                                        <input id="stock_type" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="category">Category</label>
+                                        <input id="category" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="cost_method">Cost Method</label>
+                                        <input id="cost_method" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" class="checkbox style-0">
+                                                <span>Inactive</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <a id="btnFind" class="btn btn-labeled btn-primary" data-toggle="modal"
+                                        data-target="#listing-modal">
+                                        <span class="btn-label">
+                                            <i class="glyphicon glyphicon-search"></i></span>Find</a>
+                                    <a class="btn btn-labeled btn-danger" data-dismiss="modal"> <span class="btn-label">
+                                            <i class="glyphicon glyphicon-remove-circle"></i></span> Cancel </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+
+
+            <!-- Listing Modal -->
+            <div class="modal" id="listing-modal" tabindex="-1" role="dialog" aria-labelledby="modal-label"
+                aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                &times;
+                            </button>
+                            <h4 class="modal-title" id="modal-label">Fiplus Khmer</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="table-responsive">
+                                    <table id="tblListing" class="table table-bordered table-hover">
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+
+        </div>
+        <!-- END MAIN CONTENT -->
+
+    </div>
+    <!-- END MAIN PANEL -->
+    <div id="shortcut">
+        <ul>
+            <li>
+                <a href="inbox.html" class="jarvismetro-tile big-cubes bg-color-blue"> <span class="iconbox"> <i
+                            class="fa fa-envelope fa-4x"></i>
+                        <span>Mail <span class="label pull-right bg-color-darken">14</span></span> </span> </a>
+            </li>
+            <li>
+                <a href="calendar.html" class="jarvismetro-tile big-cubes bg-color-orangeDark"> <span class="iconbox">
+                        <i class="fa fa-calendar fa-4x"></i>
+                        <span>Calendar</span> </span> </a>
+            </li>
+            <li>
+                <a href="gmap-xml.html" class="jarvismetro-tile big-cubes bg-color-purple"> <span class="iconbox"> <i
+                            class="fa fa-map-marker fa-4x"></i>
+                        <span>Maps</span> </span> </a>
+            </li>
+            <li>
+                <a href="invoice.html" class="jarvismetro-tile big-cubes bg-color-blueDark"> <span class="iconbox"> <i
+                            class="fa fa-book fa-4x"></i>
+                        <span>Invoice <span class="label pull-right bg-color-darken">99</span></span> </span> </a>
+            </li>
+            <li>
+                <a href="gallery.html" class="jarvismetro-tile big-cubes bg-color-greenLight"> <span class="iconbox"> <i
+                            class="fa fa-picture-o fa-4x"></i>
+                        <span>Gallery </span> </span> </a>
+            </li>
+            <li>
+                <a href="profile.html" class="jarvismetro-tile big-cubes selected bg-color-pinkDark"> <span
+                        class="iconbox"> <i class="fa fa-user fa-4x"></i> <span>My Profile </span> </span> </a>
+            </li>
+        </ul>
+    </div>
+    <!-- END SHORTCUT AREA -->
+
+    <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
+    <script data-pace-options='{ "restartOnRequestAfter": true }' src="js/plugin/pace/pace.min.js"></script>
+
+    <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        if (!window.jQuery) {
+            document.write('<script src="js/libs/jquery-3.2.1.min.js"><\/script>');
+        }
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+        if (!window.jQuery.ui) {
+            document.write('<script src="js/libs/jquery-ui.min.js"><\/script>');
+        }
+    </script>
+
+    <!-- IMPORTANT: APP CONFIG -->
+    <script src="js/app.config.js"></script>
+
+    <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
+    <script src="js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script>
+
+    <!-- BOOTSTRAP JS -->
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+
+    <!-- CUSTOM NOTIFICATION -->
+    <script src="js/notification/SmartNotification.min.js"></script>
+
+    <!-- JARVIS WIDGETS -->
+    <script src="js/smartwidgets/jarvis.widget.min.js"></script>
+
+    <!-- EASY PIE CHARTS -->
+    <script src="js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+
+    <!-- SPARKLINES -->
+    <script src="js/plugin/sparkline/jquery.sparkline.min.js"></script>
+
+    <!-- JQUERY VALIDATE -->
+    <script src="js/plugin/jquery-validate/jquery.validate.min.js"></script>
+
+    <!-- JQUERY MASKED INPUT -->
+    <script src="js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+
+    <!-- JQUERY SELECT2 INPUT -->
+    <script src="js/plugin/select2/select2.min.js"></script>
+
+    <!-- JQUERY UI + Bootstrap Slider -->
+    <script src="js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
+
+    <!-- browser msie issue fix -->
+    <script src="js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
+
+    <!-- FastClick: For mobile devices -->
+    <script src="js/plugin/fastclick/fastclick.min.js"></script>
+
+    <!--[if IE 8]>
+
+    <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
+
+    <![endif]-->
+
+    <!-- Demo purpose only -->
+    <script src="js/demo.min.js"></script>
+
+    <!-- MAIN APP JS FILE -->
+    <script src="js/app.min.js"></script>
+
+    <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
+    <!-- Voice command : plugin -->
+    <script src="js/speech/voicecommand.min.js"></script>
+
+    <!-- SmartChat UI : plugin -->
+    <script src="js/smart-chat-ui/smart.chat.ui.min.js"></script>
+    <script src="js/smart-chat-ui/smart.chat.manager.min.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+            pageSetUp();
+            $(document).on("click", "#btn-save-item", function (event) {
+                closedthis(event);
+            });
+
+            function closedthis(event) {
+                $.smallBox({
+                    title: "Fiplus Khmer",
+                    content: "You have committed successfully!",
+                    color: "#739E73",
+                    iconSmall: "fa fa-bell-o",
+                    timeout: 2500
+                });
+                event.preventDefault();
+
+            }
+        });
+
+        var vendor_data = [
+            { vendor_id: "Vendor ID", vendor_name: "Vendor Name", phone: "Phone", remark: "Remark" },
+            { vendor_id: "V-001", vendor_name: "Fiplus Khmer", phone: "012 12 12 12", remark: "123" },
+            { vendor_id: "V-002", vendor_name: "Samlanh Finance", phone: "012 13 13 13", remark: "123" },
+            { vendor_id: "V-003", vendor_name: "Blue Finance", phone: "012 13 13 13", remark: "123" }
+        ];
+        var customer_data = [
+            { customer_id: "Customer ID", customer_name: "Customer Name", gender: "Gender", phone: "Phone", remark: "Remark" },
+            { customer_id: "C-001", customer_name: "Soy Hunridolla", gender: "Male", phone: "012 12 12 12", remark: "123" },
+            { customer_id: "C-002", customer_name: "Khin Phorn", gender: "Female", phone: "012 13 13 13", remark: "123" },
+            { customer_id: "C-003", customer_name: "Sok DaraVisal", gender: "Male", phone: "012 13 13 13", remark: "123" }
+        ];
+        var item_data = [
+            { item_id: "Item ID", item_name: "Item Name", cost: "Cost", sale_price: "Sale Price", min_balance: "Min Balance", max_balance: "Max Balance", inactive: "Inactive", action: "Action" },
+            { item_id: "I-0001", item_name: "Macbook Pro 2012 13\"", cost: "1,500.00$", sale_price: "1,600.00$", min_balance: "2", max_balance: "20", inactive: "<span class=\"label label-success\">active</span>", action: "<a href=\"create-item.html\" class=\"btn btn-xs btn-primary\">EDIT</a>" },
+            { item_id: "I-0002", item_name: "Surface 4 14\"", cost: "850.00$", sale_price: "1,000.00$", min_balance: "2", max_balance: "20", inactive: "<span class=\"label label-success\">active</span>", action: "<a href=\"create-item.html\" class=\"btn btn-xs btn-primary\">EDIT</a>" },
+            { item_id: "I-0003", item_name: "iPhone X MAX", cost: "650.00$", sale_price: "700.00$", min_balance: "2", max_balance: "20", inactive: "<span class=\"label label-success\">active</span>", action: "<a href=\"create-item.html\" class=\"btn btn-xs btn-primary\">EDIT</a>" }
+        ];
+
+        $(document).on("click", "#btnVendor", function (event) {
+            load_modal_data("#btnVendor", "#tblVendors", vendor_data);
+        });
+
+        $(document).on("click", "#btnCustomer", function (event) {
+            load_modal_data("#btnCustomer", "#tblCustomers", customer_data);
+        });
+
+        $(document).on("click", "#btnFind", function (event) {
+            load_modal_data("#btnFind", "#tblListing", item_data);
+        });
+
+
+        function load_modal_data(button_id, table_id, modal_data) {
+            $(table_id).html('');
+            var table_header = "<thead>" + "<tr>";
+            $.each(modal_data[0], function (key, value) {
+                table_header += "<th>" + value + "</th>";
+            });
+            table_header += "</tr></thead>"
+
+            var table_body = "<tbody>";
+            $.each(modal_data, function (index, object) {
+                if (index === 0) return;
+                table_body += "<tr class=\"AA\">";
+                $.each(object, function (key, value) {
+                    table_body += "<td>" + value + "</td>";
+                });
+                table_body += "</tr>";
+            });
+            table_body += "</tbody>";
+            $(table_id).append(table_header);
+            $(table_id).append(table_body);
+        }
+
+        $(document).on("dblclick", "tr.AA", function (event) {
+            var cCode = $(this).find('td').eq(0).html();
+            var cText = $(this).find('td').eq(1).html();
+            var control_target = $(this).closest('table').attr('data-target');
+            var control_id = $('#' + control_target + '').attr('id');
+            $('.cCode', '#' + control_id + '').val(cCode);
+            $('.cText', '#' + control_id + '').html(cText);
+            var current_modal = $(this).closest('.modal').attr('id');
+            $('#' + current_modal + '').modal('toggle');
+        });
+    </script>
+
+</body>
+
+</html>

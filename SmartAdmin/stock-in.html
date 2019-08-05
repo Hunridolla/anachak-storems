@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="utf-8">
+    <title> SmartAdmin </title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- #CSS Links -->
+    <!-- Basic Styles -->
+    <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/font-awesome.min.css">
+
+    <!-- SmartAdmin Styles : Caution! DO NOT change the order -->
+    <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production-plugins.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-skins.min.css">
+
+    <!-- SmartAdmin RTL Support -->
+    <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-rtl.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="la-controls.css">
+
+
+    <!-- We recommend you use "your_style.css" to override SmartAdmin
+             specific styles this will also ensure you retrain your customization with each SmartAdmin update.
+        <link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css"> -->
+
+    <!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
+    <link rel="stylesheet" type="text/css" media="screen" href="css/demo.min.css">
+
+    <!-- #FAVICONS -->
+    <link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon">
+
+    <!-- #GOOGLE FONT -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+</head>
+
+<body class="smart-style-4">
+    <!-- #HEADER -->
+    <header id="header">
+        <div id="logo-group">
+
+            <!-- PLACE YOUR LOGO HERE -->
+            <span id="logo">
+                <img src="img/anachak-logo.png" alt="SmartAdmin"> </span>
+
+            <!-- END LOGO PLACEHOLDER -->
+            <span id="activity" class="activity-dropdown">
+                <i class="fa fa-user"></i>
+                <b class="badge"> 21 </b>
+            </span>
+
+            <!-- AJAX-DROPDOWN : control this dropdown height, look and feel from the LESS variable file -->
+            <div class="ajax-dropdown">
+
+                <!-- the ID links are fetched via AJAX to the ajax container "ajax-notifications" -->
+                <div class="btn-group btn-group-justified" data-toggle="buttons">
+                    <label class="btn btn-default">
+                        <input type="radio" name="activity" id="ajax/notify/mail.html"> Msgs (14) </label>
+                    <label class="btn btn-default">
+                        <input type="radio" name="activity" id="ajax/notify/notifications.html"> notify (3) </label>
+                    <label class="btn btn-default">
+                        <input type="radio" name="activity" id="ajax/notify/tasks.html"> Tasks (4) </label>
+                </div>
+
+                <!-- notification content -->
+                <div class="ajax-notifications custom-scroll">
+
+                    <div class="alert alert-transparent">
+                        <h4>Click a button to show messages here</h4>
+                        This blank page message helps protect your privacy, or you can show the first message here
+                        automatically.
+                    </div>
+
+                    <i class="fa fa-lock fa-4x fa-border"></i>
+
+                </div>
+                <!-- end notification content -->
+
+                <!-- footer: refresh area -->
+                <span> Last updated on: 12/12/2013 9:43AM
+                    <button type="button" data-loading-text="<i class='fa fa-refresh fa-spin'></i> Loading..."
+                        class="btn btn-xs btn-default pull-right">
+                        <i class="fa fa-refresh"></i>
+                    </button>
+                </span>
+                <!-- end footer -->
+
+            </div>
+            <!-- END AJAX-DROPDOWN -->
+        </div>
+
+        <!-- #TOGGLE LAYOUT BUTTONS -->
+        <!-- pulled right: nav area -->
+        <div class="pull-right">
+
+            <!-- collapse menu button -->
+            <div id="hide-menu" class="btn-header pull-right">
+                <span>
+                    <a href="javascript:void(0);" data-action="toggleMenu" title="Collapse Menu">
+                        <i class="fa fa-reorder"></i>
+                    </a>
+                </span>
+            </div>
+            <!-- end collapse menu -->
+
+            <!-- #MOBILE -->
+            <!-- Top menu profile link : this shows only when top menu is active -->
+            <ul id="mobile-profile-img" class="header-dropdown-list hidden-xs padding-5">
+                <li class="">
+                    <a href="#" class="dropdown-toggle no-margin userdropdown" data-toggle="dropdown">
+                        <img src="img/avatars/sunny.png" alt="John Doe" class="online" />
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                        <li>
+                            <a href="javascript:void(0);" class="padding-10 padding-top-0 padding-bottom-0">
+                                <i class="fa fa-cog"></i> Setting</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="profile.html" class="padding-10 padding-top-0 padding-bottom-0">
+                                <i class="fa fa-user"></i>
+                                <u>P</u>rofile</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="javascript:void(0);" class="padding-10 padding-top-0 padding-bottom-0"
+                                data-action="toggleShortcut">
+                                <i class="fa fa-arrow-down"></i>
+                                <u>S</u>hortcut</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="javascript:void(0);" class="padding-10 padding-top-0 padding-bottom-0"
+                                data-action="launchFullscreen">
+                                <i class="fa fa-arrows-alt"></i> Full
+                                <u>S</u>creen</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="login.html" class="padding-10 padding-top-5 padding-bottom-5"
+                                data-action="userLogout">
+                                <i class="fa fa-sign-out fa-lg"></i>
+                                <strong>
+                                    <u>L</u>ogout</strong>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <!-- logout button -->
+            <div id="logout" class="btn-header transparent pull-right">
+                <span>
+                    <a href="login.html" title="Sign Out" data-action="userLogout"
+                        data-logout-msg="You can improve your security further after logging out by closing this opened browser">
+                        <i class="fa fa-sign-out"></i>
+                    </a>
+                </span>
+            </div>
+            <!-- end logout button -->
+
+            <!-- search mobile button (this is hidden till mobile view port) -->
+            <div id="search-mobile" class="btn-header transparent pull-right">
+                <span>
+                    <a href="javascript:void(0)" title="Search">
+                        <i class="fa fa-search"></i>
+                    </a>
+                </span>
+            </div>
+            <!-- end search mobile button -->
+
+            <!-- fullscreen button -->
+            <div id="fullscreen" class="btn-header transparent pull-right">
+                <span>
+                    <a href="javascript:void(0);" data-action="launchFullscreen" title="Full Screen">
+                        <i class="fa fa-arrows-alt"></i>
+                    </a>
+                </span>
+            </div>
+            <!-- end fullscreen button -->
+        </div>
+        <!-- end pulled right: nav area -->
+
+    </header>
+    <!-- END HEADER -->
+    <aside id="left-panel">
+        <!-- User info -->
+        <div class="login-info">
+            <span>
+                <!-- User image size is adjusted inside CSS, it should stay as it -->
+                <a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
+                    <img src="img/avatars/sunny.png" alt="me" class="online" />
+                    <span>
+                        john.doe
+                    </span>
+                    <i class="fa fa-angle-down"></i>
+                </a>
+
+            </span>
+        </div>
+        <!-- end user info -->
+
+        <nav>
+            <ul>
+                <li>
+                    <a href="home.html">
+                        <i class="fa fa-lg fa-fw fa-inbox"></i>
+                        <span class="menu-item-parent">Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-lg fa-fw fa-bar-chart-o"></i>
+                        <span class="menu-item-parent">Stocks</span>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="create-invoice.html">Create Invoice</a>
+                        </li>
+                        <li>
+                            <a href="create-category.html">Create Catagory</a>
+                        </li>
+                        <li>
+                            <a href="create-item.html">Create Item</a>
+                        </li>
+                        <li>
+                            <a href="create-vendor.html">Create Vendor</a>
+                        </li>
+                        <li>
+                            <a href="vendor-type.html">Create Vendor Type</a>
+                        </li>
+                        <li class="active">
+                            <a href="stock-in.html">Stock In</a>
+                        </li>
+                        <li>
+                            <a href="exchange-rate.html">Exchange Rate</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+
+        <span class="minifyme" data-action="minifyMenu">
+            <i class="fa fa-arrow-circle-left hit"></i>
+        </span>
+
+    </aside>
+    <!-- END NAVIGATION -->
+
+    <!-- MAIN PANEL -->
+    <div id="main" role="main">
+
+        <!-- RIBBON -->
+        <div>
+            <ol class="breadcrumb">
+                <li><a id="btn-new-invoice" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> New</a></li>
+                <li><a id="btn-save-invoice" class="btn btn-sm btn-success"><i class="fa fa-check"></i> Commmit</a></li>
+                <li><a id="btn-find-invoice" class="btn btn-sm btn-primary" data-toggle="modal"
+                        data-target="#find-item-modal"><i class="fa fa-search"></i> Find</a></li>
+            </ol>
+        </div>
+        <!-- END RIBBON -->
+
+        <!-- MAIN CONTENT -->
+        <div id="content">
+            <!-- widget grid -->
+            <section id="widget-grid" class="">
+
+                <!-- row -->
+                <div class="row">
+
+                    <!-- NEW WIDGET START -->
+                    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false"
+                            data-widget-colorbutton="false" data-widget-deletebutton="true"
+                            data-widget-togglebutton="true">
+                            <header>
+                            </header>
+                            <!-- widget div-->
+                            <div>
+                                <!-- widget edit box -->
+                                <div class="jarviswidget-editbox">
+                                    <input class="form-control" type="text">
+                                </div>
+                                <!-- widget content -->
+                                <div class="widget-body no-padding">
+                                    <form id="frm-stock-in" class="smart-form" novalidate="novalidate">
+                                        <header>
+                                            <h3> Stock In </h3>
+                                        </header>
+                                        <fieldset>
+                                            <div class="row">
+                                                <section class="col col-3">
+                                                    <label class="label">Bill ID</label>
+                                                    <label for="bill-id" class="input">
+                                                        <input type="text" name="bill-id" id="bill-id" readonly>
+                                                    </label>
+                                                </section>
+                                            </div>
+                                            <div class="row">
+                                                <section class="col col-3">
+                                                    <label class="label">Date:</label>
+                                                    <label class="input">
+                                                        <i class="icon-append fa fa-calendar"></i>
+                                                        <input type="text" name="date" id="date" placeholder="">
+                                                    </label>
+                                                </section>
+                                                <section class="col col-3">
+                                                    <label class="label">Bill Due:</label>
+                                                    <label class="input">
+                                                        <i class="icon-append fa fa-calendar"></i>
+                                                        <input type="text" name="bill-due" id="bill-due" placeholder="">
+                                                    </label>
+                                                </section>
+                                                <section class="col col-3">
+                                                    <label class="label">Ref.No</label>
+                                                    <label for="ref-no" class="input">
+                                                        <input type="text" name="ref-no" id="ref-no" placeholder="">
+                                                    </label>
+                                                </section>
+                                                <section class="col col-3">
+                                                    <label class="label">Remark</label>
+                                                    <label for="Remark" class="input">
+                                                        <input type="text" name="remark" id="remark">
+                                                    </label>
+                                                </section>
+                                            </div>
+                                            <div class="row">
+                                                <section class="col col-3">
+                                                    <label class="label">Suppliers</label>
+                                                    <label class="select">
+                                                        <select name="suppliers">
+                                                            <option value="0" selected="" disabled="">Suppliers</option>
+                                                            <option value="1">Suppliers 1</option>
+                                                            <option value="2">Suppliers 2</option>
+                                                        </select>
+                                                        <i></i>
+                                                    </label>
+                                                </section>
+                                                <section class="col col-6">
+                                                    <label class="label">Address</label>
+                                                    <label for="address" class="input">
+                                                        <input type="text" name="address" id="address" placeholder="">
+                                                    </label>
+                                                </section>
+                                            </div>
+                                        </fieldset>
+                                        <header>
+                                            <h3>Item Received</h3>
+                                        </header>
+                                        <fieldset>
+                                            <div class="table-responsive">
+                                                <table id="item_received" class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Action</th>
+                                                            <th>Item.Code</th>
+                                                            <th>Description</th>
+                                                            <th>Qty</th>
+                                                            <th>Rate</th>
+                                                            <th>Disc.Value</th>
+                                                            <th>Sub.Amt</th>
+                                                            <th>Total.Amt</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <a class="btn btn-xs btn-success add-item">
+                                                                    <i class="fa fa-plus-square-o"></i></a>
+                                                                <a class="btn btn-xs btn-primary edit-item">
+                                                                    <i class="fa fa-edit"></i></a>
+                                                                <a class="btn btn-xs btn-danger remove-item">
+                                                                    <i class="fa fa-trash-o"></i></a>
+                                                            </td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </fieldset>
+                                        <fieldset>
+                                            <div class="row">
+                                                <section class="col col-8">
+                                                </section>
+                                                <section class="col col-2">
+                                                    <label class="label">Sub Amount:</label>
+                                                </section>
+                                                <section class="col col-2">
+                                                    <label for="total-subAmt" class="input">
+                                                        <input type="text" id="total-subAmt" readonly>
+                                                    </label>
+                                                </section>
+                                            </div>
+                                            <div class="row">
+                                                <section class="col col-8">
+                                                </section>
+                                                <section class="col col-2">
+                                                    <label class="label">Discount:</label>
+                                                </section>
+                                                <section class="col col-2">
+                                                    <label for="total-disc" class="input">
+                                                        <input type="text" name="total-disc" id="total-disc" readonly>
+                                                    </label>
+                                                </section>
+                                            </div>
+                                            <div class="row">
+                                                <section class="col col-8">
+                                                </section>
+                                                <section class="col col-2">
+                                                    <label class="label">Grand Amount:</label>
+                                                </section>
+                                                <section class="col col-2">
+                                                    <label for="total-amt" class="input">
+                                                        <input type="text" name="total-amt" id="total-amt" readonly>
+                                                    </label>
+                                                </section>
+                                            </div>
+                                        </fieldset>
+                                        <fieldset>
+                                            <div class="row">
+                                                <section class="col col-2">
+                                                    <a id="print" class="btn btn-primary btn-sm">
+                                                        <i class="fa fa-print"></i> Print</a>
+                                                    <a class="btn btn-danger btn-sm">
+                                                        <i class="fa fa-shopping-cart"></i> PO</a>
+                                                </section>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                                <!-- end widget content -->
+                            </div>
+                            <!-- end widget div -->
+
+                        </div>
+                        <!-- end widget -->
+
+                    </article>
+                    <!-- WIDGET END -->
+
+                </div>
+                <!-- end row -->
+            </section>
+            <!-- end widget grid -->
+        </div>
+        <!-- END MAIN CONTENT -->
+    </div>
+    <!-- END MAIN PANEL -->
+
+    <div class="modal" id="add-item-modal" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h5 class="modal-title" id="modal-label">Add Item <span id="status" class="label label-success"
+                            aria-valuetext="[new]" data-loading-text="">[new]</span></h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6" style="margin-top: 10px">
+                            <div class="input-group">
+                                <div class="input-group-btn" style="min-width: 120px;">
+                                    <label class="form-control ctl_label">Item Code:</label>
+                                </div>
+                                <input id="item-code" class="form-control ctl_textbox" type="text" tabindex="1"
+                                    oninput="this.value = this.value.toUpperCase()">
+                            </div>
+                        </div>
+                        <div class="col-md-6" style="margin-top: 10px">
+                            <input id="item-name" class="form-control ctl_textbox" type="text"
+                                value="iPhone 5s Earphone" readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6" style="margin-top: 10px">
+                            <div class="input-group">
+                                <div class="input-group-btn" style="min-width: 120px;">
+                                    <label class="form-control ctl_label">Cost:</label>
+                                </div>
+                                <input id="item-cost" class="form-control ctl_textbox" type="number" tabindex="2"
+                                    placeholder="0.00">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6" style="margin-top: 10px">
+                            <div class="input-group">
+                                <div class="input-group-btn" style="min-width: 120px;">
+                                    <label class="form-control ctl_label">Qty:</label>
+                                </div>
+                                <input id="item-qty" class="form-control ctl_textbox" type="number" tabindex="3"
+                                    placeholder="0.00">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6" style="margin-top: 10px">
+                            <div class="input-group">
+                                <div class="input-group-btn" style="min-width: 120px;">
+                                    <label class="form-control ctl_label">Discount:</label>
+                                </div>
+                                <input id="item-disc" class="form-control ctl_textbox" type="number" tabindex="4"
+                                    placeholder="0.00">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6" style="margin-top: 10px">
+                            <div class="input-group">
+                                <div class="input-group-btn" style="min-width: 120px;">
+                                    <label class="form-control ctl_label">Sub.Amt:
+                                    </label>
+                                </div>
+                                <input id="item-subAmt" class="form-control ctl_textbox" type="text" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6" style="margin-top: 10px">
+                            <div class="input-group">
+                                <div class="input-group-btn" style="min-width: 120px;">
+                                    <label class="form-control ctl_label">Total.Amt:
+                                    </label>
+                                </div>
+                                <input id="item-totalAmt" class="form-control ctl_textbox" type="text" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <a id="btn-add-item" class="btn btn-labeled btn-success" tabindex="5"> <span
+                                    class="btn-label">
+                                    <i class="glyphicon glyphicon-plus-sign"></i></span>Add</a>
+                            <a class="btn btn-default" data-dismiss="modal">Close</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
+    <script data-pace-options='{ "restartOnRequestAfter": true }' src="js/plugin/pace/pace.min.js"></script>
+
+    <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        if (!window.jQuery) {
+            document.write('<script src="js/libs/jquery-3.2.1.min.js"><\/script>');
+        }
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+        if (!window.jQuery.ui) {
+            document.write('<script src="js/libs/jquery-ui.min.js"><\/script>');
+        }
+    </script>
+
+    <!-- IMPORTANT: APP CONFIG -->
+    <script src="js/app.config.js"></script>
+
+    <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
+    <script src="js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script>
+
+    <!-- BOOTSTRAP JS -->
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src='js/bootbox.min.js'></script>
+    <!-- CUSTOM NOTIFICATION -->
+    <script src="js/notification/SmartNotification.min.js"></script>
+
+    <!-- JARVIS WIDGETS -->
+    <script src="js/smartwidgets/jarvis.widget.min.js"></script>
+
+    <!-- EASY PIE CHARTS -->
+    <script src="js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+
+    <!-- SPARKLINES -->
+    <script src="js/plugin/sparkline/jquery.sparkline.min.js"></script>
+
+    <!-- JQUERY VALIDATE -->
+    <script src="js/plugin/jquery-validate/jquery.validate.min.js"></script>
+
+    <!-- JQUERY MASKED INPUT -->
+    <script src="js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+
+    <!-- JQUERY SELECT2 INPUT -->
+    <script src="js/plugin/select2/select2.min.js"></script>
+
+    <!-- JQUERY UI + Bootstrap Slider -->
+    <script src="js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
+
+    <!-- browser msie issue fix -->
+    <script src="js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
+
+    <!-- FastClick: For mobile devices -->
+    <script src="js/plugin/fastclick/fastclick.min.js"></script>
+
+
+    <!-- MAIN APP JS FILE -->
+    <script src="js/app.min.js"></script>
+
+    <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
+    <!-- Voice command : plugin -->
+    <script src="js/speech/voicecommand.min.js"></script>
+
+    <!-- SmartChat UI : plugin -->
+    <script src="js/smart-chat-ui/smart.chat.ui.min.js"></script>
+    <script src="js/smart-chat-ui/smart.chat.manager.min.js"></script>
+
+    <script>
+        $(document).ready(function (e) {
+
+            pageSetUp();
+
+            $('#date').datepicker({
+                dateFormat: 'dd-mm-yy',
+                prevText: '<i class="fa fa-chevron-left"></i>',
+                nextText: '<i class="fa fa-chevron-right"></i>'
+            });
+
+            $('#bill-due').datepicker({
+                dateFormat: 'dd-mm-yy',
+                prevText: '<i class="fa fa-chevron-left"></i>',
+                nextText: '<i class="fa fa-chevron-right"></i>'
+            });
+
+            $("#item_received").on('click', ".remove-item", function () {
+                var row = this;
+                bootbox.confirm("Do you really want to delete record?", function (result) {
+                    if (result) {
+                        $(row).closest('tr').remove();
+                        calculateGrandAmt();
+                    }
+                })
+            });
+            $("#item_received").on('click', ".add-item", function () {
+                clear_modal_add_item();
+                $("#status").html("[new]");
+                $("#status").attr("aria-valuetext", "[new]");
+                $("#status").removeClass("label-primary");
+                $("#status").addClass("label-success");
+                $("#add-item-modal").modal();
+            });
+            var rowIndex;
+            $("#item_received").on('click', ".edit-item", function () {
+                rowIndex = $(this).closest('td').parent()[0].sectionRowIndex + 1;
+                $("#status").html("[edit]");
+                $("#status").attr("aria-valuetext", "[edit]");
+                $("status").attr("data-loading-text", "");
+                $("#status").removeClass("label-success");
+                $("#status").addClass("label-primary");
+                var item_code = $(this).closest("tr").find("td:eq(1)").text();
+                var decs = $(this).closest("tr").find("td:eq(2)").text();
+                var qty = $(this).closest("tr").find("td:eq(3)").text();
+                var cost = $(this).closest("tr").find("td:eq(4)").text();
+                var disc = $(this).closest("tr").find("td:eq(5)").text();
+                var subAmt = $(this).closest("tr").find("td:eq(6)").text();
+                var totalAmt = $(this).closest("tr").find("td:eq(7)").text();
+                $("#item-code").val(item_code);
+                $("#item-name").val(decs);
+                $("#item-cost").val(cost);
+                $("#item-qty").val(qty);
+                $("#item-disc").val(disc);
+                $("#item-subAmt").val(subAmt);
+                $("#item-totalAmt").val(totalAmt);
+                $("#add-item-modal").modal();
+            });
+
+            $("#btn-add-item").on('click', function () {
+                var item_code = $("#item-code").val();
+                var decs = $("#item-name").val();
+                var qty = $("#item-qty").val();
+                var cost = parseFloat($("#item-cost").val());
+                var disc = parseFloat($("#item-disc").val());
+                var subAmt = parseFloat($("#item-subAmt").val());
+                var totalAmt = parseFloat($("#item-totalAmt").val());
+                var status = $("#status").attr("aria-valuetext");
+                if (status === "[new]") {
+                    var row = "<tr>" +
+                        "<td><a class=\"btn btn-xs btn-success add-item\"> <i class=\"fa fa-plus-square-o\"></i></a> <a class=\"btn btn-xs btn-primary edit-item\"> <i class=\"fa fa-edit\"></i></a> <a class=\"btn btn-xs btn-danger remove-item\"> <i class=\"fa fa-trash-o\"></i></a></td>" +
+                        "<td>" + item_code + "</td>" +
+                        "<td>" + decs + "</td>" +
+                        "<td>" + qty + "</td>" +
+                        "<td>" + cost.toFixed(2) + "</td>" +
+                        "<td>" + disc.toFixed(2) + "</td>" +
+                        "<td>" + subAmt.toFixed(2) + "</td>" +
+                        "<td>" + totalAmt.toFixed(2) + "</td>" +
+                        "</tr>";
+                    $('#item_received > tbody:last-child').append(row);
+                } else {
+                    $("#item_received tr:nth-child(" + rowIndex + ") td:nth-child(2)").text(item_code);
+                    $("#item_received tr:nth-child(" + rowIndex + ") td:nth-child(3)").text(decs);
+                    $("#item_received tr:nth-child(" + rowIndex + ") td:nth-child(4)").text(qty);
+                    $("#item_received tr:nth-child(" + rowIndex + ") td:nth-child(5)").text(cost.toFixed(2));
+                    $("#item_received tr:nth-child(" + rowIndex + ") td:nth-child(6)").text(disc.toFixed(2));
+                    $("#item_received tr:nth-child(" + rowIndex + ") td:nth-child(7)").text(subAmt.toFixed(2));
+                    $("#item_received tr:nth-child(" + rowIndex + ") td:nth-child(8)").text(totalAmt.toFixed(2));
+                    $('#add-item-modal').modal('toggle');
+                }
+                calculateGrandAmt();
+                clear_modal_add_item();
+            });
+            $('#item-code').keypress(function (event) {
+                var keycode = (event.keyCode ? event.keyCode : event.which);
+                if (keycode == '13') {
+
+                }
+            });
+
+            $('#item-cost, #item-qty, #item-disc').keyup(function (event) {
+                calculateSubAmt();
+            });
+
+
+            function calculateSubAmt() {
+                var cost = parseFloat($("#item-cost").val());
+                var qty = parseFloat($("#item-qty").val());
+                var disc = parseFloat($("#item-disc").val());
+                if (!$.isNumeric(cost)) cost = 0;
+                if (!$.isNumeric(qty)) qty = 0;
+                if (!$.isNumeric(disc)) disc = 0;
+                if (!$.isNumeric(total)) total = 0;
+                var subAmt = (cost * qty);
+                var total = subAmt - disc;
+                $("#item-subAmt").val(subAmt.toFixed(2));
+                $("#item-totalAmt").val(total.toFixed(2));
+            }
+            function calculateGrandAmt() {
+                $("#total-subAmt").val(calculateColumn(6).toFixed(2));
+                $("#total-disc").val(calculateColumn(5).toFixed(2));
+                $("#total-amt").val((calculateColumn(6) - calculateColumn(5)).toFixed(2));
+            }
+
+            jQuery.extend(jQuery.expr[':'], {
+                focusable: function (el, index, selector) {
+                    return $(el).is('a, button, :input, [tabindex]');
+                }
+            });
+
+            $(document).on('keypress', 'input,select', function (e) {
+                if (e.which == 13) {
+                    e.preventDefault();
+                    var $canfocus = $(':focusable');
+                    var index = $canfocus.index(document.activeElement) + 1;
+                    if (index >= $canfocus.length) index = 0;
+                    $canfocus.eq(index).focus();
+                }
+            });
+
+            function clear_modal_add_item() {
+                $('input:text, input:password, input:file, select, textarea', '#add-item-modal').val('');
+                $('#item-cost, #item-qty, #item-disc').val("");
+            }
+
+            function calculateColumn(index) {
+                var total = 0;
+                $('#item_received tr').each(function () {
+                    var value = parseInt($('td', this).eq(index).text());
+                    if (!isNaN(value)) {
+                        total += value;
+                    }
+                });
+                return total;
+            }
+
+            $("#print").on("click", function () {
+                clear_frm_stock_in();
+            });
+            
+            function clear_frm_stock_in() {
+                $('input:text, input:password, input:file, select, textarea', '#frm-stock-in').val('');
+                $("#item_received > tbody").html("");
+                var row = "<tr>" +
+                        "<td>" +
+                            "<a class=\"btn btn-xs btn-success add-item\">" +
+                                "<i class=\"fa fa-plus-square-o\"></i></a>" +
+                            " <a class=\"btn btn-xs btn-primary edit-item\">" +
+                                "<i class=\"fa fa-edit\"></i></a>" +
+                            " <a class=\"btn btn-xs btn-danger remove-item\">" +
+                                "<i class=\"fa fa-trash-o\"></i></a>" +
+                        "</td>" +
+                        "<td></td>" +
+                        "<td></td>" +
+                        "<td></td>" +
+                        "<td></td>" +
+                        "<td></td>" +
+                        "<td></td>" +
+                        "<td></td>" +
+                    "</tr>";
+                 $("#item_received").append(row);
+            }
+        });
+    </script>
+</body>
+
+</html>

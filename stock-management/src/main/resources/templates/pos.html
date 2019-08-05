@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:background-color="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<th:block th:include="fragments/head :: head" />
+
+<head>
+    <meta charset="UTF-8">
+    <title>POS</title>
+    <style>
+        #button-group {
+            -webkit-background-clip: padding-box;
+            /* for Safari */
+            background-clip: padding-box;
+            /* for IE9+, Firefox 4+, Opera, Chrome */
+        }
+
+        /********************* shopping Demo-1 **********************/
+        .product-grid {
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            padding: 0 0 35px;
+            border: 1px solid rgba(0, 0, 0, .1);
+            overflow: hidden;
+            position: relative;
+            z-index: 1
+        }
+
+        .product-grid .product-image {
+            position: relative;
+            transition: all .3s ease 0s
+        }
+
+        .product-grid .product-image a {
+            display: block
+        }
+
+        .product-grid .product-image img {
+            width: 100%;
+            height: auto
+        }
+
+        .product-grid .pic-1 {
+            opacity: 1;
+            transition: all .3s ease-out 0s
+        }
+
+        .product-grid .product-content {
+            background-color: #fff;
+            text-align: center;
+            margin: 0 auto;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0px;
+            z-index: 1;
+            transition: all .3s
+        }
+        .product-grid .product-content h5{
+            font-family: "Open Sans",Arial,Helvetica,Sans-Serif;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        @media only screen and (max-width:990px) {
+            .product-grid {
+                margin-bottom: 30px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid" style="margin: 0px; padding:0px;">
+        <header id="header" style="background:#6E9F70">
+            <div id="logo-group">
+                <span id="logo"> <img src="img/anachak-logo.png" alt="Anachak"> </span>
+            </div>
+        </header>
+    </div>
+    <div class="container-fluid" style="padding-top: 15px">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-sm-6" style="margin-top: 10px">
+                        <div class="input-group">
+                            <div class="input-group-btn" style="min-width: 100px;">
+                                <label class="form-control" style="background: none; border: none; font-weight: bold">Barcode:</label>
+                            </div>
+                            <input type="text" class="form-control" id="barcode" name="barcode">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6" style="margin-top: 10px">
+                        <div class="input-group">
+                            <div class="input-group-btn" style="min-width: 100px;">
+                                <label class="form-control" style="background: none; border: none; font-weight: bold">Customer:</label>
+                            </div>
+                            <label class="select" style="width: 100%">
+                                <select class="form-control">
+                                    <option th:each="data : ${customer}" th:value="${data.customer_id}"
+                                        th:text="${data.company_name}"></option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="group-category" style="height: 80px;overflow-y: scroll;">
+                    <button type="button" class="btn btn-success category" th:each="data : ${categories}"
+                        th:id="${data.category_id}" th:text="${data.category_name}" style="margin-right: 10px"></button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div id="button-group" style="padding-top: 15px;">
+                    <button type="button" class="btn btn-success" id="btnCash" data-toggle="modal"
+                        data-target="#moneyModal"><i class="fa fa-money"></i></button>
+                    <button type="button" class="btn btn-success"><i class="fa fa-print"></i></button>
+                    <input type="text" value="admin" id="user" style="display: none">
+                </div>
+                <table class="table table-bordered table-hover" id="tab_logic" style="margin-top: 15px">
+                    <thead>
+                        <tr>
+                            <th class="text-center"> # </th>
+                            <th class="text-center"> Description </th>
+                            <th class="text-center"> Qty </th>
+                            <th class="text-center"> Price </th>
+                            <th class="text-center"> Amount </th>
+                            <th class="text-center"> Action </th>
+                        </tr>
+                    </thead>
+                    <tbody id="tab_logic1">
+                    </tbody>
+                </table>
+                <div class="col-md-6 pull-right" style="margin-left: -15px;margin-right: -15px">
+                    <table class="table table-bordered table-hover" id="tab_logic_total">
+                        <tbody>
+                            <tr>
+                                <th class="text-center" width="40%">Sub Total</th>
+                                <td class="text-center" width="60%"><input type="number" name='sub_total'
+                                        placeholder='0.00' class="form-control" id="sub_total" readonly /></td>
+                            </tr>
+                            <tr>
+                                <th class="text-center" width="40%">Discount</th>
+                                <td class="text-center" width="60%">
+                                    <div class="input-group mb-2 mb-sm-0">
+                                        <input type="number" class="form-control" id="discount" placeholder="0">
+                                        <div class="input-group-addon">%</div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="text-center" width="40%">Dis. Amount</th>
+                                <td class="text-center" width="60%"><input type="number" name='dis_amount'
+                                        id="dis_amount" placeholder='0.00' class="form-control" readonly /></td>
+                            </tr>
+                            <tr>
+                                <th class="text-center" width="40%">Grand Total</th>
+                                <td class="text-center" width="60%"><input type="number" name='total_amount'
+                                        id="total_amount" placeholder='0.00' class="form-control" readonly />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="group-item"
+                    style="height: 400px;overflow-y: scroll; margin-top: 15px; border-style: solid; border-width: 2px; border-color: #0aa66e">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="moneyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Payment</h5>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label>Cash Received:</label>
+                            <div class="input-group mb-2 mb-sm-0">
+                                <input type="number" class="form-control" id="cash_receive" placeholder='0.00'>
+                                <div class="input-group-addon">$</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Cash Total:</label>
+                            <div class="input-group mb-2 mb-sm-0">
+                                <input type="number" class="form-control" id="cash_total" placeholder="0.00" readonly>
+                                <div class="input-group-addon">$</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Cash Back:</label>
+                            <div class="input-group mb-2 mb-sm-0">
+                                <input type="number" class="form-control" id="cash_back" placeholder="0.00" readonly>
+                                <div class="input-group-addon">$</div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="btnSaveINV">Cash</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END MAIN PANEL -->
+    <th:block th:include="fragments/foot :: foot" />
+</body>
+
+</html>
