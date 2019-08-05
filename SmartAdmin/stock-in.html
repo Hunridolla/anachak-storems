@@ -689,10 +689,11 @@
                 var item_code = $("#item-code").val();
                 var decs = $("#item-name").val();
                 var qty = $("#item-qty").val();
-                var cost = parseFloat($("#item-cost").val());
-                var disc = parseFloat($("#item-disc").val());
-                var subAmt = parseFloat($("#item-subAmt").val());
-                var totalAmt = parseFloat($("#item-totalAmt").val());
+                var cost = toNumber($("#item-cost").val());
+                var disc = toNumber($("#item-disc").val());
+                var subAmt = toNumber($("#item-subAmt").val());
+                var totalAmt = toNumber($("#item-totalAmt").val());
+
                 var status = $("#status").attr("aria-valuetext");
                 if (status === "[new]") {
                     var row = "<tr>" +
@@ -732,13 +733,9 @@
 
 
             function calculateSubAmt() {
-                var cost = parseFloat($("#item-cost").val());
-                var qty = parseFloat($("#item-qty").val());
-                var disc = parseFloat($("#item-disc").val());
-                if (!$.isNumeric(cost)) cost = 0;
-                if (!$.isNumeric(qty)) qty = 0;
-                if (!$.isNumeric(disc)) disc = 0;
-                if (!$.isNumeric(total)) total = 0;
+                var cost = toNumber($("#item-cost").val());
+                var qty = toNumber($("#item-qty").val());
+                var disc = toNumber($("#item-disc").val());
                 var subAmt = (cost * qty);
                 var total = subAmt - disc;
                 $("#item-subAmt").val(subAmt.toFixed(2));
@@ -807,6 +804,11 @@
                         "<td></td>" +
                     "</tr>";
                  $("#item_received").append(row);
+            }
+
+            function toNumber(string){
+                var result = isNaN(parseFloat(string)) ? 0 : parseFloat(string);
+                return result;
             }
         });
     </script>

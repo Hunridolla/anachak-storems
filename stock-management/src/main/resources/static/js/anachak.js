@@ -18,3 +18,7 @@ function alert_error() {
         timeout: 5000
     });
 }
+function toNumber(string){
+    var result = isNaN(parseFloat(string)) ? 0 : parseFloat(string);
+    return result;
+}

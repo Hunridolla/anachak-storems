@@ -57,10 +57,10 @@ $(document).ready(function () {
         var item_code = $("#item-code").val();
         var decs = $("#item-name").val();
         var qty = $("#item-qty").val();
-        var cost = parseFloat($("#item-cost").val());
-        var disc = parseFloat($("#item-disc").val());
-        var subAmt = parseFloat($("#item-subAmt").val());
-        var totalAmt = parseFloat($("#item-totalAmt").val());
+        var cost = toNumber($("#item-cost").val());
+        var disc = toNumber($("#item-disc").val());
+        var subAmt = toNumber($("#item-subAmt").val());
+        var totalAmt = toNumber($("#item-totalAmt").val());
         var status = $("#status").attr("aria-valuetext");
         if (status === "[new]") {
             var row = "<tr>" +
@@ -105,12 +105,9 @@ $(document).ready(function () {
 
 
     function calculateSubAmt() {
-        var cost = parseFloat($("#item-cost").val());
-        var qty = parseFloat($("#item-qty").val());
-        var disc = parseFloat($("#item-disc").val());
-        if (!$.isNumeric(cost)) cost = 0;
-        if (!$.isNumeric(qty)) qty = 0;
-        if (!$.isNumeric(disc)) disc = 0;
+        var cost = toNumber($("#item-cost").val());
+        var qty = toNumber($("#item-qty").val());
+        var disc = toNumber($("#item-disc").val());
         var subAmt = (cost * qty);
         var total = subAmt - disc;
         $("#item-subAmt").val(subAmt.toFixed(2));
@@ -163,9 +160,9 @@ $(document).ready(function () {
         var ref_no = $("#ref-no").val();
         var remark = $("#remark").val();
         var address = $("#address").val();
-        var sub_amt = parseFloat($("#total-subAmt").val());
-        var disc_amt = parseFloat($("#total-disc").val());
-        var total_amt = parseFloat($("#total-amt").val());
+        var sub_amt = toNumber($("#total-subAmt").val());
+        var disc_amt = toNumber($("#total-disc").val());
+        var total_amt = toNumber($("#total-amt").val());
         $.ajax({
             async: false,
             dataType: "json",
@@ -192,11 +189,11 @@ $(document).ready(function () {
         $('#item_received > tbody  > tr').each(function () {
             var item_code = $(this).closest("tr").find("td:eq(1)").text();
             var item_desc = $(this).closest("tr").find("td:eq(2)").text();
-            var item_qty = parseInt($(this).closest("tr").find("td:eq(3)").text());
-            var item_rate = parseFloat($(this).closest("tr").find("td:eq(4)").text());
-            var item_disc = parseFloat($(this).closest("tr").find("td:eq(5)").text());
-            var item_sub_amt = parseFloat($(this).closest("tr").find("td:eq(6)").text());
-            var item_total_amt = parseFloat($(this).closest("tr").find("td:eq(7)").text());
+            var item_qty = toNumber($(this).closest("tr").find("td:eq(3)").text());
+            var item_rate = toNumber($(this).closest("tr").find("td:eq(4)").text());
+            var item_disc = toNumber($(this).closest("tr").find("td:eq(5)").text());
+            var item_sub_amt = toNumber($(this).closest("tr").find("td:eq(6)").text());
+            var item_total_amt = toNumber($(this).closest("tr").find("td:eq(7)").text());
 
             $.ajax({
                 async: false,
