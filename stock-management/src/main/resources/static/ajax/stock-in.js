@@ -154,6 +154,9 @@ $(document).ready(function () {
     $("#btn-save-bill").on('click', function (event) {
         event.preventDefault();
         var bill_id = $("#bill-id").val();
+        if (bill_id !== "") {
+            return;
+        }
         var bill_date = toDate($("#bill-date").val());
         var bill_due = toDate($("#bill-due").val());
         var vendor_id = $("#vendors").val();
@@ -176,7 +179,7 @@ $(document).ready(function () {
                 var bill_id = data.bill_id;
                 saveItemDetail(bill_id);
                 alert_message();
-                clear_frm_stock_in();
+                $("#bill-id").val(bill_id);
             },
             error: function (e) {
                 alert_error();
@@ -217,6 +220,13 @@ $(document).ready(function () {
         return new Date(parts[2], parts[1] - 1, parts[0])
     }
 
+    $("#btn-new-bill").on("click", function () {
+        clear_frm_stock_in();
+    });
+    $("#print").on("click", function () {
+        clear_frm_stock_in();
+    });
+
     function clear_frm_stock_in() {
         $('input:text, input:password, input:file, select, textarea', '#frm-stock-in').val('');
         $("#item_received > tbody").html("");
@@ -238,5 +248,6 @@ $(document).ready(function () {
             "<td></td>" +
             "</tr>";
         $("#item_received").append(row);
+        // $("#bill_date").focus();
     }
 });
