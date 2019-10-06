@@ -780,36 +780,37 @@
             }
 
             $("#print").on("click", function () {
-                clear_frm_stock_in();
+               CreatePDF();
             });
-            
+
             function clear_frm_stock_in() {
                 $('input:text, input:password, input:file, select, textarea', '#frm-stock-in').val('');
                 $("#item_received > tbody").html("");
                 var row = "<tr>" +
-                        "<td>" +
-                            "<a class=\"btn btn-xs btn-success add-item\">" +
-                                "<i class=\"fa fa-plus-square-o\"></i></a>" +
-                            " <a class=\"btn btn-xs btn-primary edit-item\">" +
-                                "<i class=\"fa fa-edit\"></i></a>" +
-                            " <a class=\"btn btn-xs btn-danger remove-item\">" +
-                                "<i class=\"fa fa-trash-o\"></i></a>" +
-                        "</td>" +
-                        "<td></td>" +
-                        "<td></td>" +
-                        "<td></td>" +
-                        "<td></td>" +
-                        "<td></td>" +
-                        "<td></td>" +
-                        "<td></td>" +
+                    "<td>" +
+                    "<a class=\"btn btn-xs btn-success add-item\">" +
+                    "<i class=\"fa fa-plus-square-o\"></i></a>" +
+                    " <a class=\"btn btn-xs btn-primary edit-item\">" +
+                    "<i class=\"fa fa-edit\"></i></a>" +
+                    " <a class=\"btn btn-xs btn-danger remove-item\">" +
+                    "<i class=\"fa fa-trash-o\"></i></a>" +
+                    "</td>" +
+                    "<td></td>" +
+                    "<td></td>" +
+                    "<td></td>" +
+                    "<td></td>" +
+                    "<td></td>" +
+                    "<td></td>" +
+                    "<td></td>" +
                     "</tr>";
-                 $("#item_received").append(row);
+                $("#item_received").append(row);
             }
 
-            function toNumber(string){
+            function toNumber(string) {
                 var result = isNaN(parseFloat(string)) ? 0 : parseFloat(string);
                 return result;
             }
+
         });
     </script>
 </body>

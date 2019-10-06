@@ -224,7 +224,7 @@ $(document).ready(function () {
         clear_frm_stock_in();
     });
     $("#print").on("click", function () {
-        clear_frm_stock_in();
+
     });
 
     function clear_frm_stock_in() {
