@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html th:with="active_page = 'vendor-types'" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <th:block th:include="fragments/head :: head" />
+
 <body class="smart-style-4">
     <!-- #HEADER -->
     <header id="header">
         <th:block th:include="fragments/head :: logo" />
-        
+
         <!-- #TOGGLE LAYOUT BUTTONS -->
         <!-- pulled right: nav area -->
         <div class="pull-right">
@@ -172,15 +173,22 @@
                 <div class="row">
 
                     <!-- NEW WIDGET START -->
-                    <article class="col-sm-12 col-md-12 col-lg-6">
+                    <article class="col-sm-12 col-md-12 col-lg-10">
 
                         <!-- Widget ID (each widget will need unique ID)-->
                         <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false"
                             data-widget-colorbutton="false" data-widget-deletebutton="false">
                             <header>
-                                <span class="widget-icon"> <i class="fa fa-comments"></i> </span>
-                                <h2> VENDOR TYPES </h2>
-
+                                <ul class="nav nav-tabs pull-left in">
+                                    <li class="active">
+                                        <a id="tab-create-vendor-type" data-toggle="tab" href="#create-vendor-type">
+                                            <i class="fa fa-lg fa-plus"></i> Create Vendor Type</a>
+                                    </li>
+                                    <li>
+                                        <a id="tab-vendor-type-list" data-toggle="tab" href="#vendor-type-list">
+                                            <i class="fa fa-lg fa-group"></i> Vendor Type List </a>
+                                    </li>
+                                </ul>
                             </header>
 
                             <!-- widget div-->
@@ -195,140 +203,106 @@
 
                                 <!-- widget content -->
                                 <div class="widget-body no-padding">
+                                    <div class="tab-content">
+                                        <!--TAB MAIN-->
+                                        <div class="tab-pane active" id="create-vendor-type">
+                                            <form id="frm-create-vendor-type" class="smart-form"
+                                                novalidate="novalidate">
+                                                <header>
+                                                    Create Vendor Type
+                                                </header>
+                                                <fieldset>
+                                                    <div class="row">
+                                                        <section class="col col-4">
+                                                            <label class="label">Type ID</label>
+                                                            <label for="vendor_type_id" class="input">
+                                                                <input type="text" name="vendor_type_id"
+                                                                    id="vendor_type_id" readonly>
+                                                            </label>
+                                                        </section>
+                                                        <section class="col col-8">
+                                                            <label class="label">Type</label>
+                                                            <label for="vendor_type_name" class="input">
+                                                                <input type="text" name="vendor_type_name"
+                                                                    id="vendor_type_name">
+                                                            </label>
+                                                        </section>
+                                                    </div>
+                                                    <section>
+                                                        <label class="label">Remark</label>
+                                                        <label for="remark" class="input">
+                                                            <input type="text" name="remark" id="remark">
+                                                        </label>
+                                                    </section>
+                                                    <section>
+                                                        <label class="checkbox">
+                                                            <input type="checkbox" name="inactive" id="inactive">
+                                                            <i></i>Inactive
+                                                        </label>
+                                                    </section>
+                                                </fieldset>
+                                                <footer>
+                                                    <button id="btn-save-vendor-type" class="btn btn-primary">
+                                                        Save
+                                                    </button>
+                                                    <button id="btn_clear" class="btn btn-default">
+                                                        Back
+                                                    </button>
+                                                </footer>
+                                            </form>
+                                        </div>
+                                        <!--END-->
 
-                                    <!-- this is what the user will see -->
-                                    <form id="frm-create-vendor-type" class="smart-form" novalidate="novalidate">
-                                        <header>
-                                            Create Vendor Type
-                                        </header>
-                                        <fieldset>
-                                            <div class="row">
-                                                <section class="col col-4">
-                                                    <label class="label">Type ID</label>
-                                                    <label for="vendor_type_id" class="input">
-                                                        <input type="text" name="vendor_type_id" id="vendor_type_id"
-                                                            readonly>
-                                                    </label>
-                                                </section>
-                                                <section class="col col-8">
-                                                    <label class="label">Type</label>
-                                                    <label for="vendor_type_name" class="input">
-                                                        <input type="text" name="vendor_type_name"
-                                                            id="vendor_type_name">
-                                                    </label>
-                                                </section>
+                                        <!--TAB LISTING-->
+                                        <div class="tab-pane" id="vendor-type-list">
+                                            <div class="table-responsive">
+                                                <table id="tbl_vendor_Types" class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Type ID</th>
+                                                            <th>Type Name</th>
+                                                            <th>Remark</th>
+                                                            <th>Status</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr th:each="data : ${vendorTypes}">
+                                                            <td th:text="${data.vendor_type_id}"></td>
+                                                            <td th:text="${data.vendor_type_name}"></td>
+                                                            <td th:text="${data.remark}"></td>
+                                                            <td>
+                                                                <span th:if="${data.inactive} == true"
+                                                                    class="label label-danger">inactive</span>
+                                                                <span th:if="${data.inactive} == false"
+                                                                    class="label label-success">active</span>
+                                                            </td>
+                                                            <td>
+                                                                <a th:href="${'/vendor-types/view/' + data.vendor_type_id}"
+                                                                    class="btn btn-xs btn-primary"><i
+                                                                        class="fa fa-edit"></i></a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
                                             </div>
-                                            <section>
-                                                <label class="label">Remark</label>
-                                                <label for="remark" class="input">
-                                                    <input type="text" name="remark" id="remark">
-                                                </label>
-                                            </section>
-                                            <section>
-                                                <label class="checkbox">
-                                                    <input type="checkbox" name="inactive" id="inactive">
-                                                    <i></i>Inactive
-                                                </label>
-                                            </section>
-                                        </fieldset>
-                                        <footer>
-                                            <button id="btn-save-vendor-type" class="btn btn-primary">
-                                                Save
-                                            </button>
-                                            <button id="btn_clear" class="btn btn-default">
-                                                Back
-                                            </button>
-                                        </footer>
-                                    </form>
-                                </div>
-                                <!-- end widget content -->
-
-                            </div>
-                            <!-- end widget div -->
-
-                        </div>
-                        <!-- end widget -->
-
-                    </article>
-                    <!-- WIDGET END -->
-
-                </div>
-
-                <!-- end row -->
-
-                <!-- row -->
-
-                <div class="row">
-                    <article class="col-sm-12 col-md-12 col-lg-12">
-                        <div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false"
-                            data-widget-colorbutton="false" data-widget-deletebutton="false"
-                            data-widget-togglebutton="true">
-                            <header>
-                                <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                                <h2> Vendor Types </h2>
-                            </header>
-
-                            <!-- widget div-->
-                            <div>
-
-                                <!-- widget edit box -->
-                                <div class="jarviswidget-editbox">
-                                    <!-- This area used as dropdown edit box -->
-
-                                </div>
-                                <!-- end widget edit box -->
-
-                                <!-- widget content -->
-                                <div class="widget-body no-padding">
-                                    <div class="table-responsive">
-                                        <table id="tbl_vendor_Types" class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>Type ID</th>
-                                                    <th>Type Name</th>
-                                                    <th>Remark</th>
-                                                    <th>Status</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr th:each="data : ${vendorTypes}">
-                                                    <td th:text="${data.vendor_type_id}"></td>
-                                                    <td th:text="${data.vendor_type_name}"></td>
-                                                    <td th:text="${data.remark}"></td>
-                                                    <td>
-                                                        <span th:if="${data.inactive} == true"
-                                                            class="label label-danger">inactive</span>
-                                                        <span th:if="${data.inactive} == false"
-                                                            class="label label-success">active</span>
-                                                    </td>
-                                                    <td>
-                                                        <a th:href="${'/vendor-types/view/' + data.vendor_type_id}"
-                                                            class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-
+                                        </div>
+                                        <!--END-->
                                     </div>
                                 </div>
                                 <!-- end widget content -->
-
                             </div>
                             <!-- end widget div -->
-
                         </div>
                         <!-- end widget -->
                     </article>
+                    <!-- WIDGET END -->
                 </div>
                 <!-- end row -->
-
             </section>
             <!-- end widget grid -->
-
         </div>
         <!-- END MAIN CONTENT -->
-
     </div>
     <!-- END MAIN PANEL -->
     <th:block th:include="fragments/foot :: foot" />

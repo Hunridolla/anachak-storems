@@ -175,21 +175,26 @@
                 <div class="row">
 
                     <!-- NEW WIDGET START -->
-                    <article class="col-sm-12 col-md-12 col-lg-8">
+                    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-10">
 
                         <!-- Widget ID (each widget will need unique ID)-->
-                        <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false"
+                        <div class="jarviswidget jarviswidget-color-white" id="wid-id-0" data-widget-editbutton="false"
                             data-widget-colorbutton="false" data-widget-deletebutton="false"
                             data-widget-togglebutton="true">
                             <header>
-                                <span class="widget-icon"> <i class="fa fa-comments"></i> </span>
-                                <h2>CATEGORIES</h2>
-
+                                <ul class="nav nav-tabs pull-left in">
+                                    <li class="active">
+                                        <a id="tab-create-category" data-toggle="tab" href="#create-category">
+                                            <i class="fa fa-lg fa-plus"></i> Create Category</a>
+                                    </li>
+                                    <li>
+                                        <a id="tab-category-list" data-toggle="tab" href="#category-list">
+                                            <i class="fa fa-lg fa-group"></i> Category List</a>
+                                    </li>
+                                </ul>
                             </header>
-
                             <!-- widget div-->
                             <div>
-
                                 <!-- widget edit box -->
                                 <div class="jarviswidget-editbox">
                                     <!-- This area used as dropdown edit box -->
@@ -199,128 +204,96 @@
 
                                 <!-- widget content -->
                                 <div class="widget-body no-padding">
+                                    <div class="tab-content">
+                                        <!--TAB MAIN-->
+                                        <div class="tab-pane active" id="create-category">
+                                            <form id="frm-create-category" class="smart-form" novalidate="novalidate">
+                                                <fieldset>
+                                                    <div class="row">
+                                                        <section class="col col-4">
+                                                            <label class="label">Category ID</label>
+                                                            <label for="category_id" class="input">
+                                                                <input type="text" name="category_id" id="category_id"
+                                                                    readonly>
+                                                            </label>
+                                                        </section>
+                                                        <section class="col col-8">
+                                                            <label class="label">Category Name</label>
+                                                            <label for="category_name" class="input">
+                                                                <input type="text" name="category_name"
+                                                                    id="category_name">
+                                                            </label>
+                                                        </section>
+                                                    </div>
+                                                    <section>
+                                                        <label class="label">Remark</label>
+                                                        <label for="remark" class="input">
+                                                            <input type="text" name="remark" id="remark">
+                                                        </label>
+                                                    </section>
+                                                    <section>
+                                                        <label class="checkbox">
+                                                            <input type="checkbox" name="inactive" id="inactive">
+                                                            <i></i>Inactive
+                                                        </label>
+                                                    </section>
+                                                </fieldset>
+                                                <footer>
+                                                    <button id="btn-save-category" class="btn btn-primary">
+                                                        Save
+                                                    </button>
+                                                    <button id="btn-clear-category" class="btn btn-primary">
+                                                        New
+                                                    </button>
+                                                </footer>
+                                            </form>
+                                        </div>
+                                        <!--END-->
 
-                                    <!-- this is what the user will see -->
-                                    <form id="frm-create-category" class="smart-form" novalidate="novalidate">
-                                        <header>
-                                            Create Category
-                                        </header>
-                                        <fieldset>
-                                            <div class="row">
-                                                <section class="col col-4">
-                                                    <label class="label">Category ID</label>
-                                                    <label for="category_id" class="input">
-                                                        <input type="text" name="category_id" id="category_id" readonly>
-                                                    </label>
-                                                </section>
-                                                <section class="col col-8">
-                                                    <label class="label">Category Name</label>
-                                                    <label for="category_name" class="input">
-                                                        <input type="text" name="category_name" id="category_name">
-                                                    </label>
-                                                </section>
+                                        <!--TAB LIST-->
+                                        <div class="tab-pane" id="category-list">
+                                            <div class="table-responsive">
+                                                <table id="tbl_categories" class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Category ID</th>
+                                                            <th>Category Name</th>
+                                                            <th>Remark</th>
+                                                            <th>Status</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr th:each="data: ${categories}">
+                                                            <td th:text="${data.category_id}"></td>
+                                                            <td th:text="${data.category_name}"></td>
+                                                            <td th:text="${data.remark}">​​</td>
+                                                            <td>
+                                                                <span th:if="${data.inactive} == true"
+                                                                    class="label label-danger">inactive</span>
+                                                                <span th:if="${data.inactive} == false"
+                                                                    class="label label-success">active</span>
+                                                            </td>
+                                                            <td>
+                                                                <a th:href="${'/categories/view/' + data.category_id}"
+                                                                    class="btn btn-xs btn-primary"><i
+                                                                        class="fa fa-edit"></i></a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
                                             </div>
-                                            <section>
-                                                <label class="label">Remark</label>
-                                                <label for="remark" class="input">
-                                                    <input type="text" name="remark" id="remark">
-                                                </label>
-                                            </section>
-                                            <section>
-                                                <label class="checkbox">
-                                                    <input type="checkbox" name="inactive" id="inactive">
-                                                    <i></i>Inactive
-                                                </label>
-                                            </section>
-                                        </fieldset>
-                                        <footer>
-                                            <button id="btn-save-category" class="btn btn-primary">
-                                                Save
-                                            </button>
-                                            <button id="btn-clear-category" class="btn btn-primary">
-                                                New
-                                            </button>
-                                        </footer>
-                                    </form>
+                                        </div>
+                                        <!--END-->
+                                    </div>
                                 </div>
                                 <!-- end widget content -->
-
                             </div>
                             <!-- end widget div -->
-
                         </div>
                         <!-- end widget -->
                     </article>
                     <!-- WIDGET END -->
-
-                </div>
-
-                <!-- end row -->
-
-                <!-- row -->
-                <div class="row">
-                    <article class="col-sm-12 col-md-12 col-lg-12">
-                        <div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false"
-                            data-widget-colorbutton="false" data-widget-deletebutton="false"
-                            data-widget-togglebutton="true">
-                            <header>
-                                <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                                <h2>Categories</h2>
-                            </header>
-
-                            <!-- widget div-->
-                            <div>
-
-                                <!-- widget edit box -->
-                                <div class="jarviswidget-editbox">
-                                    <!-- This area used as dropdown edit box -->
-
-                                </div>
-                                <!-- end widget edit box -->
-
-                                <!-- widget content -->
-                                <div class="widget-body no-padding">
-                                    <div class="table-responsive">
-                                        <table id="tbl_categories" class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>Category ID</th>
-                                                    <th>Category Name</th>
-                                                    <th>Remark</th>
-                                                    <th>Status</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr th:each="data: ${categories}">
-                                                    <td th:text="${data.category_id}"></td>
-                                                    <td th:text="${data.category_name}"></td>
-                                                    <td th:text="${data.remark}">​​</td>
-                                                    <td>
-                                                        <span th:if="${data.inactive} == true"
-                                                            class="label label-danger">inactive</span>
-                                                        <span th:if="${data.inactive} == false"
-                                                            class="label label-success">active</span>
-                                                    </td>
-                                                    <td>
-                                                        <a th:href="${'/categories/view/' + data.category_id}"
-                                                            class="btn btn-xs btn-primary"><i
-                                                                class="fa fa-edit"></i></a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-
-                                    </div>
-                                </div>
-                                <!-- end widget content -->
-
-                            </div>
-                            <!-- end widget div -->
-
-                        </div>
-                        <!-- end widget -->
-                    </article>
                 </div>
                 <!-- end row -->
             </section>
@@ -330,7 +303,6 @@
     </div>
     <!-- END MAIN PANEL -->
     <th:block th:include="fragments/foot :: foot" />
-
 </body>
 
 </html>
