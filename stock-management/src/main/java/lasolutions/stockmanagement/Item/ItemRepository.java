@@ -16,6 +16,10 @@ public interface ItemRepository extends JpaRepository<ItemModel, String> {
     @Query(value = getItemById, nativeQuery = true)
     ItemModel getItemById(@Param("item_id") String item_id);
 
+    String getItemByBarcode = "CALL GBL_SHOW_ITEM_BY_BARCODE(:barcode)";
+    @Query(value = getItemByBarcode,nativeQuery = true)
+    ItemModel getItemByBarcode (@Param("barcode") String barcode);
+
     String getItemByCat = "CALL GBL_SHOW_ITEM_INFO_BY_CAT(:cat_id)";
     @Query(value = getItemByCat, nativeQuery = true)
     List<ItemModel> getItemByCat(@Param("cat_id") String cat_id);

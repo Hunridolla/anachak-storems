@@ -141,11 +141,11 @@ function alert_message() {
 }
 
 $('#barcode').on('input', function (event) {
-    var item_id = $(this).val();
+    var barcode = $(this).val();
     event.preventDefault();
-    var href = "/getItembyID/" + item_id;
+    var href = "/getItemByBarcode/" + barcode;
     $.get(href, function (data) {
-        if (item_id == data.item_id) {
+        if (barcode == data.barcode) {
             $('#tab_logic').append('<tr id="Saddr' + (i + 1) + '">' +
                 '<td><input id="item_id[]" type="text" name=\'item_id[]\' value=\'' + data.item_id + '\'  class="form-control" readonly/></td>' +
                 '<td><input type="text" id="item_name[]"  name=\'item_name[]\' value=\'' + data.item_name + '\'  class="form-control" readonly/></td>' +

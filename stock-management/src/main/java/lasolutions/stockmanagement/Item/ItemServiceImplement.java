@@ -22,5 +22,10 @@ public class ItemServiceImplement implements ItemService {
     }
 
     @Override
+    public ItemModel getItemByBarcode(String barcode) {
+        return itemRepository.getItemByBarcode(barcode);
+    }
+
+    @Override
     public  List<ItemModel> getItemByCat(String  cat_id){return  itemRepository.getItemByCat(cat_id);}
 }

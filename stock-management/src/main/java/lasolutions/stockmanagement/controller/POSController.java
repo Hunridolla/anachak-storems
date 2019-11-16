@@ -63,8 +63,14 @@ public class POSController {
 
     @RequestMapping(value = "/getItembyID/{item_id}", method = RequestMethod.GET)
     public ResponseEntity<Object> getItem(@PathVariable("item_id") String item_id) {
-        ItemModel itembyIDList = itemRepository.getItemById(item_id);
-        return new ResponseEntity<>(itembyIDList, HttpStatus.OK);
+        ItemModel itemModel = itemRepository.getItemById(item_id);
+        return new ResponseEntity<>(itemModel, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/getItemByBarcode/{barcode}", method = RequestMethod.GET)
+    public ResponseEntity<Object> getItemByBarcode(@PathVariable("barcode") String barcode) {
+        ItemModel itemModel = itemRepository.getItemByBarcode(barcode);
+        return new ResponseEntity<>(itemModel, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/save-invoice", method = RequestMethod.POST)

@@ -8,5 +8,6 @@ import java.util.List;
 public interface ItemService {
     public List<ItemModel> getItems();
     public ItemModel getItemById(String item_id);
+    public ItemModel getItemByBarcode(String barcode);
     public List<ItemModel> getItemByCat(String cat_id);
 }
