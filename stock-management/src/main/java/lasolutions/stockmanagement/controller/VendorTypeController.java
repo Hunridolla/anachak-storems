@@ -2,7 +2,6 @@ package lasolutions.stockmanagement.controller;
 
 import lasolutions.stockmanagement.VendorType.VendorTypeModel;
 import lasolutions.stockmanagement.VendorType.VendorTypeRepository;
-import lasolutions.stockmanagement.VendorType.VendorTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,16 +9,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 public class VendorTypeController {
 
     @Autowired
-    private VendorTypeService vendorTypeService;
     private VendorTypeRepository vendorTypeRepository;
 
     @Autowired
-    public VendorTypeController(VendorTypeService vendorTypeService, VendorTypeRepository vendorTypeRepository) {
-        this.vendorTypeService = vendorTypeService;
+    public VendorTypeController(VendorTypeRepository vendorTypeRepository) {
         this.vendorTypeRepository = vendorTypeRepository;
     }
 
@@ -55,5 +54,11 @@ public class VendorTypeController {
     public ResponseEntity<Object> viewVendorType(@PathVariable("vendor_type_id") String vendor_type_id) {
         VendorTypeModel vendorType = vendorTypeRepository.getVendorTypeById(vendor_type_id);
         return new ResponseEntity<>(vendorType, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/vendor-types//get/all", method = RequestMethod.GET)
+    public ResponseEntity<Object> getVendorTypes() {
+        List<VendorTypeModel> vendorTypes = vendorTypeRepository.getVendorTypes();
+        return new ResponseEntity<>(vendorTypes, HttpStatus.OK);
     }
 }

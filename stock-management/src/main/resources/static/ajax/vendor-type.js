@@ -13,7 +13,7 @@ $(document).ready(function () {
             else
                 $('#frm-create-vendor-type #inactive').prop('checked', false);
         });
-
+        $("#tab-create-vendor-type").click();
     });
 
     /* save new vendor-type type or edit vendor-type type info */
@@ -39,13 +39,14 @@ $(document).ready(function () {
                 inactive: inactive
             },
             success: function (data) {
-                loadProfilesIntoTable(data);
+                alert_message();
+                clear_frm_save_vendor_type();
             },
             error: function (e) {
                 console.log(e);
             }
         });
-        clear_frm_save_vendor_type();
+        
     });
 
     /* func clear save profile modal */
@@ -55,8 +56,22 @@ $(document).ready(function () {
         $('#inactive').prop('checked', false);
     }
 
+    /* tab listing */
+    $('#tab-vendor-type-list').on('click', function (event) {
+        event.preventDefault();
+        var href = "/vendor-types/get/all";
+        $.get(href, function (data) {
+            SpreadData(data);
+        });
+    });
+    /* btn new vendor type */
+    $('#btn-new-vendor-type').on('click', function (event) {
+        clear_frm_save_vendor_type();
+        $("#tab-create-vendor-type").click();
+    });
+
     /* func load data into table */
-    function loadProfilesIntoTable(data) {
+    function SpreadData(data) {
         $("#tbl_vendor_Types > tbody").html('');
         $.each(data, function (key) {
             var categoryStatus = getStatus(data[key].inactive);
@@ -79,5 +94,15 @@ $(document).ready(function () {
             true: "<span class=\"label label-danger\">inactive</span>",
             false: "<span class=\"label label-success\">active</span>"
         }[Status];
+    }
+
+    function alert_message() {
+        $.smallBox({
+            title: "Fiplus Khmer",
+            content: "You have committed successfully!",
+            color: "#739E73",
+            iconSmall: "fa fa-bell-o",
+            timeout: 3000
+        });
     }
 });

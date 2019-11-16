@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    /* view data into modal */
+    /* view data into form */
     $(document).on("click", ".table .btn-primary", function (event) {
         event.preventDefault();
         var href = $(this).attr('href');
@@ -12,7 +12,7 @@ $(document).ready(function () {
             else
                 $('#frm-create-category #inactive').prop('checked', false);
         });
-
+        $("#tab-create-category").click();
     });
 
     /* save new category or edit category info */
@@ -38,19 +38,19 @@ $(document).ready(function () {
                 inactive: inactive
             },
             success: function (data) {
-                loadProfilesIntoTable(data);
+                alert_message();
+                clear_frm_save_category();
             },
             error: function (e) {
                 console.log(e);
             }
         });
-        clear_frm_save_category();
     });
 
     /* button new category */
-    $('#btn-clear-category').on('click', function (event) {
-        event.preventDefault();
+    $('#btn-new-category').on('click', function (event) {
         clear_frm_save_category();
+        $("#tab-create-category").click();
     });
 
     /* func clear save profile modal */
@@ -61,8 +61,17 @@ $(document).ready(function () {
         $('#btn-save-category').prop("disabled", false);
     }
 
+    /* tab listing */
+    $('#tab-category-list').on('click', function (event) {
+        event.preventDefault();
+        var href = "/categories/get/all";
+        $.get(href, function (data) {
+            SpreadData(data);
+        });
+    });
+
     /* func load data into table */
-    function loadProfilesIntoTable(data) {
+    function SpreadData(data) {
         $("#tbl_categories > tbody").html('');
         $.each(data, function (key) {
             var categoryStatus = getStatus(data[key].inactive);
@@ -85,6 +94,16 @@ $(document).ready(function () {
             true: "<span class=\"label label-danger\">inactive</span>",
             false: "<span class=\"label label-success\">active</span>"
         }[Status];
+    }
+
+    function alert_message() {
+        $.smallBox({
+            title: "Fiplus Khmer",
+            content: "You have committed successfully!",
+            color: "#739E73",
+            iconSmall: "fa fa-bell-o",
+            timeout: 5000
+        });
     }
 
 });

@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 
 @Controller
 public class CategoryController {
@@ -55,5 +57,11 @@ public class CategoryController {
     public ResponseEntity<Object> viewCategory(@PathVariable("category_id") String category_id) {
         CategoryModel category = categoryRepository.getCategoryById(category_id);
         return new ResponseEntity<>(category, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/categories/get/all", method = RequestMethod.GET)
+    public ResponseEntity<Object> getCategories() {
+        List<CategoryModel> categories = categoryRepository.getCategories();
+        return new ResponseEntity<>(categories, HttpStatus.OK);
     }
 }

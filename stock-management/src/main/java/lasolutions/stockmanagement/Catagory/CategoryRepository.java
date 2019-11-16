@@ -8,17 +8,17 @@ import java.util.List;
 
 public interface CategoryRepository extends JpaRepository<CategoryModel, String> {
 
-    String getCategories = "SELECT category_id, category_name, remark, inactive FROM tbl_categories";
+    String getCategories = "CALL GBL_GET_CATEGORIES()";
 
     @Query(value = getCategories, nativeQuery = true)
     List<CategoryModel> getCategories();
 
-    String getCategoryById = "SELECT category_id, category_name, remark, inactive FROM tbl_categories WHERE category_id= :category_id";
+    String getCategoryById = "CALL GBL_SHOW_CATEGORY_INFO(:category_id)";
 
     @Query(value = getCategoryById, nativeQuery = true)
     CategoryModel getCategoryById(@Param("category_id") String category_id);
 
-    String getCategoryId = "SELECT CONCAT('CAT-' , LPAD(RIGHT(MAX(category_id),3) + 1,3,0)) as category_id FROM tbl_categories";
+    String getCategoryId = "CALL GBL_GET_CATEGORY_ID()";
     @Query(value = getCategoryId, nativeQuery = true)
     String getCategoryId();
 }

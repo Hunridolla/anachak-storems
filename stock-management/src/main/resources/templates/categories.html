@@ -159,9 +159,9 @@
         <!-- RIBBON -->
         <div>
             <ol class="breadcrumb">
-                <li><a id="btn-new-item" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> New</a></li>
-                <li><a id="btn-save-item" class="btn btn-sm btn-success"><i class="fa fa-check"></i> Commmit</a></li>
-                <li><a id="btn-find-item" class="btn btn-sm btn-primary" data-toggle="modal"
+                <li><a id="btn-new-category" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> New</a></li>
+                <li><a id="btn-save-category" class="btn btn-sm btn-success"><i class="fa fa-check"></i> Commmit</a></li>
+                <li><a id="btn-find-category" class="btn btn-sm btn-primary" data-toggle="modal"
                         data-target="#find-item-modal"><i class="fa fa-search"></i> Find</a></li>
             </ol>
         </div>
@@ -189,7 +189,7 @@
                                     </li>
                                     <li>
                                         <a id="tab-category-list" data-toggle="tab" href="#category-list">
-                                            <i class="fa fa-lg fa-group"></i> Category List</a>
+                                            <i class="fa fa-lg fa-list"></i> Category List</a>
                                     </li>
                                 </ul>
                             </header>
@@ -238,14 +238,6 @@
                                                         </label>
                                                     </section>
                                                 </fieldset>
-                                                <footer>
-                                                    <button id="btn-save-category" class="btn btn-primary">
-                                                        Save
-                                                    </button>
-                                                    <button id="btn-clear-category" class="btn btn-primary">
-                                                        New
-                                                    </button>
-                                                </footer>
                                             </form>
                                         </div>
                                         <!--END-->
@@ -264,22 +256,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr th:each="data: ${categories}">
-                                                            <td th:text="${data.category_id}"></td>
-                                                            <td th:text="${data.category_name}"></td>
-                                                            <td th:text="${data.remark}">​​</td>
-                                                            <td>
-                                                                <span th:if="${data.inactive} == true"
-                                                                    class="label label-danger">inactive</span>
-                                                                <span th:if="${data.inactive} == false"
-                                                                    class="label label-success">active</span>
-                                                            </td>
-                                                            <td>
-                                                                <a th:href="${'/categories/view/' + data.category_id}"
-                                                                    class="btn btn-xs btn-primary"><i
-                                                                        class="fa fa-edit"></i></a>
-                                                            </td>
-                                                        </tr>
+                                                        
                                                     </tbody>
                                                 </table>
                                             </div>
