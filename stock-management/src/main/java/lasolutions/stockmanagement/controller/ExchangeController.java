@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Date;
+
 @Controller
 public class ExchangeController {
 
@@ -38,7 +40,7 @@ public class ExchangeController {
             @RequestParam("buy_rate") double buy_rate,
             @RequestParam("sell_rate") double sell_rate,
             @RequestParam("mid_rate") double mid_rate,
-            @RequestParam("effective_date") String effective_date
+            @RequestParam("effective_date") Date effective_date
     ){
         ExModel exModel;
         exModel = new ExModel();

@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Date;
 
 @Entity
 @Table(name = "tbl_exchange_rates")
@@ -30,7 +31,7 @@ public class ExModel {
     private double mid_rate;
 
     @Column(name = "effective_date")
-    private String effective_date;
+    private Date effective_date;
 
     public String getEx_id() {
         return ex_id;
@@ -64,11 +65,11 @@ public class ExModel {
         this.sell_rate = sell_rate;
     }
 
-    public String getEffective_date() {
+    public Date getEffective_date() {
         return effective_date;
     }
 
-    public void setEffective_date(String effective_date) {
+    public void setEffective_date(Date effective_date) {
         this.effective_date = effective_date;
     }
 
