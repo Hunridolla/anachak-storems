@@ -5,10 +5,11 @@ $(document).ready(function () {
         var ex_id = $('#ex-id').val();
         ex_id = '';
         var ex_type = $('#ex-type').val();
-        var buy_rate = $('#buy-rate').val();
-        var sell_rate = $('#sell-rate').val();
-        var mid_rate = $('#mid-rate').val();
+        var buy_rate = toNumber($('#buy-rate').val());
+        var sell_rate = toNumber($('#sell-rate').val());
+        var mid_rate = toNumber($('#mid-rate').val());
         var effective_date = toDate($("#effective-date").val());
+        alert(mid_rate);
         $.ajax({
             async: false,
             dataType: "json",

@@ -2,15 +2,16 @@ package lasolutions.stockmanagement.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class StockController {
+public class PayBillController {
 
-    @RequestMapping(value = "/_blank")
-    public ModelAndView _blank() {
+    @RequestMapping(value = "/pay-bills", method = RequestMethod.GET)
+    public ModelAndView showPayBills(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("_blank");
+        modelAndView.setViewName("pay-bills");
         return modelAndView;
     }
 }

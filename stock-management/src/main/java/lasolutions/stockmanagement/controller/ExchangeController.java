@@ -47,6 +47,7 @@ public class ExchangeController {
         if (ex_id.isEmpty()){
             ex_id = exRepository.getExId();
         }
+        System.out.println(String.valueOf(mid_rate));
         exModel.setEx_id(ex_id);
         exModel.setEx_type(ex_type);
         exModel.setBuy_rate(buy_rate);

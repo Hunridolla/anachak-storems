@@ -12,7 +12,7 @@
             </li>
             <li>
                 <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span
-                        class="menu-item-parent">Stocks</span></a>
+                        class="menu-item-parent">Stock Module</span></a>
                 <ul>
                     <li th:classappend="${active_page == 'customers'} ? 'active'">
                         <a th:href="@{/customers}">Customers <span class="label label-success">done</span></a>
@@ -38,8 +38,32 @@
                     <li th:classappend="${active_page == 'stock-in'} ? 'active'">
                         <a th:href="@{/stock-in}">Stock In <span class="label label-success">done</span> </a>
                     </li>
+                    <li th:classappend="${active_page == 'purchase-orders'} ? 'active'">
+                        <a th:href="@{/purchase-orders}">Purchase Orders <span class="label label-warning">pending</span> </a>
+                    </li>
+                    <li th:classappend="${active_page == 'sale-orders'} ? 'active'">
+                        <a th:href="@{/sale-orders}">Sale Orders <span class="label label-warning">pending</span> </a>
+                    </li>
+                    <li th:classappend="${active_page == 'pay-bills'} ? 'active'">
+                        <a th:href="@{/pay-bills}">Pay Bills <span class="label label-warning">pending</span> </a>
+                    </li>
+                    <li th:classappend="${active_page == 'invoices'} ? 'active'">
+                        <a th:href="@{/invoices}">Invoices <span class="label label-warning">pending</span> </a>
+                    </li>
+                    <li th:classappend="${active_page == 'invoice-payments'} ? 'active'">
+                        <a th:href="@{/invoice-payments}">Invoice Payments <span class="label label-warning">pending</span> </a>
+                    </li>
                     <li th:classappend="${active_page == 'exchange-rate'} ? 'active'">
                         <a th:href="@{/exchange-rate}">Exchange Rate <span class="label label-success">done</span> </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-lg fa-fw fa-cog"></i> <span
+                        class="menu-item-parent">System Setup</span></a>
+                <ul>
+                    <li th:classappend="${active_page == 'report-setup'} ? 'active'">
+                        <a th:href="@{/report-setup}">Report Setup <span class="label label-warning">pending</span> </a>
                     </li>
                 </ul>
             </li>
