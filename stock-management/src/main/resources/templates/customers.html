@@ -154,8 +154,8 @@
         <!-- RIBBON -->
         <div>
             <ol class="breadcrumb">
-                <li><a id="btn-new-customer" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> New</a></li>
-                <li><a id="btn-save-customer" class="btn btn-sm btn-success"><i class="fa fa-check"></i> Commit</a></li>
+                <li><button id="btn-new-customer" class="btn btn-sm btn-success" ><i class="fa fa-plus"></i> New</button></li>
+                <li><button id="btn-save-customer" type="submit" form="frm-create-customer" class="btn btn-sm btn-success" ><i class="fa fa-check"></i> Commit</button></li>
                 <li><a id="btn-find-customer" class="btn btn-sm btn-primary" data-toggle="modal"
                         data-target="#find-customer-modal"><i class="fa fa-search"></i> Find</a></li>
             </ol>
@@ -281,7 +281,7 @@
                                                             <label class="label">Phone</label>
                                                             <label for="phone" class="input">
                                                                 <input type="text" name="phone" id="phone"
-                                                                    placeholder="">
+                                                                       data-mask="(999) 999-9999 " placeholder="">
                                                             </label>
                                                         </section>
                                                     </div>
@@ -314,10 +314,9 @@
                                                             <input type="text" name="remark" id="remark" placeholder="">
                                                         </label>
                                                     </section>
-                                                    <section class="col col-4">
+                                                    <section> <!--class="col col-4"-->
                                                         <label class="checkbox">
-                                                            <input type="checkbox" name="inactive" id="inactive">
-                                                            <i></i>Inactive
+                                                            <input type="checkbox" name="inactive" id="inactive"><i></i>Inactive
                                                         </label>
                                                     </section>
                                                 </fieldset>
@@ -366,6 +365,8 @@
     </div>
     <!-- END MAIN PANEL -->
     <th:block th:include="fragments/foot :: foot" />
-</body>
+    <script>
 
+    </script>
+</body>
 </html>

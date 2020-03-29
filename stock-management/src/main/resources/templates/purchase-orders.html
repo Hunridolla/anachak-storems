@@ -206,7 +206,123 @@
                                 <div class="tab-content">
                                     <!--TAB MAIN-->
                                     <div class="tab-pane active" id="create-purchase-order">
+                                        <form id="frm-purchase-order" class="smart-form" novalidate="novalidate">
+                                            <header>
+                                                <h3> Purchase Order </h3>
+                                            </header>
+                                            <fieldset>
+                                                <div class="row">
+                                                    <section class="col col-3">
+                                                        <label class="label">Purchase ID</label>
+                                                        <label for="purchase-id" class="input">
+                                                            <input type="text" name="purchase-id" id="purchase-id" readonly>
+                                                        </label>
+                                                    </section>
+                                                </div>
+                                                <div class="row">
+                                                    <section class="col col-3">
+                                                        <label class="label">Purchase Date:</label>
+                                                        <label class="input">
+                                                            <i class="icon-append fa fa-calendar"></i>
+                                                            <input type="text" name="date" id="purchase-date">
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-3">
+                                                        <label class="label">Ref.No</label>
+                                                        <label for="ref-no" class="input">
+                                                            <input type="text" name="ref-no" id="ref-no">
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-6">
+                                                        <label class="label">Remark</label>
+                                                        <label for="Remark" class="input">
+                                                            <input type="text" name="remark" id="remark">
+                                                        </label>
+                                                    </section>
+                                                </div>
+                                                <div class="row">
+                                                    <section class="col col-3">
+                                                        <label class="label">Vendors</label>
+                                                        <label class="select">
+                                                            <select name="vendors" id="vendors">
+                                                                <option th:each="data :${vendors}"
+                                                                        th:value="${data.vendor_id}"
+                                                                        th:text="${data.company_name}"></option>
+                                                            </select>
+                                                            <i></i>
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-6">
+                                                        <label class="label">Address</label>
+                                                        <label for="address" class="input">
+                                                            <input type="text" name="address" id="address">
+                                                        </label>
+                                                    </section>
+                                                </div>
+                                            </fieldset>
+                                            <fieldset>
+                                                <div style="margin:0px 0px 10px 0px;">
+                                                    <a id="btn-add-items" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Add Purchase Items</a>
+                                                </div>
+                                                <div class="table-responsive">
+                                                    <table id="purchase-item" class="table table-bordered">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>Action</th>
+                                                            <th>Item.Code</th>
+                                                            <th>Description</th>
+                                                            <th>Qty</th>
+                                                            <th>Rate</th>
+                                                            <th>Disc.Value</th>
+                                                            <th>Sub.Amt</th>
+                                                            <th>Total.Amt</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
 
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </fieldset>
+                                            <fieldset>
+                                                <div class="row">
+                                                    <section class="col col-8">
+                                                    </section>
+                                                    <section class="col col-2">
+                                                        <label class="label">Sub Amount:</label>
+                                                    </section>
+                                                    <section class="col col-2">
+                                                        <label for="total-subAmt" class="input">
+                                                            <input type="text" id="total-subAmt" readonly>
+                                                        </label>
+                                                    </section>
+                                                </div>
+                                                <div class="row">
+                                                    <section class="col col-8">
+                                                    </section>
+                                                    <section class="col col-2">
+                                                        <label class="label">Discount:</label>
+                                                    </section>
+                                                    <section class="col col-2">
+                                                        <label for="total-disc" class="input">
+                                                            <input type="text" name="total-disc" id="total-disc" readonly>
+                                                        </label>
+                                                    </section>
+                                                </div>
+                                                <div class="row">
+                                                    <section class="col col-8">
+                                                    </section>
+                                                    <section class="col col-2">
+                                                        <label class="label">Grand Amount:</label>
+                                                    </section>
+                                                    <section class="col col-2">
+                                                        <label for="total-amt" class="input">
+                                                            <input type="text" name="total-amt" id="total-amt" readonly>
+                                                        </label>
+                                                    </section>
+                                                </div>
+                                            </fieldset>
+                                        </form>
                                     </div>
                                     <!--END-->
 
@@ -232,7 +348,106 @@
     <!-- END MAIN CONTENT -->
 </div>
 <!-- END MAIN PANEL -->
-<th:block th:include="fragments/foot :: foot" />
-</body>
 
+<!-- MODALS -->
+<div class="modal" id="add-item-modal" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h5 class="modal-title" id="modal-label">Add Item <span id="status" class="label label-success"
+                                                                        aria-valuetext="[new]" data-loading-text="">[new]</span></h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6" style="margin-top: 10px">
+                        <div class="input-group">
+                            <div class="input-group-btn" style="min-width: 120px;">
+                                <label class="form-control ctl_label">Item Code:</label>
+                            </div>
+                            <input id="item-code" class="form-control ctl_textbox" type="text" oninput="this.value = this.value.toUpperCase()" tabindex="1" >
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-top: 10px">
+                        <input id="item-name" class="form-control ctl_textbox" type="text"
+                               value="iPhone 5s Earphone" readonly>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6" style="margin-top: 10px">
+                        <div class="input-group">
+                            <div class="input-group-btn" style="min-width: 120px;">
+                                <label class="form-control ctl_label">Cost:</label>
+                            </div>
+                            <input id="item-cost" class="form-control ctl_textbox" type="number" tabindex="2"
+                                   placeholder="0.00">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6" style="margin-top: 10px">
+                        <div class="input-group">
+                            <div class="input-group-btn" style="min-width: 120px;">
+                                <label class="form-control ctl_label">Qty:</label>
+                            </div>
+                            <input id="item-qty" class="form-control ctl_textbox" type="number" tabindex="3"
+                                   placeholder="0.00">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6" style="margin-top: 10px">
+                        <div class="input-group">
+                            <div class="input-group-btn" style="min-width: 120px;">
+                                <label class="form-control ctl_label">Discount:</label>
+                            </div>
+                            <input id="item-disc" class="form-control ctl_textbox" type="number" tabindex="4"
+                                   placeholder="0.00">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6" style="margin-top: 10px">
+                        <div class="input-group">
+                            <div class="input-group-btn" style="min-width: 120px;">
+                                <label class="form-control ctl_label">Sub.Amt:
+                                </label>
+                            </div>
+                            <input id="item-subAmt" class="form-control ctl_textbox" type="text" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6" style="margin-top: 10px">
+                        <div class="input-group">
+                            <div class="input-group-btn" style="min-width: 120px;">
+                                <label class="form-control ctl_label">Total.Amt:
+                                </label>
+                            </div>
+                            <input id="item-totalAmt" class="form-control ctl_textbox" type="text" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <a id="btn-add-item" class="btn btn-labeled btn-success" tabindex="5"> <span
+                                class="btn-label">
+                                    <i class="glyphicon glyphicon-plus-sign"></i></span>Add</a>
+                        <a class="btn btn-default" data-dismiss="modal">Close</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:include="fragments/foot :: foot" />
+<script>
+
+</script>
+</body>
 </html>
