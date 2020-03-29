@@ -24,8 +24,8 @@ $(document).ready(function () {
         $('#btn-save-unit-measure').show();
     });
 
-    /* save new measure or edit measure info */
-    $('#btn-save-unit-measure').on('click', function (event) {
+    /* SAVE NEW MEASURE */
+    $(document).on('submit',"#create-unit-measure", function (event) {
         event.preventDefault();
         var unit_measure_id = $('#unit_measure_id').val();
         var unit_measure_name = $('#unit_measure_name').val();
@@ -48,6 +48,7 @@ $(document).ready(function () {
             },
             success: function (data) {
                 loadProfilesIntoTable(data);
+                clear_modal_save_unit_measure();
             },
             error: function (e) {
                 alert('Error: ' + e);
@@ -56,14 +57,14 @@ $(document).ready(function () {
         $('#create-unit-measure-modal').modal('toggle');
     });
 
-    /* func clear save unit measure modal */
+    /* CLEAR FORM CREATE UNIT MEASURE */
     function clear_modal_save_unit_measure() {
-        $('input:text, input:password, input:file, select, textarea', '#create-unit-measure-modal').val('');
-        $('input:checkbox, input:radio', '#create-unit-measure-modal').removeAttr('checked').removeAttr('selected');
+        $('input:text, input:password, input:file, select, textarea', '#create-unit-measure').val('');
+        $('input:checkbox, input:radio', '#create-unit-measure').removeAttr('checked').removeAttr('selected');
         $('#inactive').prop('checked', false);
     }
 
-    /* func load data into table */
+    /* LOAD UNIT MEASURE INTO TABLE */
     function loadProfilesIntoTable(data) {
         $("#tbl_unit_measure > tbody").html('');
         $.each(data, function (key, nums) {
@@ -73,8 +74,8 @@ $(document).ready(function () {
                 "<td>" + data[key].unit_measure_name + "</td>" +
                 "<td>" + data[key].remark + "</td>" +
                 "<td>" + UnitMeasureStatus + "</td>" +
-                "<td>" +
-                " <a href=\"/unit-measures/view/" + data[key].unit_measure_id + "\" class=\"btn btn-xs btn-primary\">\n" +
+                "<td align=\"center\">" +
+                "<a href=\"/unit-measures/view/" + data[key].unit_measure_id + "\" class=\"btn btn-xs btn-primary\">\n" +
                 "<i class=\"fa fa-edit\"></i></a>" +
                 "</td>"
                 + "</tr>";
@@ -82,12 +83,40 @@ $(document).ready(function () {
         });
     }
 
-    /* func add label inactive & active */
-    function getStatus(Status) {
-        return {
-            true: "<span class=\"label label-danger\">inactive</span>",
-            false: "<span class=\"label label-success\">active</span>"
-        }[Status];
-    }
+    /* VALIDATIONS */
+    /* ADDED BY DOLLA 29-MAR-2020 */
+    var $frm_create_unit_measure = $('#create-unit-measure').validate({
+        errorClass: global_variables.gbl_errorClass,
+        errorElement: global_variables.gbl_errorElement,
+        highlight: function (element) {
+            $(element).parent().removeClass('state-success').addClass("state-error");
+            $(element).removeClass('valid');
+        },
+        unhighlight: function (element) {
+            $(element).parent().removeClass("state-error").addClass('state-success');
+            $(element).addClass('valid');
+        },
+
+        /* FIELDS THAT WILL CHECK VALIDATE */
+        /* BY NAME OF ATTRIBUTE */
+        rules: {
+            unit_measure_name: {
+                required: true
+            }
+        },
+
+        /* MESSAGE INVALID FOR EACH  FIELDS ABOVE */
+        messages: {
+            unit_measure_name: {
+                required: 'Required*'
+            }
+        },
+
+        /* DEFAULT OF SMARTADMIN */
+        /* DON'T CHANGE */
+        errorPlacement: function (error, element) {
+            error.insertAfter(element.parent());
+        }
+    });
 });
 

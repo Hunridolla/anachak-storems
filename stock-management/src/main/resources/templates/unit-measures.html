@@ -1,359 +1,121 @@
 <!DOCTYPE html>
 <html th:with="active_page = 'unit-measures'" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<th:block th:include="fragments/head :: head" />
+    <th:block th:include="fragments/head :: head" />
+    <body class="smart-style-4">
+        <!-- HEADER -->
+        <header id="header">
+            <th:block th:include="fragments/head :: logo" />
+            <th:block th:include="fragments/head :: toggle"/>
+        </header>
+        <!-- END HEADER -->
 
-<body class="smart-style-4">
-
-    <!-- #HEADER -->
-    <header id="header">
-        <th:block th:include="fragments/head :: logo" />
-        
-        <!-- #TOGGLE LAYOUT BUTTONS -->
-        <!-- pulled right: nav area -->
-        <div class="pull-right">
-
-            <!-- collapse menu button -->
-            <div id="hide-menu" class="btn-header pull-right">
-                <span> <a href="javascript:void(0);" data-action="toggleMenu" title="Collapse Menu"><i
-                            class="fa fa-reorder"></i></a>
-                </span>
-            </div>
-            <!-- end collapse menu -->
-
-            <!-- #MOBILE -->
-            <!-- Top menu profile link : this shows only when top menu is active -->
-            <ul id="mobile-profile-img" class="header-dropdown-list hidden-xs padding-5">
-                <li class="">
-                    <a href="#" class="dropdown-toggle no-margin userdropdown" data-toggle="dropdown">
-                        <img src="img/avatars/sunny.png" alt="John Doe" class="online" />
+        <!-- NAVIGATION -->
+        <aside id="left-panel">
+            <!-- USER INFORMATION -->
+            <div class="login-info">
+                <span>
+                    <a href="" id="show-shortcut" data-action="toggleShortcut">
+                        <img src="img/avatars/sunny.png" alt="me" class="online" />
+                        <span>
+                            Hunridolla
+                        </span>
+                        <i class="fa fa-angle-down"></i>
                     </a>
-                    <ul class="dropdown-menu pull-right">
-                        <li>
-                            <a href="javascript:void(0);" class="padding-10 padding-top-0 padding-bottom-0"><i
-                                    class="fa fa-cog"></i>
-                                Setting</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="profile.html" class="padding-10 padding-top-0 padding-bottom-0"> <i
-                                    class="fa fa-user"></i>
-                                <u>P</u>rofile</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="javascript:void(0);" class="padding-10 padding-top-0 padding-bottom-0"
-                                data-action="toggleShortcut"><i class="fa fa-arrow-down"></i> <u>S</u>hortcut</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="javascript:void(0);" class="padding-10 padding-top-0 padding-bottom-0"
-                                data-action="launchFullscreen"><i class="fa fa-arrows-alt"></i> Full <u>S</u>creen</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="login.html" class="padding-10 padding-top-5 padding-bottom-5"
-                                data-action="userLogout"><i class="fa fa-sign-out fa-lg"></i>
-                                <strong><u>L</u>ogout</strong></a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-
-            <!-- logout button -->
-            <div id="logout" class="btn-header transparent pull-right">
-                <span> <a href="login.html" title="Sign Out" data-action="userLogout"
-                        data-logout-msg="You can improve your security further after logging out by closing this opened browser"><i
-                            class="fa fa-sign-out"></i></a> </span>
-            </div>
-            <!-- end logout button -->
-
-            <!-- search mobile button (this is hidden till mobile view port) -->
-            <div id="search-mobile" class="btn-header transparent pull-right">
-                <span> <a href="javascript:void(0)" title="Search"><i class="fa fa-search"></i></a> </span>
-            </div>
-            <!-- end search mobile button -->
-
-            <!-- #SEARCH -->
-            <!-- input: search field -->
-            <form action="search.html" class="header-search pull-right">
-                <input id="search-fld" type="text" name="param" placeholder="Find reports and more">
-                <button type="submit">
-                    <i class="fa fa-search"></i>
-                </button>
-                <a href="javascript:void(0);" id="cancel-search-js" title="Cancel Search"><i
-                        class="fa fa-times"></i></a>
-            </form>
-            <!-- end input: search field -->
-
-            <!-- fullscreen button -->
-            <div id="fullscreen" class="btn-header transparent pull-right">
-                <span> <a href="javascript:void(0);" data-action="launchFullscreen" title="Full Screen"><i
-                            class="fa fa-arrows-alt"></i></a>
                 </span>
             </div>
-            <!-- end fullscreen button -->
-
-            <!-- #Voice Command: Start Speech -->
-            <div id="speech-btn" class="btn-header transparent pull-right hidden-sm hidden-xs">
-                <div>
-                    <a href="javascript:void(0)" title="Voice Command" data-action="voiceCommand"><i
-                            class="fa fa-microphone"></i></a>
-                    <div class="popover bottom">
-                        <div class="arrow"></div>
-                        <div class="popover-content">
-                            <h4 class="vc-title">Voice command activated <br>
-                                <small>Please speak clearly into the
-                                    mic
-                                </small>
-                            </h4>
-                            <h4 class="vc-title-error text-center">
-                                <i class="fa fa-microphone-slash"></i> Voice command failed
-                                <br>
-                                <small class="txt-color-red">Must <strong>"Allow"</strong> Microphone</small>
-                                <br>
-                                <small class="txt-color-red">Must have <strong>Internet Connection</strong></small>
-                            </h4>
-                            <a href="javascript:void(0);" class="btn btn-success" onclick="commands.help()">See
-                                Commands</a>
-                            <a href="javascript:void(0);" class="btn bg-color-purple txt-color-white"
-                                onclick="$('#speech-btn .popover').fadeOut(50);">Close
-                                Popup</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- end voice command -->
-
-        </div>
-        <!-- end pulled right: nav area -->
-
-    </header>
-    <!-- END HEADER -->
-
-    <!-- #NAVIGATION -->
-    <!-- Left panel : Navigation area -->
-    <!-- Note: This width of the aside area can be adjusted through LESS variables -->
-    <aside id="left-panel">
-
-        <!-- User info -->
-        <div class="login-info">
-            <span>
-                <!-- User image size is adjusted inside CSS, it should stay as it -->
-
-                <a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
-                    <img src="img/avatars/sunny.png" alt="me" class="online" />
-                    <span>
-                        Hunridolla
-                    </span>
-                    <i class="fa fa-angle-down"></i>
-                </a>
-
+            <!-- END USER INFORMATION -->
+            <th:block th:include="fragments/nav :: nav" />
+            <span class="minifyme" data-action="minifyMenu">
+                <i class="fa fa-arrow-circle-left hit"></i>
             </span>
-        </div>
-        <!-- end user info -->
+        </aside>
+        <!-- END NAVIGATION -->
 
-        <!--BEGIN Navigator-->
-
-        <th:block th:include="fragments/nav :: nav" />
-
-        <!--END Navigator-->
-
-        <span class="minifyme" data-action="minifyMenu">
-            <i class="fa fa-arrow-circle-left hit"></i>
-        </span>
-
-    </aside>
-    <!-- END NAVIGATION -->
-
-    <!-- MAIN PANEL -->
-    <div id="main" role="main">
-        <!-- MAIN CONTENT -->
-        <div id="content">
-            <!-- widget grid -->
-            <section id="widget-grid" class="">
-                <!-- row -->
-                <div class="row" style="margin-bottom:10px;">
-                    <!-- a blank row to get started -->
-                    <div class="col-sm-12">
-                        <a id="btn-new-unit-measure" class="btn btn-labeled btn-success" data-toggle="modal"
-                            data-target="#create-unit-measure-modal"> <span class="btn-label"><i
-                                    class="glyphicon glyphicon-glass"></i></span>
-                            New Unit Measure</a>
-                    </div>
-                </div>
-                <!-- end row -->
-
-                <!-- row -->
-                <div class="row">
-
-                    <!-- NEW WIDGET START -->
-                    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <!-- Widget ID (each widget will need unique ID)-->
-                        <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false"
-                            data-widget-colorbutton="false" data-widget-deletebutton="false"
-                            data-widget-togglebutton="true">
-                            <header>
-                                <span class="widget-icon"> <i class="fa fa-group"></i> </span>
-                                <h2>Unit Measures</h2>
-                            </header>
-
-                            <!-- widget div-->
-                            <div>
-
-                                <!-- widget edit box -->
-                                <div class="jarviswidget-editbox">
-                                    <!-- This area used as dropdown edit box -->
-
-                                </div>
-                                <!-- end widget edit box -->
-
-                                <!-- widget content -->
-                                <div class="widget-body no-padding">
-                                    <div class="table-responsive">
-                                        <table id="tbl_unit_measure"
-                                            class="table table-striped table-bordered table-hover" width="100%">
-                                            <thead>
-                                                <tr>
-                                                    <th>Unit Measure ID</th>
-                                                    <th>Unit Measure Name</th>
-                                                    <th>Remark</th>
-                                                    <th>Status</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr th:each="data : ${unitMeasures}">
-                                                    <td th:text="${data.unit_measure_id}"></td>
-                                                    <td th:text="${data.unit_measure_name}"></td>
-                                                    <td th:text="${data.remark}"></td>
-                                                    <td>
-                                                        <span th:if="${data.inactive} == true"
-                                                            class="label label-danger">inactive</span>
-                                                        <span th:if="${data.inactive} == false"
-                                                            class="label label-success">active</span>
-                                                    </td>
-                                                    <td>
-                                                        <a th:href="${'/unit-measures/view/' + data.unit_measure_id}"
-                                                            class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <!-- end widget content -->
-
-                            </div>
-                            <!-- end widget div -->
-
+        <!-- MAIN PANEL -->
+        <div id="main" role="main">
+            <!-- MAIN CONTENT -->
+            <div id="content">
+                <!-- WIDGET GRID -->
+                <section id="widget-grid" class="">
+                    <!-- ROW FOR BUTTON CREATE -->
+                    <div class="row" style="margin-bottom:10px;">
+                        <!-- a blank row to get started -->
+                        <div class="col-sm-12">
+                            <a id="btn-new-unit-measure" class="btn btn-labeled btn-success" data-toggle="modal"
+                                data-target="#create-unit-measure-modal"> <span class="btn-label">
+                                <i class="glyphicon glyphicon-glass"></i></span> New Unit Measure</a>
                         </div>
-                        <!-- end widget -->
-
-                    </article>
-                    <!-- WIDGET END -->
-
-                </div>
-
-                <!-- end row -->
-
-                <!-- row -->
-
-                <div class="row">
-
-                    <!-- a blank row to get started -->
-                    <div class="col-sm-12">
-                        <!-- your contents here -->
                     </div>
+                    <!-- END ROW FOR BUTTON CREATE -->
+                    <!-- ROW FOR TABLE -->
+                    <div class="row">
+                        <!-- WIDGET-->
+                        <article class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                            <div id="wid-id-0" class="jarviswidget" data-widget-editbutton="false"
+                                data-widget-colorbutton="false" data-widget-deletebutton="false"
+                                data-widget-togglebutton="true">
+                                <header>
+                                    <span class="widget-icon"> <i class="fa fa-group"></i> </span>
+                                    <h2>Unit Measures</h2>
+                                </header>
+                                <!-- widget div-->
+                                <div>
+                                    <!-- widget edit box -->
+                                    <div class="jarviswidget-editbox">
+                                        <!-- This area used as dropdown edit box -->
+                                    </div>
+                                    <!-- end widget edit box -->
 
-                </div>
-
-                <!-- end row -->
-
-            </section>
-            <!-- end widget grid -->
-
-            <form id="create-unit-measure">
-                <!-- create user modal -->
-                <div class="modal fade" id="create-unit-measure-modal" tabindex="-1" role="dialog"
-                    aria-labelledby="modal-label" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                    &times;
-                                </button>
-                                <h4 class="modal-title" id="modal-label">Unit Measure Setup</h4>
+                                    <!-- widget content -->
+                                    <div class="widget-body no-padding">
+                                        <div class="table-responsive">
+                                            <table id="tbl_unit_measure"
+                                                class="table table-striped table-bordered table-hover" width="100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Unit Measure ID</th>
+                                                        <th>Unit Measure Name</th>
+                                                        <th>Remark</th>
+                                                        <th>Status</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr th:each="data : ${unitMeasures}">
+                                                        <td th:text="${data.unit_measure_id}"></td>
+                                                        <td th:text="${data.unit_measure_name}"></td>
+                                                        <td th:text="${data.remark}"></td>
+                                                        <td>
+                                                            <span th:if="${data.inactive} == true"
+                                                                class="label label-danger">inactive</span>
+                                                            <span th:if="${data.inactive} == false"
+                                                                class="label label-success">active</span>
+                                                        </td>
+                                                        <td align="center">
+                                                            <a th:href="${'/unit-measures/view/' + data.unit_measure_id}"
+                                                                class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <!-- end widget content -->
+                                </div>
+                                <!-- end widget div -->
                             </div>
-                            <div class="modal-body">
-
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="unit_measure_id">Unit Measure ID</label>
-                                            <input name="unit_measure_id" id="unit_measure_id" type="text"
-                                                class="form-control" readonly required />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="unit_measure_name">Unit Measure Name</label>
-                                            <input name="unit_measure_name" id="unit_measure_name" type="text"
-                                                class="form-control" required />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="remark">Remark</label>
-                                            <input name="remark" id="remark" type="text" class="form-control" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="well well-sm well-primary">
-                                            <div class="form-group">
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input name="inactive" id="inactive" type="checkbox"
-                                                            class="checkbox style-0" checked="checked">
-                                                        <span>Inactive</span>
-                                                        <input name="inactive" type='hidden' value='0'
-                                                            class="checkbox style-0">
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="modal-footer">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <a id="btn-save-unit-measure" class="btn btn-labeled btn-primary">
-                                            <span class="btn-label"><i
-                                                    class="glyphicon glyphicon-floppy-save"></i></span>
-                                            Save</a>
-                                        <a id="btn-close-modal" class="btn btn-labeled btn-danger" data-dismiss="modal">
-                                            <span class="btn-label"><i
-                                                    class="glyphicon glyphicon-remove-circle"></i></span>
-                                            Close</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!-- /.modal-content -->
-                    </div><!-- /.modal-dialog -->
-                </div><!-- /.modal -->
-            </form>
+                            <!-- end widget -->
+                        </article>
+                        <!-- WIDGET END -->
+                    </div>
+                    <!-- END ROW FOR TABLE -->
+                </section>
+                <!-- WIDGET GRID -->
+                <th:block th:include="fragments/modals :: create-unit-measure"/>
+            </div>
+            <!-- END MAIN CONTENT -->
         </div>
-        <!-- END MAIN CONTENT -->
-
-    </div>
-    <!-- END MAIN PANEL -->
-    <th:block th:include="fragments/foot :: foot" />
-</body>
-
+        <!-- END MAIN PANEL -->
+        <th:block th:include="fragments/foot :: foot"/>
+    </body>
 </html>

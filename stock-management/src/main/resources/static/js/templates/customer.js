@@ -137,11 +137,9 @@ $(document).ready(function () {
 
     /* VALIDATIONS */
     /* ADDED BY DOLLA 29-MAR-2020 */
-    var errorClass = 'invalid';
-    var errorElement = 'em';
     var $frm_create_customer = $('#frm-create-customer').validate({
-        errorClass: errorClass,
-        errorElement: errorElement,
+        errorClass: global_variables.gbl_errorClass,
+        errorElement: global_variables.gbl_errorElement,
         highlight: function (element) {
             $(element).parent().removeClass('state-success').addClass("state-error");
             $(element).removeClass('valid');
@@ -184,23 +182,4 @@ $(document).ready(function () {
             error.insertAfter(element.parent());
         }
     });
-
-    /* GLOBAL FUNCTIONS */
-    /* ALERT MESSAGE */
-    function alert_message(msg) {
-        $.smallBox({
-            title: "Anachak Store",
-            content: msg, /*"You have committed successfully!",*/
-            color: "#739E73",
-            iconSmall: "fa fa-bell-o",
-            timeout: 5000
-        });
-    }
-    /* GET LABEL FOR INACTIVE AND ACTIVE */
-    function getStatus(Status) {
-        return {
-            true: "<span class=\"label label-danger\">inactive</span>",
-            false: "<span class=\"label label-success\">active</span>"
-        }[Status];
-    }
 });

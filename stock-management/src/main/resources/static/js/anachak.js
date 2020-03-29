@@ -1,24 +1,23 @@
-
-
-function alert_message() {
+/* GLOBAL FUNCTIONS */
+/* ALERT MESSAGE */
+function alert_message(msg) {
     $.smallBox({
-        title: "Anachak",
-        content: "You have committed successfully!",
+        title: "Anachak Store",
+        content: msg,
         color: "#739E73",
         iconSmall: "fa fa-bell-o",
         timeout: 5000
     });
 }
-function alert_error() {
-    $.smallBox({
-        title: "Anachak",
-        content: "Unsuccessfully! Please verify data again!",
-        color: "#E2504A",
-        iconSmall: "fa fa-bell-o",
-        timeout: 5000
-    });
+/* GET LABEL FOR INACTIVE AND ACTIVE */
+function getStatus(Status) {
+    return {
+        true: "<span class=\"label label-danger\">inactive</span>",
+        false: "<span class=\"label label-success\">active</span>"
+    }[Status];
 }
+/* CONVERT TO NUMBER */
 function toNumber(string){
-    var result = isNaN(parseFloat(string)) ? 0 : parseFloat(string);
+    const result = isNaN(parseFloat(string)) ? 0 : parseFloat(string);
     return result;
 }
