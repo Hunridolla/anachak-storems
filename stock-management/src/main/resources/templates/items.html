@@ -1,391 +1,276 @@
 <!DOCTYPE html>
 <html th:with="active_page = 'items'" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<th:block th:include="fragments/head :: head" />
+    <th:block th:include="fragments/head :: head" />
+    <body class="smart-style-4">
+        <!-- HEADER -->
+        <header id="header">
+            <th:block th:include="fragments/head :: logo" />
+            <th:block th:include="fragments/head :: toggle"/>
+        </header>
+        <!-- END HEADER -->
 
-<body class="smart-style-4">
-    <!-- #HEADER -->
-    <header id="header">
-        <th:block th:include="fragments/head :: logo" />
-
-        <!-- pulled right: nav area -->
-        <div class="pull-right">
-            <!-- collapse menu button -->
-            <div id="hide-menu" class="btn-header pull-right">
-                <span> <a href="" data-action="toggleMenu" title="Collapse Menu"><i class="fa fa-reorder"></i></a>
-                </span>
+        <!-- NAVIGATION -->
+        <aside id="left-panel">
+            <!-- USER INFORMATION -->
+            <div class="login-info">
+                        <span>
+                            <a href="" id="show-shortcut" data-action="toggleShortcut">
+                                <img src="img/avatars/sunny.png" alt="me" class="online" />
+                                <span>
+                                    Hunridolla
+                                </span>
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+                        </span>
             </div>
-            <!-- end collapse menu -->
-
-            <!-- #MOBILE -->
-            <!-- Top menu profile link : this shows only when top menu is active -->
-            <ul id="mobile-profile-img" class="header-dropdown-list hidden-xs padding-5">
-                <li class="">
-                    <a href="#" class="dropdown-toggle no-margin userdropdown" data-toggle="dropdown">
-                        <img src="img/avatars/sunny.png" alt="John Doe" class="online" />
-                    </a>
-                    <ul class="dropdown-menu pull-right">
-                        <li>
-                            <a href="" class="padding-10 padding-top-0 padding-bottom-0"><i class="fa fa-cog"></i>
-                                Setting</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="profile.html" class="padding-10 padding-top-0 padding-bottom-0"> <i
-                                    class="fa fa-user"></i> <u>P</u>rofile</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="" class="padding-10 padding-top-0 padding-bottom-0" data-action="toggleShortcut"><i
-                                    class="fa fa-arrow-down"></i> <u>S</u>hortcut</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="" class="padding-10 padding-top-0 padding-bottom-0"
-                                data-action="launchFullscreen"><i class="fa fa-arrows-alt"></i> Full <u>S</u>creen</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="login.html" class="padding-10 padding-top-5 padding-bottom-5"
-                                data-action="userLogout"><i class="fa fa-sign-out fa-lg"></i>
-                                <strong><u>L</u>ogout</strong></a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-
-            <!-- logout button -->
-            <div id="logout" class="btn-header transparent pull-right">
-                <span> <a href="login.html" title="Sign Out" data-action="userLogout"
-                        data-logout-msg="You can improve your security further after logging out by closing this opened browser"><i
-                            class="fa fa-sign-out"></i></a> </span>
-            </div>
-            <!-- end logout button -->
-
-            <!-- search mobile button (this is hidden till mobile view port) -->
-            <div id="search-mobile" class="btn-header transparent pull-right">
-                <span> <a href="" title="Search"><i class="fa fa-search"></i></a> </span>
-            </div>
-            <!-- end search mobile button -->
-
-            <!-- #SEARCH -->
-            <!-- input: search field -->
-            <form action="search.html" class="header-search pull-right">
-                <input id="search-fld" type="text" name="param" placeholder="Find reports and more">
-                <button type="submit">
-                    <i class="fa fa-search"></i>
-                </button>
-                <a href="" id="cancel-search-js" title="Cancel Search"><i class="fa fa-times"></i></a>
-            </form>
-            <!-- end input: search field -->
-
-            <!-- fullscreen button -->
-            <div id="fullscreen" class="btn-header transparent pull-right">
-                <span> <a href="" data-action="launchFullscreen" title="Full Screen"><i
-                            class="fa fa-arrows-alt"></i></a> </span>
-            </div>
-            <!-- end fullscreen button -->
-
-            <!-- #Voice Command: Start Speech -->
-            <div id="speech-btn" class="btn-header transparent pull-right hidden-sm hidden-xs">
-                <div>
-                    <a href="" title="Voice Command" data-action="voiceCommand"><i class="fa fa-microphone"></i></a>
-                    <div class="popover bottom">
-                        <div class="arrow"></div>
-                        <div class="popover-content">
-                            <h4 class="vc-title">Voice command activated <br>
-                                <small>Please speak clearly into the mic</small>
-                            </h4>
-                            <h4 class="vc-title-error text-center">
-                                <i class="fa fa-microphone-slash"></i> Voice command failed
-                                <br>
-                                <small class="txt-color-red">Must <strong>"Allow"</strong> Microphone</small>
-                                <br>
-                                <small class="txt-color-red">Must have <strong>Internet Connection</strong></small>
-                            </h4>
-                            <a href="" class="btn btn-success" onclick="commands.help()">See
-                                Commands</a>
-                            <a href="" class="btn bg-color-purple txt-color-white"
-                                onclick="$('#speech-btn .popover').fadeOut(50);">Close Popup</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- end voice command -->
-        </div>
-        <!-- end pulled right: nav area -->
-
-    </header>
-    <!-- END HEADER -->
-
-    <!-- #NAVIGATION -->
-    <aside id="left-panel">
-        <!-- UserModel info -->
-        <div class="login-info">
-            <span>
-                <!-- UserModel image size is adjusted inside CSS, it should stay as it -->
-                <a href="" id="show-shortcut" data-action="toggleShortcut">
-                    <img src="img/avatars/sunny.png" alt="me" class="online" />
-                    <span>
-                        john.doe
-                    </span>
-                    <i class="fa fa-angle-down"></i>
-                </a>
-
+            <!-- END USER INFORMATION -->
+            <th:block th:include="fragments/nav :: nav" />
+            <span class="minifyme" data-action="minifyMenu">
+                <i class="fa fa-arrow-circle-left hit"></i>
             </span>
-        </div>
-        <!-- end user info -->
-        <th:block th:include="fragments/nav :: nav" />
-        <span class="minifyme" data-action="minifyMenu">
-            <i class="fa fa-arrow-circle-left hit"></i>
-        </span>
-    </aside>
-    <!-- END NAVIGATION -->
+        </aside>
+        <!-- END NAVIGATION -->
 
-    <!-- MAIN PANEL -->
-    <div id="main" role="main">
-        <!-- RIBBON -->
-        <div>
-            <ol class="breadcrumb">
-                <li><a id="btn-new-item" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> New</a></li>
-                <li><a id="btn-save-item" class="btn btn-sm btn-success"><i class="fa fa-check"></i> Commit</a></li>
-                <li><a id="btn-find-item" class="btn btn-sm btn-primary" data-toggle="modal"
-                        data-target="#find-item-modal"><i class="fa fa-search"></i> Find</a></li>
-            </ol>
-        </div>
-        <!-- END RIBBON -->
+        <!-- MAIN PANEL -->
+        <div id="main" role="main">
+            <!-- RIBBON -->
+            <div>
+                <ol class="breadcrumb">
+                    <li><button id="btn-new-item" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> New</button></li>
+                    <li><button id="btn-save-item" type="submit" form="frm-create-item" class="btn btn-sm btn-success"><i class="fa fa-check"></i> Commit</button></li>
+                    <li><button id="btn-find-item" class="btn btn-sm btn-primary" data-toggle="modal"
+                            data-target="#find-item-modal"><i class="fa fa-search"></i> Find</button></li>
+                </ol>
+            </div>
+            <!-- END RIBBON -->
 
-        <!-- MAIN CONTENT -->
-        <div id="content">
+            <!-- MAIN CONTENT -->
+            <div id="content">
+                <!-- widget grid -->
+                <section id="widget-grid" class="">
+                    <!-- row -->
+                    <div class="row">
+                        <!-- NEW WIDGET START -->
+                        <article class="col-sm-12 col-md-12 col-lg-12">
+                            <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false"
+                                data-widget-colorbutton="false" data-widget-deletebutton="true"
+                                data-widget-togglebutton="true">
+                                <header>
+                                    <ul class="nav nav-tabs pull-left in">
+                                        <li class="active">
+                                            <a id="tab-create-item" data-toggle="tab" href="#create-item">
+                                                <i class="fa fa-lg fa-plus"></i> Create Item </span></a>
+                                        </li>
+                                        <li>
+                                            <a id="tab-item-list" data-toggle="tab" href="#item-list">
+                                                <i class="fa fa-lg fa-list"></i> Item List </a>
+                                        </li>
+                                    </ul>
+                                </header>
 
-            <!-- widget grid -->
-            <section id="widget-grid" class="">
-                <!-- row -->
-                <div class="row">
-                    <!-- NEW WIDGET START -->
-                    <article class="col-sm-12 col-md-12 col-lg-12">
-                        <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false"
-                            data-widget-colorbutton="false" data-widget-deletebutton="true"
-                            data-widget-togglebutton="true">
-                            <header>
-                                <ul class="nav nav-tabs pull-left in">
-                                    <li class="active">
-                                        <a id="tab-create-item" data-toggle="tab" href="#create-item">
-                                            <i class="fa fa-lg fa-plus"></i> Create Item </span></a>
-                                    </li>
-                                    <li>
-                                        <a id="tab-item-list" data-toggle="tab" href="#item-list">
-                                            <i class="fa fa-lg fa-list"></i> Item List </a>
-                                    </li>
-                                </ul>
-                            </header>
-
-                            <!-- widget div-->
-                            <div>
-                                <!-- widget edit box -->
-                                <div class="jarviswidget-editbox">
-                                    <!-- This area used as dropdown edit box -->
-                                    <input class="form-control" type="text">
-                                </div>
-                                <!-- end widget edit box -->
-
-                                <!-- widget content -->
-                                <div class="widget-body no-padding">
-                                    <div class="tab-content">
-                                        <!-- start tab create item -->
-                                        <div class="tab-pane active" id="create-item">
-                                            <form id="frm-create-item" class="smart-form" novalidate="novalidate">
-                                                <fieldset>
-                                                    <div class="row">
-                                                        <section class="col col-3">
-                                                            <label class="label">Stock Types</label>
-                                                            <label class="select">
-                                                                <select name="stock_type" id="stock_type">
-                                                                    <option th:each="stockType :${stockTypes}"
-                                                                        th:value="${stockType.stock_type_id}"
-                                                                        th:text="${stockType.stock_type_name}"></option>
-                                                                </select>
-                                                                <i></i>
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-3">
-                                                            <label class="label">Item ID</label>
-                                                            <label for="item_id" class="input">
-                                                                <input type="text" name="item_id" id="item_id"
-                                                                    placeholder="">
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-6">
-                                                            <label class="label">Item Name</label>
-                                                            <label for="item_name" class="input">
-                                                                <input type="text" name="item_name" id="item_name"
-                                                                    placeholder="">
-                                                            </label>
-                                                        </section>
-                                                    </div>
-                                                    <div class="row">
-                                                        <section class="col col-4">
-                                                            <label class="label">Categories</label>
-                                                            <label class="select">
-                                                                <select name="category_id" id="category_id">
-                                                                    <option th:each="data :${categories}"
-                                                                        th:value="${data.category_id}"
-                                                                        th:text="${data.category_name}"></option>
-                                                                </select>
-                                                                <i></i>
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-4">
-                                                            <label class="label">Unit Measure</label>
-                                                            <label class="select">
-                                                                <select name="um" id="um">
-                                                                    <option th:each="data :${unit_measures}"
-                                                                        th:value="${data.unit_measure_id}"
-                                                                        th:text="${data.unit_measure_name}"></option>
-                                                                </select>
-                                                                <i></i>
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-4">
-                                                            <label class="label">Cost Methods</label>
-                                                            <label class="select">
-                                                                <select name="cost_method" id="cost_method">
-                                                                    <option th:each="data :${cost_methods}"
-                                                                        th:value="${data.cost_method_id}"
-                                                                        th:text="${data.cost_method_name}"></option>
-                                                                </select>
-                                                                <i></i>
-                                                            </label>
-                                                        </section>
-                                                    </div>
-                                                    <div class="row">
-                                                        <section class="col col-4">
-                                                            <label class="label">Cost</label>
-                                                            <label for="cost" class="input">
-                                                                <input type="text" name="cost" id="cost"
-                                                                    placeholder="0.00">
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-4">
-                                                            <label class="label">Sale Price</label>
-                                                            <label for="sale_price" class="input">
-                                                                <input type="text" name="sale_price" id="sale_price"
-                                                                    placeholder="0.00">
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-4">
-                                                            <label class="label">Prefered Supplier</label>
-                                                            <label class="select">
-                                                                <select name="prefered_supplier" id="prefered_supplier">
-                                                                    <option th:each="data :${prefered_supplier}"
-                                                                        th:value="${data.vendor_id}"
-                                                                        th:text="${data.company_name}"></option>
-                                                                </select>
-                                                                <i></i>
-                                                            </label>
-                                                        </section>
-                                                    </div>
-                                                    <div class="row">
-                                                        <section class="col col-4">
-                                                            <label class="label">Minimum Balance</label>
-                                                            <label for="min_balance" class="input">
-                                                                <input type="text" name="min_balance" id="min_balance"
-                                                                    placeholder="0.00">
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-4">
-                                                            <label class="label">Maximum Balance</label>
-                                                            <label for="max_balance" class="input">
-                                                                <input type="text" name="max_balance" id="max_balance"
-                                                                    placeholder="0.00">
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-4">
-                                                            <label class="label">Bar Code</label>
-                                                            <label for="barcode" class="input">
-                                                                <input type="text" name="barcode" id="barcode"
-                                                                    placeholder="">
-                                                            </label>
-                                                        </section>
-                                                    </div>
-                                                    <div class="row">
-                                                        <section class="col col-8">
-                                                            <label class="label">Remark</label>
-                                                            <label for="remark" class="input">
-                                                                <input type="text" name="remark" id="remark"
-                                                                    placeholder="">
-                                                            </label>
-                                                        </section>
-                                                    </div>
-                                                    <div class="row">
-                                                        <section class="col col-4">
-                                                            <label class="checkbox">
-                                                                <input name="inactive" id="inactive" type="checkbox"
-                                                                    class="checkbox style-0">
-                                                                <span>Inactive</span>
-                                                                <input name="inactive" type='hidden' value='0'
-                                                                    class="checkbox style-0">
-                                                            </label>
-                                                        </section>
-                                                    </div>
-                                                </fieldset>
-                                            </form>
-                                        </div>
-                                        <!-- end tab create item -->
-
-                                        <!-- start tab item list -->
-                                        <div class="tab-pane" id="item-list">
-                                            <div class="table-responsive padding-5">
-                                                <table id="tbl_items" class="table table-bordered">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Item ID</th>
-                                                            <th>Item Name</th>
-                                                            <th>Category</th>
-                                                            <th>Unit Measure</th>
-                                                            <th>Cost Methods</th>
-                                                            <th>Cost</th>
-                                                            <th>Sale Price</th>
-                                                            <th>BarCode</th>
-                                                            <th>Status</th>
-                                                            <th>Action</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <!-- end tab item list -->
+                                <!-- widget div-->
+                                <div>
+                                    <!-- widget edit box -->
+                                    <div class="jarviswidget-editbox">
+                                        <!-- This area used as dropdown edit box -->
+                                        <input class="form-control" type="text">
                                     </div>
+                                    <!-- end widget edit box -->
+
+                                    <!-- widget content -->
+                                    <div class="widget-body no-padding">
+                                        <div class="tab-content">
+                                            <!-- start tab create item -->
+                                            <div class="tab-pane active" id="create-item">
+                                                <form id="frm-create-item" class="smart-form" novalidate="novalidate">
+                                                    <fieldset>
+                                                        <div class="row">
+                                                            <section class="col col-3">
+                                                                <label class="label">Stock Types</label>
+                                                                <label class="select">
+                                                                    <select name="stock_type" id="stock_type">
+                                                                        <option th:each="stockType :${stockTypes}"
+                                                                            th:value="${stockType.stock_type_id}"
+                                                                            th:text="${stockType.stock_type_name}"></option>
+                                                                    </select>
+                                                                    <i></i>
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-3">
+                                                                <label class="label">Item ID</label>
+                                                                <label for="item_id" class="input">
+                                                                    <input type="text" name="item_id" id="item_id"
+                                                                        placeholder="">
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-6">
+                                                                <label class="label">Item Name</label>
+                                                                <label for="item_name" class="input">
+                                                                    <input type="text" name="item_name" id="item_name"
+                                                                        placeholder="">
+                                                                </label>
+                                                            </section>
+                                                        </div>
+                                                        <div class="row">
+                                                            <section class="col col-4">
+                                                                <label class="label">Categories</label>
+                                                                <label class="select">
+                                                                    <select name="category_id" id="category_id">
+                                                                        <option th:each="data :${categories}"
+                                                                            th:value="${data.category_id}"
+                                                                            th:text="${data.category_name}"></option>
+                                                                    </select>
+                                                                    <i></i>
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-4">
+                                                                <label class="label">Unit Measure</label>
+                                                                <label class="select">
+                                                                    <select name="um" id="um">
+                                                                        <option th:each="data :${unit_measures}"
+                                                                            th:value="${data.unit_measure_id}"
+                                                                            th:text="${data.unit_measure_name}"></option>
+                                                                    </select>
+                                                                    <i></i>
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-4">
+                                                                <label class="label">Cost Methods</label>
+                                                                <label class="select">
+                                                                    <select name="cost_method" id="cost_method">
+                                                                        <option th:each="data :${cost_methods}"
+                                                                            th:value="${data.cost_method_id}"
+                                                                            th:text="${data.cost_method_name}"></option>
+                                                                    </select>
+                                                                    <i></i>
+                                                                </label>
+                                                            </section>
+                                                        </div>
+                                                        <div class="row">
+                                                            <section class="col col-4">
+                                                                <label class="label">Cost</label>
+                                                                <label for="cost" class="input">
+                                                                    <input type="text" name="cost" id="cost"
+                                                                        placeholder="0.00">
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-4">
+                                                                <label class="label">Sale Price</label>
+                                                                <label for="sale_price" class="input">
+                                                                    <input type="text" name="sale_price" id="sale_price"
+                                                                        placeholder="0.00">
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-4">
+                                                                <label class="label">Prefered Supplier</label>
+                                                                <label class="select">
+                                                                    <select name="prefered_supplier" id="prefered_supplier">
+                                                                        <option th:each="data :${prefered_supplier}"
+                                                                            th:value="${data.vendor_id}"
+                                                                            th:text="${data.company_name}"></option>
+                                                                    </select>
+                                                                    <i></i>
+                                                                </label>
+                                                            </section>
+                                                        </div>
+                                                        <div class="row">
+                                                            <section class="col col-4">
+                                                                <label class="label">Minimum Balance</label>
+                                                                <label for="min_balance" class="input">
+                                                                    <input type="text" name="min_balance" id="min_balance"
+                                                                        placeholder="0.00">
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-4">
+                                                                <label class="label">Maximum Balance</label>
+                                                                <label for="max_balance" class="input">
+                                                                    <input type="text" name="max_balance" id="max_balance"
+                                                                        placeholder="0.00">
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-4">
+                                                                <label class="label">Bar Code</label>
+                                                                <label for="barcode" class="input">
+                                                                    <input type="text" name="barcode" id="barcode"
+                                                                        placeholder="">
+                                                                </label>
+                                                            </section>
+                                                        </div>
+                                                        <div class="row">
+                                                            <section class="col col-4">
+                                                                <label class="label">Remark</label>
+                                                                <label for="remark" class="input">
+                                                                    <input type="text" name="remark" id="remark"
+                                                                        placeholder="">
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-4">
+                                                                <label class="label">Image</label>
+                                                                <div class="input input-file">
+                                                                    <span class="button"><input type="file" id="item-image"
+                                                                            onchange="this.parentNode.nextSibling.value = this.value">Browse</span><input
+                                                                        type="text" readonly>
+                                                                </div>
+                                                            </section>
+                                                        </div>
+                                                        <div class="row">
+                                                            <section class="col col-4">
+                                                                <label class="checkbox">
+                                                                    <input name="inactive" id="inactive" type="checkbox"
+                                                                        class="checkbox style-0">
+                                                                    <span>Inactive</span>
+                                                                    <input name="inactive" type='hidden' value='0'
+                                                                        class="checkbox style-0">
+                                                                </label>
+                                                            </section>
+                                                        </div>
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                            <!-- end tab create item -->
+
+                                            <!-- start tab item list -->
+                                            <div class="tab-pane" id="item-list">
+                                                <div class="table-responsive padding-5">
+                                                    <table id="tbl_items" class="table table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Item ID</th>
+                                                                <th>Item Name</th>
+                                                                <th>Category</th>
+                                                                <th>Unit Measure</th>
+                                                                <th>Cost Methods</th>
+                                                                <th>Cost</th>
+                                                                <th>Sale Price</th>
+                                                                <th>BarCode</th>
+                                                                <th>Status</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!-- end tab item list -->
+                                        </div>
+                                    </div>
+                                    <!-- end widget content -->
                                 </div>
-                                <!-- end widget content -->
-
+                                <!-- end widget div -->
                             </div>
-                            <!-- end widget div -->
-
-                        </div>
-                        <!-- end widget -->
-
-                    </article>
-                    <!-- WIDGET END -->
-
-                </div>
-                <!-- end row -->
-
-            </section>
-            <!-- end widget grid -->
-
-            <!--Start Modals-->
-            <th:block th:include="fragments/modals :: modals" />
-            <!--End Modals-->
-
+                            <!-- END WIDGET -->
+                        </article>
+                        <!-- WIDGET END -->
+                    </div>
+                    <!-- END ROW -->
+                </section>
+                <!-- END WIDGET GRID -->
+            </div>
+            <!-- END MAIN CONTENT -->
         </div>
-        <!-- END MAIN CONTENT -->
-
-    </div>
-    <!-- END MAIN PANEL -->
-    <th:block th:include="fragments/foot :: foot" />
-</body>
-
+        <!-- END MAIN PANEL -->
+        <th:block th:include="fragments/foot :: foot" />
+    </body>
 </html>

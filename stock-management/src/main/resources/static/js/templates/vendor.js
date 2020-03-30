@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    /* read data into form */
+    /* GET VENDOR INTO FORM */
     $(document).on("click", ".table .btn-primary", function (event) {
         event.preventDefault();
         var href = $(this).attr('href');
@@ -24,10 +24,12 @@ $(document).ready(function () {
                 $('#frm-create-vendor #inactive').prop('checked', false);
         });
         $("#tab-create-vendor").click();
+        $("#btn-save-vendor").prop('disabled', false);
+        $("#btn-new-vendor").prop('disabled', false);
     });
 
-    /* save new vendors edit vendors info */
-    $('#btn-save-vendor').on('click', function (event) {
+    /* SAVE VENDOR */
+    $(document).on('submit',"#frm-create-vendor", function (event) {
         event.preventDefault();
         var vendor_id = $('#vendor_id').val();
         var vendor_type = $('#vendor_type').val();
@@ -69,7 +71,7 @@ $(document).ready(function () {
                 inactive: inactive
             },
             success: function () {
-                alert_message();
+                alert_message("You have committed successfully!");
                 clear_frm_save_vendor();
             },
             error: function (e) {
@@ -78,15 +80,31 @@ $(document).ready(function () {
         });
     });
 
+    /* DISABLE BUTTON SAVE AND NEW */
+    $('#tab-create-vendor').on('click', function (event) {
+        event.preventDefault();
+        $("#btn-save-vendor").prop('disabled', false);
+        $("#btn-new-vendor").prop('disabled', false);
+    });
+
     $('#tab-vendor-list').on('click', function (event) {
         event.preventDefault();
         var href = "/vendors/get/all";
         $.get(href, function (data) {
             SpreadData(data);
         });
+        $("#btn-save-vendor").prop('disabled', true);
+        $("#btn-new-vendor").prop('disabled', true);
     });
 
-    /* func load data into table */
+    /* EVENT FOR BUTTON NEW CUSTOMER */
+    /* ADDED BY DOLLA 29-MAR-2020 */
+    $('#btn-new-vendor').on('click', function () {
+        clear_frm_save_vendor();
+        $("#btn-save-vendor").prop('disabled', false);
+    });
+
+    /* LOAD VENDOR INTO TABLE */
     function SpreadData(data) {
         $("#tbl_vendors > tbody").html('');
         $.each(data, function (key) {
@@ -98,7 +116,7 @@ $(document).ready(function () {
                 "<td>" + data[key].contact + "</td>" +
                 "<td>" + data[key].phone + "</td>" +
                 "<td>" + vendorStatus + "</td>" +
-                "<td>" + "<a href=\"/vendors/view/" + data[key].vendor_id + "\" class=\"btn btn-xs btn-primary\">\n" +
+                "<td align=\"center\">" + "<a href=\"/vendors/view/" + data[key].vendor_id + "\" class=\"btn btn-xs btn-primary\">\n" +
                 "<i class=\"fa fa-edit\"></i></a>" +
                 "</td>"
                 + "</tr>";
@@ -106,11 +124,7 @@ $(document).ready(function () {
         });
     }
 
-    $('#btn-new-vendor').on('click', function () {
-        clear_frm_save_vendor();
-    });
-
-    /* func clear frm save vendor */
+    /* CLEAR FORM CREATE VENDOR */
     function clear_frm_save_vendor() {
         $('input:text, input:password, input:file, select, textarea', '#frm-create-vendor').val('');
         $('input:checkbox, input:radio', '#frm-create-vendor').removeAttr('checked').removeAttr('selected');
@@ -120,21 +134,57 @@ $(document).ready(function () {
         });
     }
 
-    /* func add label inactive & active */
-    function getStatus(Status) {
-        return {
-            true: "<span class=\"label label-danger\">inactive</span>",
-            false: "<span class=\"label label-success\">active</span>"
-        }[Status];
-    }
+    /* VALIDATIONS */
+    /* ADDED BY DOLLA 29-MAR-2020 */
+    var $frm_create_vendor = $('#frm-create-vendor').validate({
+        errorClass: global_variables.gbl_errorClass,
+        errorElement: global_variables.gbl_errorElement,
+        highlight: function (element) {
+            $(element).parent().removeClass('state-success').addClass("state-error");
+            $(element).removeClass('valid');
+        },
+        unhighlight: function (element) {
+            $(element).parent().removeClass("state-error").addClass('state-success');
+            $(element).addClass('valid');
+        },
 
-    function alert_message() {
-        $.smallBox({
-            title: "Fiplus Khmer",
-            content: "You have committed successfully!",
-            color: "#739E73",
-            iconSmall: "fa fa-bell-o",
-            timeout: 5000
-        });
-    }
+        /* FIELDS THAT WILL CHECK VALIDATE */
+        /* BY NAME OF ATTRIBUTE */
+        rules: {
+            vendor_type: {
+                required: true
+            },
+            company_name: {
+                required: true
+            },
+            contact: {
+                required: true
+            },
+            phone: {
+                required: true
+            }
+        },
+
+        /* MESSAGE INVALID FOR EACH  FIELDS ABOVE */
+        messages: {
+            vendor_type:{
+                required: 'Required*'
+            },
+            company_name: {
+                required: 'Required*'
+            },
+            contact:{
+                required: 'Required*'
+            },
+            phone: {
+                required: 'Required*'
+            }
+        },
+
+        /* DEFAULT OF SMARTADMIN */
+        /* DON'T CHANGE */
+        errorPlacement: function (error, element) {
+            error.insertAfter(element.parent());
+        }
+    });
 });

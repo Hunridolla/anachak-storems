@@ -28,8 +28,7 @@ $(document).ready(function () {
         $("#btn-new-customer").prop('disabled', false);
     });
 
-
-    /* SAVE NEW CUSTOMER */
+    /* SAVE CUSTOMER */
     $(document).on('submit',"#frm-create-customer", function (event) {
         event.preventDefault();
         var customer_id = $('#customer_id').val();

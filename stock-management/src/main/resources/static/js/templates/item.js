@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    /* read data into form */
+    /* GET ITEM INTO FORM */
     $(document).on("click", ".table .btn-primary", function (event) {
         event.preventDefault();
         var href = $(this).attr('href');
@@ -24,10 +24,12 @@ $(document).ready(function () {
                 $('#frm-create-item #inactive').prop('checked', false);
         });
         $("#tab-create-item").click();
+        $("#btn-save-item").prop('disabled', false);
+        $("#btn-new-item").prop('disabled', false);
     });
 
-
-    $('#btn-save-item').on('click', function (event) {
+    /* SAVE ITEM */
+    $(document).on('submit', "#frm-create-item", function (event) {
         event.preventDefault();
         var item_id = $('#item_id').val();
         var item_name = $('#item_name').val();
@@ -56,8 +58,8 @@ $(document).ready(function () {
                 cost: cost, sale_price: sale_price,prefered_supplier: prefered_supplier,min_balance: min_balance,max_balance: max_balance,
                 barcode: barcode,remark: remark, inactive: inactive},
             success: function () {
-                alert_message();
-                clear_ctrl();
+                alert_message("You have committed successfully!");
+                clear_frm_save_item();
             },
             error: function (e) {
                 alert('Error: ' + e);
@@ -65,29 +67,19 @@ $(document).ready(function () {
         });
     });
 
+    /* EVENT FOR BUTTON NEW CUSTOMER */
+    /* ADDED BY DOLLA 29-MAR-2020 */
     $('#btn-new-item').on('click', function () {
-        clear_ctrl();
+        clear_frm_save_item();
+        $("#btn-save-item").prop('disabled', false);
     });
 
-    function clear_ctrl() {
-        $('input:text, input:password, input:file, select, textarea', '#create-item').val('');
-        $('input:checkbox, input:radio', '#create-item').removeAttr('checked').removeAttr('selected');
-        $('#inactive').prop('checked', false);
-        $(function(){
-            $("#item_id").focus();
-        });
-    }
-
-    function alert_message() {
-        $.smallBox({
-            title: "Fiplus Khmer",
-            content: "You have committed successfully!",
-            color: "#739E73",
-            iconSmall: "fa fa-bell-o",
-            timeout: 5000
-        });
-    }
-
+    /* DISABLE BUTTON SAVE AND NEW */
+    $('#tab-create-item').on('click', function (event) {
+        event.preventDefault();
+        $("#btn-save-item").prop('disabled', false);
+        $("#btn-new-item").prop('disabled', false);
+    });
 
     $('#tab-item-list').on('click', function (event) {
         event.preventDefault();
@@ -95,9 +87,11 @@ $(document).ready(function () {
         $.get(href, function (data) {
             SpreadData(data);
         });
-
+        $("#btn-save-item").prop('disabled', true);
+        $("#btn-new-item").prop('disabled', true);
     });
 
+    /* LOAD ITEMS INTO TABLE */
     function SpreadData(data) {
         $("#tbl_items > tbody").html("");
         $.each(data, function (key) {
@@ -112,7 +106,7 @@ $(document).ready(function () {
                "<td>"+ data[key].sale_price + "</td>" +
                "<td>"+ data[key].barcode + "</td>" +
                "<td>"+ itemStatus + "</td>" +
-               "<td>" + "<a href=\"/items/view/" + data[key].item_id + "\" class=\"btn btn-xs btn-primary\">\n" +
+               "<td align=\"center\">" + "<a href=\"/items/view/" + data[key].item_id + "\" class=\"btn btn-xs btn-primary\">\n" +
                "<i class=\"fa fa-edit\"></i></a>" +
                "</td>"
                + "</tr>";
@@ -120,13 +114,86 @@ $(document).ready(function () {
         });
     }
 
-    /* func add label inactive & active */
-    function getStatus(Status) {
-        return {
-            true: "<span class=\"label label-danger\">inactive</span>",
-            false: "<span class=\"label label-success\">active</span>"
-        }[Status];
+    /* CLEAR FORM CREATE ITEM */
+    function clear_frm_save_item() {
+        $('input:text, input:password, input:file, select, textarea', '#create-item').val('');
+        $('input:checkbox, input:radio', '#create-item').removeAttr('checked').removeAttr('selected');
+        $('#inactive').prop('checked', false);
+        $(function(){
+            $("#item_id").focus();
+        });
     }
 
+    /* VALIDATIONS */
+    /* ADDED BY DOLLA 29-MAR-2020 */
+    var $frm_create_item = $('#frm-create-item').validate({
+        errorClass: global_variables.gbl_errorClass,
+        errorElement: global_variables.gbl_errorElement,
+        highlight: function (element) {
+            $(element).parent().removeClass('state-success').addClass("state-error");
+            $(element).removeClass('valid');
+        },
+        unhighlight: function (element) {
+            $(element).parent().removeClass("state-error").addClass('state-success');
+            $(element).addClass('valid');
+        },
+
+        /* FIELDS THAT WILL CHECK VALIDATE */
+        /* BY NAME OF ATTRIBUTE */
+        rules: {
+            stock_type: {
+                required: true
+            },
+            item_name: {
+                required: true
+            },
+            category_id: {
+                required: true
+            },
+            um: {
+                required: true
+            },
+            cost_method: {
+                required: true
+            },
+            cost: {
+                required: true
+            },
+            sale_price: {
+                required: true
+            }
+        },
+
+        /* MESSAGE INVALID FOR EACH  FIELDS ABOVE */
+        messages: {
+            stock_type: {
+                required: 'Required*'
+            },
+            item_name:{
+                required: 'Required*'
+            },
+            category_id: {
+                required: 'Required*'
+            },
+            um: {
+                required: 'Required*'
+            },
+            cost_method: {
+                required: 'Required*'
+            },
+            cost: {
+                required: 'Required*'
+            },
+            sale_price: {
+                required: 'Required*'
+            }
+        },
+
+        /* DEFAULT OF SMARTADMIN */
+        /* DON'T CHANGE */
+        errorPlacement: function (error, element) {
+            error.insertAfter(element.parent());
+        }
+    });
 });
 

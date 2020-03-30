@@ -1,380 +1,252 @@
 <!DOCTYPE html>
 <html th:with="active_page = 'vendors'" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<th:block th:include="fragments/head :: head" />
+    <th:block th:include="fragments/head :: head" />
+    <body class="smart-style-4">
+        <!-- HEADER -->
+        <header id="header">
+            <th:block th:include="fragments/head :: logo" />
+            <th:block th:include="fragments/head :: toggle"/>
+        </header>
+        <!-- END HEADER -->
 
-<body class="smart-style-4">
-    <!-- #HEADER -->
-    <header id="header">
-        <th:block th:include="fragments/head :: logo" />
-
-        <!-- #TOGGLE LAYOUT BUTTONS -->
-        <!-- pulled right: nav area -->
-        <div class="pull-right">
-
-            <!-- collapse menu button -->
-            <div id="hide-menu" class="btn-header pull-right">
-                <span> <a href="javascript:void(0);" data-action="toggleMenu" title="Collapse Menu"><i
-                            class="fa fa-reorder"></i></a>
-                </span>
+        <!-- NAVIGATION -->
+        <aside id="left-panel">
+            <!-- USER INFORMATION -->
+            <div class="login-info">
+                        <span>
+                            <a href="" id="show-shortcut" data-action="toggleShortcut">
+                                <img src="img/avatars/sunny.png" alt="me" class="online" />
+                                <span>
+                                    Hunridolla
+                                </span>
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+                        </span>
             </div>
-            <!-- end collapse menu -->
-
-            <!-- #MOBILE -->
-            <!-- Top menu profile link : this shows only when top menu is active -->
-            <ul id="mobile-profile-img" class="header-dropdown-list hidden-xs padding-5">
-                <li class="">
-                    <a href="#" class="dropdown-toggle no-margin userdropdown" data-toggle="dropdown">
-                        <img src="img/avatars/sunny.png" alt="John Doe" class="online" />
-                    </a>
-                    <ul class="dropdown-menu pull-right">
-                        <li>
-                            <a href="javascript:void(0);" class="padding-10 padding-top-0 padding-bottom-0"><i
-                                    class="fa fa-cog"></i>
-                                Setting</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="profile.html" class="padding-10 padding-top-0 padding-bottom-0"> <i
-                                    class="fa fa-user"></i> <u>P</u>rofile</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="javascript:void(0);" class="padding-10 padding-top-0 padding-bottom-0"
-                                data-action="toggleShortcut"><i class="fa fa-arrow-down"></i> <u>S</u>hortcut</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="javascript:void(0);" class="padding-10 padding-top-0 padding-bottom-0"
-                                data-action="launchFullscreen"><i class="fa fa-arrows-alt"></i> Full <u>S</u>creen</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="login.html" class="padding-10 padding-top-5 padding-bottom-5"
-                                data-action="userLogout"><i class="fa fa-sign-out fa-lg"></i>
-                                <strong><u>L</u>ogout</strong></a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-
-            <!-- logout button -->
-            <div id="logout" class="btn-header transparent pull-right">
-                <span> <a href="login.html" title="Sign Out" data-action="userLogout"
-                        data-logout-msg="You can improve your security further after logging out by closing this opened browser"><i
-                            class="fa fa-sign-out"></i></a> </span>
-            </div>
-            <!-- end logout button -->
-
-            <!-- search mobile button (this is hidden till mobile view port) -->
-            <div id="search-mobile" class="btn-header transparent pull-right">
-                <span> <a href="javascript:void(0)" title="Search"><i class="fa fa-search"></i></a> </span>
-            </div>
-            <!-- end search mobile button -->
-
-            <!-- #SEARCH -->
-            <!-- input: search field -->
-            <form action="search.html" class="header-search pull-right">
-                <input id="search-fld" type="text" name="param" placeholder="Find reports and more">
-                <button type="submit">
-                    <i class="fa fa-search"></i>
-                </button>
-                <a href="" id="cancel-search-js" title="Cancel Search"><i class="fa fa-times"></i></a>
-            </form>
-            <!-- end input: search field -->
-
-            <!-- fullscreen button -->
-            <div id="fullscreen" class="btn-header transparent pull-right">
-                <span> <a href="" data-action="launchFullscreen" title="Full Screen"><i
-                            class="fa fa-arrows-alt"></i></a>
-                </span>
-            </div>
-            <!-- end fullscreen button -->
-
-            <!-- #Voice Command: Start Speech -->
-            <div id="speech-btn" class="btn-header transparent pull-right hidden-sm hidden-xs">
-                <div>
-                    <a href="javascript:void(0)" title="Voice Command" data-action="voiceCommand"><i
-                            class="fa fa-microphone"></i></a>
-                    <div class="popover bottom">
-                        <div class="arrow"></div>
-                        <div class="popover-content">
-                            <h4 class="vc-title">Voice command activated <br>
-                                <small>Please speak clearly into the mic</small>
-                            </h4>
-                            <h4 class="vc-title-error text-center">
-                                <i class="fa fa-microphone-slash"></i> Voice command failed
-                                <br>
-                                <small class="txt-color-red">Must <strong>"Allow"</strong> Microphone</small>
-                                <br>
-                                <small class="txt-color-red">Must have <strong>Internet Connection</strong></small>
-                            </h4>
-                            <a href="" class="btn btn-success" onclick="commands.help()">See
-                                Commands</a>
-                            <a href="" class="btn bg-color-purple txt-color-white"
-                                onclick="$('#speech-btn .popover').fadeOut(50);">Close
-                                Popup</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- end voice command -->
-        </div>
-        <!-- end pulled right: nav area -->
-
-    </header>
-    <!-- END HEADER -->
-
-    <!-- #NAVIGATION -->
-    <aside id="left-panel">
-        <!-- UserModel info -->
-        <div class="login-info">
-            <span>
-                <!-- UserModel image size is adjusted inside CSS, it should stay as it -->
-
-                <a href="" id="show-shortcut" data-action="toggleShortcut">
-                    <img src="img/avatars/sunny.png" alt="me" class="online" />
-                    <span>
-                        john.doe
+            <!-- END USER INFORMATION -->
+            <th:block th:include="fragments/nav :: nav" />
+            <span class="minifyme" data-action="minifyMenu">
+                        <i class="fa fa-arrow-circle-left hit"></i>
                     </span>
-                    <i class="fa fa-angle-down"></i>
-                </a>
+        </aside>
+        <!-- END NAVIGATION -->
 
-            </span>
-        </div>
-        <!-- end user info -->
-        <th:block th:include="fragments/nav :: nav" />
-        <span class="minifyme" data-action="minifyMenu">
-            <i class="fa fa-arrow-circle-left hit"></i>
-        </span>
+        <!-- MAIN PANEL -->
+        <div id="main" role="main">
+            <!-- RIBBON -->
+            <div>
+                <ol class="breadcrumb">
+                    <li><button id="btn-new-vendor" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> New</button></li>
+                    <li><button id="btn-save-vendor" type="submit" form="frm-create-vendor" class="btn btn-sm btn-success"><i class="fa fa-check"></i> Commit</button></li>
+                    <li><button id="btn-find-vendor" class="btn btn-sm btn-primary" data-toggle="modal"
+                            data-target="#find-vendor-modal"><i class="fa fa-search"></i> Find</button></li>
+                </ol>
+            </div>
+            <!-- END RIBBON -->
+            <!-- MAIN CONTENT -->
+            <div id="content">
+                <!-- widget grid -->
+                <section id="widget-grid" class="">
+                    <!-- ROW -->
+                    <div class="row">
+                        <!-- NEW WIDGET START -->
+                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="jarviswidget jarviswidget-color-white" id="wid-id-0" data-widget-editbutton="false"
+                                data-widget-colorbutton="false" data-widget-deletebutton="false"
+                                data-widget-togglebutton="true">
+                                <header>
+                                    <ul class="nav nav-tabs pull-left in">
+                                        <li class="active">
+                                            <a id="tab-create-vendor" data-toggle="tab" href="#create-vendor">
+                                                <i class="fa fa-lg fa-plus"></i> Create Vendor</a>
+                                        </li>
+                                        <li>
+                                            <a id="tab-vendor-list" data-toggle="tab" href="#vendor-list">
+                                                <i class="fa fa-lg fa-list"></i> Vendor List </a>
+                                        </li>
+                                    </ul>
+                                </header>
+                                <!-- widget div-->
+                                <div>
+                                    <!-- widget edit box -->
+                                    <div class="jarviswidget-editbox">
+                                        <!-- This area used as dropdown edit box -->
+                                    </div>
+                                    <!-- end widget edit box -->
 
-    </aside>
-    <!-- END NAVIGATION -->
+                                    <!-- widget content -->
+                                    <div class="widget-body no-padding">
+                                        <div class="tab-content">
+                                            <!-- start tab -->
+                                            <div id="create-vendor" class="tab-pane active">
+                                                <form id="frm-create-vendor" class="smart-form padding-5"
+                                                    novalidate="novalidate">
+                                                    <header>
+                                                        <h3>Vendor</h3>
+                                                    </header>
+                                                    <fieldset>
+                                                        <div class="row">
+                                                            <section class="col col-4">
+                                                                <label class="label">Vendor ID</label>
+                                                                <label for="vendor_id" class="input">
+                                                                    <input id="vendor_id" name="vendor_id"  type="text" readonly>
+                                                                </label>
+                                                            </section>
+                                                        </div>
+                                                        <div class="row">
+                                                            <section class="col col-4">
+                                                                <label class="label">Vendor Type</label>
+                                                                <label class="select">
+                                                                    <select id="vendor_type" name="vendor_type">
+                                                                        <option th:each="type :${types}"
+                                                                            th:value="${type.vendor_type_id}"
+                                                                            th:text="${type.vendor_type_name}"></option>
+                                                                    </select>
+                                                                    <i></i>
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-8">
+                                                                <label class="label">Company Name</label>
+                                                                <label for="company_name" class="input">
+                                                                    <input type="text" name="company_name" id="company_name"
+                                                                        placeholder="">
+                                                                </label>
+                                                            </section>
+                                                        </div>
+                                                        <div class="row">
+                                                            <section class="col col-4">
+                                                                <label class="label">Title</label>
+                                                                <label class="select">
+                                                                    <select name="title" id="title">
+                                                                        <option value="Mss." selected> Mss.</option>
+                                                                        <option value="Mrs."> Mrs.</option>
+                                                                        <option value="Miss."> Miss.</option>
+                                                                    </select>
+                                                                    <i></i>
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-8">
+                                                                <label class="label">Company Name (Khmer)</label>
+                                                                <label for="company_name_khmer" class="input">
+                                                                    <input type="text" name="company_name_khmer"
+                                                                        id="company_name_khmer">
+                                                                </label>
+                                                            </section>
+                                                        </div>
+                                                        <div class="row">
+                                                            <section class="col col-6">
+                                                                <label class="label">First Name</label>
+                                                                <label for="first_name" class="input">
+                                                                    <input type="text" name="first_name" id="first_name">
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-6">
+                                                                <label class="label">Last Name</label>
+                                                                <label for="last_name" class="input">
+                                                                    <input type="text" name="last_name" id="last_name">
+                                                                </label>
+                                                            </section>
+                                                        </div>
 
-    <!-- MAIN PANEL -->
-    <div id="main" role="main">
-        <!-- RIBBON -->
-        <div>
-            <ol class="breadcrumb">
-                <li><a id="btn-new-vendor" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> New</a></li>
-                <li><a id="btn-save-vendor" class="btn btn-sm btn-success"><i class="fa fa-check"></i> Commit</a></li>
-                <li><a id="btn-find-item" class="btn btn-sm btn-primary" data-toggle="modal"
-                        data-target="#find-item-modal"><i class="fa fa-search"></i> Find</a></li>
-            </ol>
-        </div>
-        <!-- END RIBBON -->
-        <!-- MAIN CONTENT -->
-        <div id="content">
-            <!-- widget grid -->
-            <section id="widget-grid" class="">
-
-                <!-- row -->
-                <div class="row">
-
-                    <!-- NEW WIDGET START -->
-                    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
-                        <!-- Widget ID (each widget will need unique ID)-->
-                        <div class="jarviswidget jarviswidget-color-white" id="wid-id-0" data-widget-editbutton="false"
-                            data-widget-colorbutton="false" data-widget-deletebutton="false"
-                            data-widget-togglebutton="true">
-                            <header>
-                                <ul class="nav nav-tabs pull-left in">
-                                    <li class="active">
-                                        <a id="tab-create-vendor" data-toggle="tab" href="#create-vendor">
-                                            <i class="fa fa-lg fa-plus"></i> Create Vendor</a>
-                                    </li>
-                                    <li>
-                                        <a id="tab-vendor-list" data-toggle="tab" href="#vendor-list">
-                                            <i class="fa fa-lg fa-list"></i> Vendor List </a>
-                                    </li>
-                                </ul>
-                            </header>
-                            <!-- widget div-->
-                            <div>
-
-                                <!-- widget edit box -->
-                                <div class="jarviswidget-editbox">
-                                    <!-- This area used as dropdown edit box -->
-                                </div>
-                                <!-- end widget edit box -->
-
-                                <!-- widget content -->
-                                <div class="widget-body no-padding">
-                                    <div class="tab-content">
-                                        <!-- start tab -->
-                                        <div class="tab-pane active" id="create-vendor">
-                                            <form id="frm-create-vendor" class="smart-form padding-5"
-                                                novalidate="novalidate">
-                                                <header>
-                                                    <h3>Vendor</h3>
-                                                </header>
-                                                <fieldset>
-                                                    <div class="row">
-                                                        <section class="col col-4">
-                                                            <label class="label">Vendor ID</label>
-                                                            <label for="vendor_id" class="input">
-                                                                <input type="text" name="vendor_id" id="vendor_id"
-                                                                    readonly>
-                                                            </label>
-                                                        </section>
-                                                    </div>
-                                                    <div class="row">
-                                                        <section class="col col-4">
-                                                            <label class="label">Vendor Type</label>
-                                                            <label class="select">
-                                                                <select name="vendor_type" id="vendor_type">
-                                                                    <option th:each="type :${types}"
-                                                                        th:value="${type.vendor_type_id}"
-                                                                        th:text="${type.vendor_type_name}"></option>
-                                                                </select>
-                                                                <i></i>
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-8">
-                                                            <label class="label">Company Name</label>
-                                                            <label for="company_name" class="input">
-                                                                <input type="text" name="company_name" id="company_name"
+                                                    </fieldset>
+                                                    <fieldset id="invoice-container">
+                                                        <h3>Contact Information</h3>
+                                                    </fieldset>
+                                                    <fieldset>
+                                                        <div class="row">
+                                                            <section class="col col-6">
+                                                                <label class="label">Contact</label>
+                                                                <label for="contact" class="input">
+                                                                    <input type="text" name="contact" id="contact"
+                                                                        placeholder="">
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-6">
+                                                                <label class="label">Phone</label>
+                                                                <label for="phone" class="input">
+                                                                    <input type="text" name="phone" id="phone"
+                                                                        placeholder="">
+                                                                </label>
+                                                            </section>
+                                                        </div>
+                                                        <div class="row">
+                                                            <section class="col col-6">
+                                                                <label class="label">Email</label>
+                                                                <label for="email" class="input">
+                                                                    <input type="text" name="email" id="email"
+                                                                        placeholder="">
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-6">
+                                                                <label class="label">Website</label>
+                                                                <label for="website" class="input">
+                                                                    <input type="text" name="website" id="website"
+                                                                        placeholder="">
+                                                                </label>
+                                                            </section>
+                                                        </div>
+                                                        <section>
+                                                            <label class="label">Address Detail</label>
+                                                            <label for="address-detail" class="input">
+                                                                <input type="text" name="address-detail" id="address-detail"
                                                                     placeholder="">
                                                             </label>
                                                         </section>
-                                                    </div>
-                                                    <div class="row">
-                                                        <section class="col col-4">
-                                                            <label class="label">Title</label>
-                                                            <label class="select">
-                                                                <select name="title" id="title">
-                                                                    <option value="Mss." selected> Mss.</option>
-                                                                    <option value="Mrs."> Mrs.</option>
-                                                                    <option value="Miss."> Miss.</option>
-                                                                </select>
-                                                                <i></i>
+                                                        <section>
+                                                            <label class="label">Remark</label>
+                                                            <label for="remark" class="input">
+                                                                <input type="text" name="remark" id="remark" placeholder="">
                                                             </label>
                                                         </section>
-                                                        <section class="col col-8">
-                                                            <label class="label">Company Name (Khmer)</label>
-                                                            <label for="company_name_khmer" class="input">
-                                                                <input type="text" name="company_name_khmer"
-                                                                    id="company_name_khmer">
+                                                        <section>
+                                                            <label class="checkbox">
+                                                                <input type="checkbox" name="inactive" id="inactive">
+                                                                <i></i>Inactive
                                                             </label>
                                                         </section>
-                                                    </div>
-                                                    <div class="row">
-                                                        <section class="col col-6">
-                                                            <label class="label">First Name</label>
-                                                            <label for="first_name" class="input">
-                                                                <input type="text" name="first_name" id="first_name">
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-6">
-                                                            <label class="label">Last Name</label>
-                                                            <label for="last_name" class="input">
-                                                                <input type="text" name="last_name" id="last_name">
-                                                            </label>
-                                                        </section>
-                                                    </div>
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                            <!-- end tab -->
 
-                                                </fieldset>
-                                                <fieldset id="invoice-container">
-                                                    <h3>Contact Information</h3>
-                                                </fieldset>
-                                                <fieldset>
-                                                    <div class="row">
-                                                        <section class="col col-6">
-                                                            <label class="label">Contact</label>
-                                                            <label for="contact" class="input">
-                                                                <input type="text" name="contact" id="contact"
-                                                                    placeholder="">
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-6">
-                                                            <label class="label">Phone</label>
-                                                            <label for="phone" class="input">
-                                                                <input type="text" name="phone" id="phone"
-                                                                    placeholder="">
-                                                            </label>
-                                                        </section>
-                                                    </div>
-                                                    <div class="row">
-                                                        <section class="col col-6">
-                                                            <label class="label">Email</label>
-                                                            <label for="email" class="input">
-                                                                <input type="text" name="email" id="email"
-                                                                    placeholder="">
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-6">
-                                                            <label class="label">Website</label>
-                                                            <label for="website" class="input">
-                                                                <input type="text" name="website" id="website"
-                                                                    placeholder="">
-                                                            </label>
-                                                        </section>
-                                                    </div>
-                                                    <section>
-                                                        <label class="label">Address Detail</label>
-                                                        <label for="address-detail" class="input">
-                                                            <input type="text" name="address-detail" id="address-detail"
-                                                                placeholder="">
-                                                        </label>
-                                                    </section>
-                                                    <section>
-                                                        <label class="label">Remark</label>
-                                                        <label for="remark" class="input">
-                                                            <input type="text" name="remark" id="remark" placeholder="">
-                                                        </label>
-                                                    </section>
-                                                    <section>
-                                                        <label class="checkbox">
-                                                            <input type="checkbox" name="inactive" id="inactive">
-                                                            <i></i>Inactive
-                                                        </label>
-                                                    </section>
-                                                </fieldset>
-                                            </form>
-                                        </div>
-                                        <!-- end tab -->
+                                            <!-- start tab -->
+                                            <div class="tab-pane" id="vendor-list">
+                                                <div class="table-responsive padding-5">
+                                                    <table id="tbl_vendors" class="table table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Vendor ID</th>
+                                                                <th>Company Name</th>
+                                                                <th>Company Name (Khmer)</th>
+                                                                <th>Contact Name</th>
+                                                                <th>Phone</th>
+                                                                <th>Status</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
 
-                                        <!-- start tab -->
-                                        <div class="tab-pane" id="vendor-list">
-                                            <div class="table-responsive padding-5">
-                                                <table id="tbl_vendors" class="table table-bordered">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Vendor ID</th>
-                                                            <th>Company Name</th>
-                                                            <th>Company Name (Khmer)</th>
-                                                            <th>Contact Name</th>
-                                                            <th>Phone</th>
-                                                            <th>Status</th>
-                                                            <th>Action</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-
-                                                    </tbody>
-                                                </table>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
                                         </div>
+                                        <!-- END TAB -->
                                     </div>
-                                    <!-- end tab -->
-
+                                    <!-- END WIDGET CONTENT -->
                                 </div>
-                                <!-- end widget content -->
+                                <!-- END WIDGET DIV -->
                             </div>
-                            <!-- end widget div -->
-                        </div>
-                        <!-- end widget -->
-                    </article>
-                </div>
-                <!-- end row -->
-            </section>
-            <!-- end widget grid -->
+                            <!-- END WIDGET -->
+                        </article>
+                    </div>
+                    <!-- END ROW -->
+                </section>
+                <!-- END WIDGET GRID -->
+            </div>
+            <!-- END MAIN CONTENT -->
         </div>
-        <!-- END MAIN CONTENT -->
-
-    </div>
-    <!-- END MAIN PANEL -->
-    <th:block th:include="fragments/foot :: foot" />
-</body>
-
+        <!-- END MAIN PANEL -->
+        <th:block th:include="fragments/foot :: foot" />
+    </body>
 </html>
