@@ -1,15 +1,4 @@
 $(document).ready(function () {
-    $('#bill-date').datepicker({
-        dateFormat: 'dd-mm-yy',
-        prevText: '<i class="fa fa-chevron-left"></i>',
-        nextText: '<i class="fa fa-chevron-right"></i>'
-    });
-
-    $('#bill-due').datepicker({
-        dateFormat: 'dd-mm-yy',
-        prevText: '<i class="fa fa-chevron-left"></i>',
-        nextText: '<i class="fa fa-chevron-right"></i>'
-    });
 
     $("#item_received").on('click', ".remove-item", function () {
         var row = this;
@@ -28,6 +17,7 @@ $(document).ready(function () {
         $("#status").addClass("label-success");
         $("#add-item-modal").modal();
     });
+
     var rowIndex;
     $("#item_received").on('click', ".edit-item", function () {
         rowIndex = $(this).closest('td').parent()[0].sectionRowIndex + 1;
@@ -103,7 +93,6 @@ $(document).ready(function () {
         calculateSubAmt();
     });
 
-
     function calculateSubAmt() {
         var cost = toNumber($("#item-cost").val());
         var qty = toNumber($("#item-qty").val());
@@ -114,9 +103,9 @@ $(document).ready(function () {
         $("#item-totalAmt").val(total.toFixed(2));
     }
     function calculateGrandAmt() {
-        $("#total-subAmt").val(calculateColumn(6).toFixed(2));
-        $("#total-disc").val(calculateColumn(5).toFixed(2));
-        $("#total-amt").val((calculateColumn(6) - calculateColumn(5)).toFixed(2));
+        $("#total_subAmt").val(calculateColumn(6).toFixed(2));
+        $("#total_disc").val(calculateColumn(5).toFixed(2));
+        $("#total_amt").val((calculateColumn(6) - calculateColumn(5)).toFixed(2));
     }
 
     jQuery.extend(jQuery.expr[':'], {
@@ -135,11 +124,6 @@ $(document).ready(function () {
         }
     });
 
-    function clear_modal_add_item() {
-        $('input:text, input:password, input:file, select, textarea', '#add-item-modal').val('');
-        $('#item-cost, #item-qty, #item-disc').val("");
-    }
-
     function calculateColumn(index) {
         var total = 0;
         $('#item_received tr').each(function () {
@@ -151,21 +135,23 @@ $(document).ready(function () {
         return total;
     }
 
-    $("#btn-save-bill").on('click', function (event) {
+    /* SAVE BILL */
+    $(document).on('submit', "#frm-stock-in", function (event) {
         event.preventDefault();
-        var bill_id = $("#bill-id").val();
+        var bill_id = $("#bill_id").val();
         if (bill_id !== "") {
+            alert_message("this bill id is already exist!")
             return;
         }
-        var bill_date = toDate($("#bill-date").val());
-        var bill_due = toDate($("#bill-due").val());
+        var bill_date = toDate($("#bill_date").val());
+        var bill_due = toDate($("#bill_due").val());
         var vendor_id = $("#vendors").val();
-        var ref_no = $("#ref-no").val();
+        var ref_no = $("#ref_no").val();
         var remark = $("#remark").val();
         var address = $("#address").val();
-        var sub_amt = toNumber($("#total-subAmt").val());
-        var disc_amt = toNumber($("#total-disc").val());
-        var total_amt = toNumber($("#total-amt").val());
+        var sub_amt = toNumber($("#total_subAmt").val());
+        var disc_amt = toNumber($("#total_disc").val());
+        var total_amt = toNumber($("#total_amt").val());
         $.ajax({
             async: false,
             dataType: "json",
@@ -178,16 +164,17 @@ $(document).ready(function () {
             success: function (data) {
                 var bill_id = data.bill_id;
                 saveItemDetail(bill_id);
-                alert_message();
-                $("#bill-id").val(bill_id);
+                alert_message("You have committed successfully!");
+                $("#bill_id").val(bill_id);
             },
             error: function (e) {
-                alert_error();
+                alert_message("Error:" + e);
             }
         });
 
     });
 
+    /* LOAD BILL DETAIL INTO TABLE */
     function saveItemDetail(bill_id) {
         $('#item_received > tbody  > tr').each(function () {
             var item_code = $(this).closest("tr").find("td:eq(1)").text();
@@ -215,18 +202,15 @@ $(document).ready(function () {
         });
     }
 
-    function toDate(dateStr) {
-        var parts = dateStr.split("-")
-        return new Date(parts[2], parts[1] - 1, parts[0])
-    }
-
+    /* EVENTS FOR BUTTON NEW, PRINT */
     $("#btn-new-bill").on("click", function () {
         clear_frm_stock_in();
     });
-    $("#print").on("click", function () {
+    $("#btn-print-bill").on("click", function () {
 
     });
 
+    /* CLEAR FORM CREATE BILL */
     function clear_frm_stock_in() {
         $('input:text, input:password, input:file, select, textarea', '#frm-stock-in').val('');
         $("#item_received > tbody").html("");
@@ -248,6 +232,72 @@ $(document).ready(function () {
             "<td></td>" +
             "</tr>";
         $("#item_received").append(row);
-        // $("#bill_date").focus();
     }
+
+    /* CLEAR MODAL ADD ITEM */
+    function clear_modal_add_item() {
+        $('input:text, input:password, input:file, select, textarea', '#add-item-modal').val('');
+        $('#item-cost, #item-qty, #item-disc').val("");
+    }
+
+    /* SET EVENT ON DATE CONTROL */
+    $('#bill_date').datepicker({
+        dateFormat: 'dd-mm-yy',
+        prevText: '<i class="fa fa-chevron-left"></i>',
+        nextText: '<i class="fa fa-chevron-right"></i>'
+    });
+
+    $('#bill_due').datepicker({
+        dateFormat: 'dd-mm-yy',
+        prevText: '<i class="fa fa-chevron-left"></i>',
+        nextText: '<i class="fa fa-chevron-right"></i>'
+    });
+
+    /* VALIDATIONS */
+    /* ADDED BY DOLLA 29-MAR-2020 */
+    var $frm_stock_in = $('#frm-stock-in').validate({
+        errorClass: global_variables.gbl_errorClass,
+        errorElement: global_variables.gbl_errorElement,
+        highlight: function (element) {
+            $(element).parent().removeClass('state-success').addClass("state-error");
+            $(element).removeClass('valid');
+        },
+        unhighlight: function (element) {
+            $(element).parent().removeClass("state-error").addClass('state-success');
+            $(element).addClass('valid');
+        },
+
+        /* FIELDS THAT WILL CHECK VALIDATE */
+        /* BY NAME OF ATTRIBUTE */
+        rules: {
+            date: {
+                required: true
+            },
+            vendors: {
+                required: true
+            },
+            total_amt: {
+                required: true
+            }
+        },
+
+        /* MESSAGE INVALID FOR EACH  FIELDS ABOVE */
+        messages: {
+            date: {
+                required: 'Required*'
+            },
+            vendors: {
+                required: 'Required*'
+            },
+            total_amt: {
+                required: 'Required*'
+            }
+        },
+
+        /* DEFAULT OF SMARTADMIN */
+        /* DON'T CHANGE */
+        errorPlacement: function (error, element) {
+            error.insertAfter(element.parent());
+        }
+    });
 });

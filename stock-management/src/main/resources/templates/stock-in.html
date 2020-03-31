@@ -1,434 +1,228 @@
 <!DOCTYPE html>
 <html th:with="active_page = 'stock-in'" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<th:block th:include="fragments/head :: head" />
+    <th:block th:include="fragments/head :: head" />
+    <body class="smart-style-4">
+        <!-- HEADER -->
+        <header id="header">
+            <th:block th:include="fragments/head :: logo" />
+            <th:block th:include="fragments/head :: toggle"/>
+        </header>
+        <!-- END HEADER -->
 
-<body class="smart-style-4">
-    <!-- #HEADER -->
-    <header id="header">
-        <div id="logo-group">
-            <span id="logo"> <img src="img/anachak-logo.png" alt="Anachak"> </span>
-        </div>
-
-        <!-- #TOGGLE LAYOUT BUTTONS -->
-        <!-- pulled right: nav area -->
-        <div class="pull-right">
-            <!-- collapse menu button -->
-            <div id="hide-menu" class="btn-header pull-right">
-                <span>
-                    <a href="javascript:void(0);" data-action="toggleMenu" title="Collapse Menu">
-                        <i class="fa fa-reorder"></i>
-                    </a>
-                </span>
-            </div>
-            <!-- end collapse menu -->
-
-            <!-- #MOBILE -->
-            <!-- Top menu profile link : this shows only when top menu is active -->
-            <ul id="mobile-profile-img" class="header-dropdown-list hidden-xs padding-5">
-                <li class="">
-                    <a href="#" class="dropdown-toggle no-margin userdropdown" data-toggle="dropdown">
-                        <img src="img/avatars/sunny.png" alt="John Doe" class="online" />
-                    </a>
-                    <ul class="dropdown-menu pull-right">
-                        <li>
-                            <a href="javascript:void(0);" class="padding-10 padding-top-0 padding-bottom-0">
-                                <i class="fa fa-cog"></i> Setting</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="profile.html" class="padding-10 padding-top-0 padding-bottom-0">
-                                <i class="fa fa-user"></i>
-                                <u>P</u>rofile</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="javascript:void(0);" class="padding-10 padding-top-0 padding-bottom-0"
-                                data-action="toggleShortcut">
-                                <i class="fa fa-arrow-down"></i>
-                                <u>S</u>hortcut</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="javascript:void(0);" class="padding-10 padding-top-0 padding-bottom-0"
-                                data-action="launchFullscreen">
-                                <i class="fa fa-arrows-alt"></i> Full
-                                <u>S</u>creen</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="login.html" class="padding-10 padding-top-5 padding-bottom-5"
-                                data-action="userLogout">
-                                <i class="fa fa-sign-out fa-lg"></i>
-                                <strong>
-                                    <u>L</u>ogout</strong>
+        <!-- NAVIGATION -->
+        <aside id="left-panel">
+            <!-- USER INFORMATION -->
+            <div class="login-info">
+                        <span>
+                            <a href="" id="show-shortcut" data-action="toggleShortcut">
+                                <img src="img/avatars/sunny.png" alt="me" class="online" />
+                                <span>
+                                    Hunridolla
+                                </span>
+                                <i class="fa fa-angle-down"></i>
                             </a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-
-            <!-- logout button -->
-            <div id="logout" class="btn-header transparent pull-right">
-                <span>
-                    <a href="login.html" title="Sign Out" data-action="userLogout"
-                        data-logout-msg="You can improve your security further after logging out by closing this opened browser">
-                        <i class="fa fa-sign-out"></i>
-                    </a>
-                </span>
+                        </span>
             </div>
-            <!-- end logout button -->
-
-            <!-- search mobile button (this is hidden till mobile view port) -->
-            <div id="search-mobile" class="btn-header transparent pull-right">
-                <span>
-                    <a href="javascript:void(0)" title="Search">
-                        <i class="fa fa-search"></i>
-                    </a>
-                </span>
-            </div>
-            <!-- end search mobile button -->
-
-            <!-- fullscreen button -->
-            <div id="fullscreen" class="btn-header transparent pull-right">
-                <span>
-                    <a href="javascript:void(0);" data-action="launchFullscreen" title="Full Screen">
-                        <i class="fa fa-arrows-alt"></i>
-                    </a>
-                </span>
-            </div>
-            <!-- end fullscreen button -->
-        </div>
-        <!-- end pulled right: nav area -->
-
-    </header>
-    <!-- END HEADER -->
-    <aside id="left-panel">
-        <!-- User info -->
-        <div class="login-info">
-            <span>
-                <!-- User image size is adjusted inside CSS, it should stay as it -->
-                <a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
-                    <img src="img/avatars/sunny.png" alt="me" class="online" />
-                    <span>
-                        john.doe
+            <!-- END USER INFORMATION -->
+            <th:block th:include="fragments/nav :: nav" />
+            <span class="minifyme" data-action="minifyMenu">
+                        <i class="fa fa-arrow-circle-left hit"></i>
                     </span>
-                    <i class="fa fa-angle-down"></i>
-                </a>
+        </aside>
+        <!-- END NAVIGATION -->
 
-            </span>
-        </div>
-        <!-- end user info -->
-        <th:block th:include="fragments/nav :: nav" />
-        <span class="minifyme" data-action="minifyMenu">
-            <i class="fa fa-arrow-circle-left hit"></i>
-        </span>
-
-    </aside>
-    <!-- END NAVIGATION -->
-
-    <!-- MAIN PANEL -->
-    <div id="main" role="main">
-
-        <!-- RIBBON -->
-        <div>
-            <ol class="breadcrumb">
-                <li><a id="btn-new-bill" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> New</a></li>
-                <li><a id="btn-save-bill" class="btn btn-sm btn-success"><i class="fa fa-check"></i> Commmit</a></li>
-                <li><a id="btn-find-bill" class="btn btn-sm btn-primary" data-toggle="modal"
-                        data-target="#find-item-modal"><i class="fa fa-search"></i> Find</a></li>
-            </ol>
-        </div>
-        <!-- END RIBBON -->
-
-        <!-- MAIN CONTENT -->
-        <div id="content">
-            <!-- widget grid -->
-            <section id="widget-grid" class="">
-
-                <!-- row -->
-                <div class="row">
-
-                    <!-- NEW WIDGET START -->
-                    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false"
-                            data-widget-colorbutton="false" data-widget-deletebutton="true"
-                            data-widget-togglebutton="true">
-                            <header>
-                            </header>
-                            <!-- widget div-->
-                            <div>
-                                <!-- widget edit box -->
-                                <div class="jarviswidget-editbox">
-                                    <input class="form-control" type="text">
-                                </div>
-                                <!-- widget content -->
-                                <div class="widget-body no-padding">
-                                    <form id="frm-stock-in" class="smart-form" novalidate="novalidate">
-                                        <header>
-                                            <h3> Stock In </h3>
-                                        </header>
-                                        <fieldset>
-                                            <div class="row">
-                                                <section class="col col-3">
-                                                    <label class="label">Bill ID</label>
-                                                    <label for="bill-id" class="input">
-                                                        <input type="text" name="bill-id" id="bill-id" readonly>
-                                                    </label>
-                                                </section>
-                                            </div>
-                                            <div class="row">
-                                                <section class="col col-3">
-                                                    <label class="label">Date:</label>
-                                                    <label class="input">
-                                                        <i class="icon-append fa fa-calendar"></i>
-                                                        <input type="text" name="date" id="bill-date" placeholder="">
-                                                    </label>
-                                                </section>
-                                                <section class="col col-3">
-                                                    <label class="label">Bill Due:</label>
-                                                    <label class="input">
-                                                        <i class="icon-append fa fa-calendar"></i>
-                                                        <input type="text" name="bill-due" id="bill-due" placeholder="">
-                                                    </label>
-                                                </section>
-                                                <section class="col col-3">
-                                                    <label class="label">Ref.No</label>
-                                                    <label for="ref-no" class="input">
-                                                        <input type="text" name="ref-no" id="ref-no" placeholder="">
-                                                    </label>
-                                                </section>
-                                                <section class="col col-3">
-                                                    <label class="label">Remark</label>
-                                                    <label for="Remark" class="input">
-                                                        <input type="text" name="remark" id="remark">
-                                                    </label>
-                                                </section>
-                                            </div>
-                                            <div class="row">
-                                                <section class="col col-3">
-                                                    <label class="label">Vendors</label>
-                                                    <label class="select">
-                                                        <select name="vendors" id="vendors">
-                                                            <option th:each="data :${vendors}"
-                                                                    th:value="${data.vendor_id}"
-                                                                    th:text="${data.company_name}"></option>
-                                                        </select>
-                                                        <i></i>
-                                                    </label>
-                                                </section>
-                                                <section class="col col-6">
-                                                    <label class="label">Address</label>
-                                                    <label for="address" class="input">
-                                                        <input type="text" name="address" id="address" placeholder="">
-                                                    </label>
-                                                </section>
-                                            </div>
-                                        </fieldset>
-                                        <header>
-                                            <h3>Item Received</h3>
-                                        </header>
-                                        <fieldset>
-                                            <div class="table-responsive">
-                                                <table id="item_received" class="table table-bordered">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Action</th>
-                                                            <th>Item.Code</th>
-                                                            <th>Description</th>
-                                                            <th>Qty</th>
-                                                            <th>Rate</th>
-                                                            <th>Disc.Value</th>
-                                                            <th>Sub.Amt</th>
-                                                            <th>Total.Amt</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                <a class="btn btn-xs btn-success add-item">
-                                                                    <i class="fa fa-plus-square-o"></i></a>
-                                                                <a class="btn btn-xs btn-primary edit-item">
-                                                                    <i class="fa fa-edit"></i></a>
-                                                                <a class="btn btn-xs btn-danger remove-item">
-                                                                    <i class="fa fa-trash-o"></i></a>
-                                                            </td>
-                                                            <td></td>
-                                                            <td></td>
-                                                            <td>0</td>
-                                                            <td>0</td>
-                                                            <td>0</td>
-                                                            <td>0</td>
-                                                            <td>0</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </fieldset>
-                                        <fieldset>
-                                            <div class="row">
-                                                <section class="col col-8">
-                                                </section>
-                                                <section class="col col-2">
-                                                    <label class="label">Sub Amount:</label>
-                                                </section>
-                                                <section class="col col-2">
-                                                    <label for="total-subAmt" class="input">
-                                                        <input type="text" id="total-subAmt" readonly>
-                                                    </label>
-                                                </section>
-                                            </div>
-                                            <div class="row">
-                                                <section class="col col-8">
-                                                </section>
-                                                <section class="col col-2">
-                                                    <label class="label">Discount:</label>
-                                                </section>
-                                                <section class="col col-2">
-                                                    <label for="total-disc" class="input">
-                                                        <input type="text" name="total-disc" id="total-disc" readonly>
-                                                    </label>
-                                                </section>
-                                            </div>
-                                            <div class="row">
-                                                <section class="col col-8">
-                                                </section>
-                                                <section class="col col-2">
-                                                    <label class="label">Grand Amount:</label>
-                                                </section>
-                                                <section class="col col-2">
-                                                    <label for="total-amt" class="input">
-                                                        <input type="text" name="total-amt" id="total-amt" readonly>
-                                                    </label>
-                                                </section>
-                                            </div>
-                                        </fieldset>
-                                        <fieldset>
-                                            <div class="row">
-                                                <section class="col col-2">
-                                                    <a id="print" class="btn btn-primary btn-sm">
-                                                        <i class="fa fa-print"></i> Print</a>
-                                                    <a class="btn btn-danger btn-sm">
-                                                        <i class="fa fa-shopping-cart"></i> PO</a>
-                                                </section>
-                                            </div>
-                                        </fieldset>
-                                    </form>
-                                </div>
-                                <!-- end widget content -->
-
-                            </div>
-                            <!-- end widget div -->
-
-                        </div>
-                        <!-- end widget -->
-                    </article>
-                    <!-- WIDGET END -->
-
-                </div>
-                <!-- end row -->
-            </section>
-            <!-- end widget grid -->
-        </div>
-        <!-- END MAIN CONTENT -->
-    </div>
-    <!-- END MAIN PANEL -->
-
-    <div class="modal" id="add-item-modal" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        &times;
-                    </button>
-                    <h5 class="modal-title" id="modal-label">Add Item <span id="status" class="label label-success"
-                            aria-valuetext="[new]" data-loading-text="">[new]</span></h5>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-6" style="margin-top: 10px">
-                            <div class="input-group">
-                                <div class="input-group-btn" style="min-width: 120px;">
-                                    <label class="form-control ctl_label">Item Code:</label>
-                                </div>
-                                <input id="item-code" class="form-control ctl_textbox" type="text" oninput="this.value = this.value.toUpperCase()" tabindex="1" >
-                            </div>
-                        </div>
-                        <div class="col-md-6" style="margin-top: 10px">
-                            <input id="item-name" class="form-control ctl_textbox" type="text"
-                                value="iPhone 5s Earphone" readonly>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6" style="margin-top: 10px">
-                            <div class="input-group">
-                                <div class="input-group-btn" style="min-width: 120px;">
-                                    <label class="form-control ctl_label">Cost:</label>
-                                </div>
-                                <input id="item-cost" class="form-control ctl_textbox" type="number" tabindex="2"
-                                    placeholder="0.00">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6" style="margin-top: 10px">
-                            <div class="input-group">
-                                <div class="input-group-btn" style="min-width: 120px;">
-                                    <label class="form-control ctl_label">Qty:</label>
-                                </div>
-                                <input id="item-qty" class="form-control ctl_textbox" type="number" tabindex="3"
-                                    placeholder="0.00">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6" style="margin-top: 10px">
-                            <div class="input-group">
-                                <div class="input-group-btn" style="min-width: 120px;">
-                                    <label class="form-control ctl_label">Discount:</label>
-                                </div>
-                                <input id="item-disc" class="form-control ctl_textbox" type="number" tabindex="4"
-                                    placeholder="0.00">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6" style="margin-top: 10px">
-                            <div class="input-group">
-                                <div class="input-group-btn" style="min-width: 120px;">
-                                    <label class="form-control ctl_label">Sub.Amt:
-                                    </label>
-                                </div>
-                                <input id="item-subAmt" class="form-control ctl_textbox" type="text" readonly>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6" style="margin-top: 10px">
-                            <div class="input-group">
-                                <div class="input-group-btn" style="min-width: 120px;">
-                                    <label class="form-control ctl_label">Total.Amt:
-                                    </label>
-                                </div>
-                                <input id="item-totalAmt" class="form-control ctl_textbox" type="text" readonly>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <a id="btn-add-item" class="btn btn-labeled btn-success" tabindex="5"> <span
-                                    class="btn-label">
-                                    <i class="glyphicon glyphicon-plus-sign"></i></span>Add</a>
-                            <a class="btn btn-default" data-dismiss="modal">Close</a>
-
-                        </div>
-                    </div>
-                </div>
+        <!-- MAIN PANEL -->
+        <div id="main" role="main">
+            <!-- RIBBON -->
+            <div>
+                <ol class="breadcrumb">
+                    <li><button id="btn-new-bill" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> New</button></li>
+                    <li><button id="btn-save-bill" type="submit" form="frm-stock-in" class="btn btn-sm btn-success"><i class="fa fa-check"></i> Commit</button></li>
+                    <li><button id="btn-print-bill" class="btn btn-sm btn-success"><i class="fa fa-print"></i> Print</button></li>
+                    <li><button id="btn-find-bill" class="btn btn-sm btn-primary" data-toggle="modal"
+                                data-target="#find-item-modal"><i class="fa fa-search"></i> Find</button></li>
+                </ol>
             </div>
-        </div>
-    </div>
-    <th:block th:include="fragments/foot :: foot" />
-</body>
+            <!-- END RIBBON -->
 
+            <!-- MAIN CONTENT -->
+            <div id="content">
+                <!-- widget grid -->
+                <section id="widget-grid" class="">
+                    <!-- row -->
+                    <div class="row">
+                        <!-- NEW WIDGET START -->
+                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false"
+                                data-widget-colorbutton="false" data-widget-deletebutton="true"
+                                data-widget-togglebutton="true">
+                                <header>
+                                </header>
+                                <!-- widget div-->
+                                <div>
+                                    <!-- widget edit box -->
+                                    <div class="jarviswidget-editbox">
+                                        <input class="form-control" type="text">
+                                    </div>
+                                    <!-- widget content -->
+                                    <div class="widget-body no-padding">
+                                        <form id="frm-stock-in" class="smart-form" novalidate="novalidate">
+                                            <header>
+                                                <h3> Stock In </h3>
+                                            </header>
+                                            <fieldset>
+                                                <div class="row">
+                                                    <section class="col col-3">
+                                                        <label class="label">Bill ID</label>
+                                                        <label for="bill_id" class="input">
+                                                            <input type="text" name="bill_id" id="bill_id" readonly>
+                                                        </label>
+                                                    </section>
+                                                </div>
+                                                <div class="row">
+                                                    <section class="col col-3">
+                                                        <label class="label">Date:</label>
+                                                        <label class="input">
+                                                            <i class="icon-append fa fa-calendar"></i>
+                                                            <input type="text" name="date" id="bill_date" placeholder="">
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-3">
+                                                        <label class="label">Bill Due:</label>
+                                                        <label class="input">
+                                                            <i class="icon-append fa fa-calendar"></i>
+                                                            <input type="text" name="bill_due" id="bill_due" placeholder="">
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-3">
+                                                        <label class="label">Ref.No</label>
+                                                        <label for="ref_no" class="input">
+                                                            <input type="text" name="ref_no" id="ref_no" placeholder="">
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-3">
+                                                        <label class="label">Remark</label>
+                                                        <label for="Remark" class="input">
+                                                            <input type="text" name="remark" id="remark">
+                                                        </label>
+                                                    </section>
+                                                </div>
+                                                <div class="row">
+                                                    <section class="col col-3">
+                                                        <label class="label">Vendors</label>
+                                                        <label class="select">
+                                                            <select name="vendors" id="vendors">
+                                                                <option th:each="data :${vendors}"
+                                                                        th:value="${data.vendor_id}"
+                                                                        th:text="${data.company_name}"></option>
+                                                            </select>
+                                                            <i></i>
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-6">
+                                                        <label class="label">Address</label>
+                                                        <label for="address" class="input">
+                                                            <input type="text" name="address" id="address" placeholder="">
+                                                        </label>
+                                                    </section>
+                                                </div>
+                                            </fieldset>
+                                            <header>
+                                                <h3>Item Received</h3>
+                                            </header>
+                                            <fieldset>
+                                                <div class="table-responsive">
+                                                    <table id="item_received" class="table table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Action</th>
+                                                                <th>Item.Code</th>
+                                                                <th>Description</th>
+                                                                <th>Qty</th>
+                                                                <th>Rate</th>
+                                                                <th>Disc.Value</th>
+                                                                <th>Sub.Amt</th>
+                                                                <th>Total.Amt</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <a class="btn btn-xs btn-success add-item">
+                                                                        <i class="fa fa-plus-square-o"></i></a>
+                                                                    <a class="btn btn-xs btn-primary edit-item">
+                                                                        <i class="fa fa-edit"></i></a>
+                                                                    <a class="btn btn-xs btn-danger remove-item">
+                                                                        <i class="fa fa-trash-o"></i></a>
+                                                                </td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td>0</td>
+                                                                <td>0</td>
+                                                                <td>0</td>
+                                                                <td>0</td>
+                                                                <td>0</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </fieldset>
+                                            <fieldset>
+                                                <div class="row">
+                                                    <section class="col col-8">
+                                                    </section>
+                                                    <section class="col col-2">
+                                                        <label class="label">Sub Amount:</label>
+                                                    </section>
+                                                    <section class="col col-2">
+                                                        <label for="total_subAmt" class="input">
+                                                            <input type="text" id="total_subAmt" readonly>
+                                                        </label>
+                                                    </section>
+                                                </div>
+                                                <div class="row">
+                                                    <section class="col col-8">
+                                                    </section>
+                                                    <section class="col col-2">
+                                                        <label class="label">Discount:</label>
+                                                    </section>
+                                                    <section class="col col-2">
+                                                        <label for="total_disc" class="input">
+                                                            <input type="text" name="total_disc" id="total_disc" readonly>
+                                                        </label>
+                                                    </section>
+                                                </div>
+                                                <div class="row">
+                                                    <section class="col col-8">
+                                                    </section>
+                                                    <section class="col col-2">
+                                                        <label class="label">Grand Amount:</label>
+                                                    </section>
+                                                    <section class="col col-2">
+                                                        <label for="total_amt" class="input">
+                                                            <input type="text" name="total_amt" id="total_amt" readonly>
+                                                        </label>
+                                                    </section>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                    <!-- end widget content -->
+                                </div>
+                                <!-- end widget div -->
+                            </div>
+                            <!-- end widget -->
+                        </article>
+                        <!-- WIDGET END -->
+                    </div>
+                    <!-- end row -->
+                </section>
+                <!-- end widget grid -->
+            </div>
+            <!-- END MAIN CONTENT -->
+        </div>
+        <!-- END MAIN PANEL -->
+        <th:block th:include="fragments/modals :: add-item-modal"/>
+        <th:block th:include="fragments/foot :: foot" />
+    </body>
 </html>
