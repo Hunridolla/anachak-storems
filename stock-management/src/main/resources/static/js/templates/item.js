@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     /* GET ITEM INTO FORM */
-    $(document).on("click", ".table .btn-primary", function (event) {
+    $(document).on("click", "#tbl_items .btn-primary", function (event) {
         event.preventDefault();
         var href = $(this).attr('href');
         $.get(href, function (data) {
@@ -102,8 +102,8 @@ $(document).ready(function () {
                "<td>"+ data[key].category_id + "</td>" +
                "<td>"+ data[key].um + "</td>" +
                "<td>"+ data[key].cost_method + "</td>" +
-               "<td>"+ data[key].cost + "</td>" +
-               "<td>"+ data[key].sale_price + "</td>" +
+               "<td>"+ data[key].cost.toFixed(2) + "</td>" +
+               "<td>"+ data[key].sale_price.toFixed(2) + "</td>" +
                "<td>"+ data[key].barcode + "</td>" +
                "<td>"+ itemStatus + "</td>" +
                "<td align=\"center\">" + "<a href=\"/items/view/" + data[key].item_id + "\" class=\"btn btn-xs btn-primary\">\n" +

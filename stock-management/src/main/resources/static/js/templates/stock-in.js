@@ -1,113 +1,5 @@
 $(document).ready(function () {
 
-    $("#item_received").on('click', ".remove-item", function () {
-        var row = this;
-        bootbox.confirm("Do you really want to delete record?", function (result) {
-            if (result) {
-                $(row).closest('tr').remove();
-                calculateGrandAmt();
-            }
-        })
-    });
-    $("#item_received").on('click', ".add-item", function () {
-        clear_modal_add_item();
-        $("#status").html("[new]");
-        $("#status").attr("aria-valuetext", "[new]");
-        $("#status").removeClass("label-primary");
-        $("#status").addClass("label-success");
-        $("#add-item-modal").modal();
-    });
-
-    var rowIndex;
-    $("#item_received").on('click', ".edit-item", function () {
-        rowIndex = $(this).closest('td').parent()[0].sectionRowIndex + 1;
-        $("#status").html("[edit]");
-        $("#status").attr("aria-valuetext", "[edit]");
-        $("status").attr("data-loading-text", "");
-        $("#status").removeClass("label-success");
-        $("#status").addClass("label-primary");
-        var item_code = $(this).closest("tr").find("td:eq(1)").text();
-        var decs = $(this).closest("tr").find("td:eq(2)").text();
-        var qty = $(this).closest("tr").find("td:eq(3)").text();
-        var cost = $(this).closest("tr").find("td:eq(4)").text();
-        var disc = $(this).closest("tr").find("td:eq(5)").text();
-        var subAmt = $(this).closest("tr").find("td:eq(6)").text();
-        var totalAmt = $(this).closest("tr").find("td:eq(7)").text();
-        $("#item-code").val(item_code);
-        $("#item-name").val(decs);
-        $("#item-cost").val(cost);
-        $("#item-qty").val(qty);
-        $("#item-disc").val(disc);
-        $("#item-subAmt").val(subAmt);
-        $("#item-totalAmt").val(totalAmt);
-        $("#add-item-modal").modal();
-    });
-
-    $("#btn-add-item").on('click', function () {
-        var item_code = $("#item-code").val();
-        var decs = $("#item-name").val();
-        var qty = $("#item-qty").val();
-        var cost = toNumber($("#item-cost").val());
-        var disc = toNumber($("#item-disc").val());
-        var subAmt = toNumber($("#item-subAmt").val());
-        var totalAmt = toNumber($("#item-totalAmt").val());
-        var status = $("#status").attr("aria-valuetext");
-        if (status === "[new]") {
-            var row = "<tr>" +
-                "<td><a class=\"btn btn-xs btn-success add-item\"> <i class=\"fa fa-plus-square-o\"></i></a> <a class=\"btn btn-xs btn-primary edit-item\"> <i class=\"fa fa-edit\"></i></a> <a class=\"btn btn-xs btn-danger remove-item\"> <i class=\"fa fa-trash-o\"></i></a></td>" +
-                "<td>" + item_code + "</td>" +
-                "<td>" + decs + "</td>" +
-                "<td>" + qty + "</td>" +
-                "<td>" + cost.toFixed(2) + "</td>" +
-                "<td>" + disc.toFixed(2) + "</td>" +
-                "<td>" + subAmt.toFixed(2) + "</td>" +
-                "<td>" + totalAmt.toFixed(2) + "</td>" +
-                "</tr>";
-            $('#item_received > tbody:last-child').append(row);
-        } else {
-            $("#item_received tr:nth-child(" + rowIndex + ") td:nth-child(2)").text(item_code);
-            $("#item_received tr:nth-child(" + rowIndex + ") td:nth-child(3)").text(decs);
-            $("#item_received tr:nth-child(" + rowIndex + ") td:nth-child(4)").text(qty);
-            $("#item_received tr:nth-child(" + rowIndex + ") td:nth-child(5)").text(cost.toFixed(2));
-            $("#item_received tr:nth-child(" + rowIndex + ") td:nth-child(6)").text(disc.toFixed(2));
-            $("#item_received tr:nth-child(" + rowIndex + ") td:nth-child(7)").text(subAmt.toFixed(2));
-            $("#item_received tr:nth-child(" + rowIndex + ") td:nth-child(8)").text(totalAmt.toFixed(2));
-            $('#add-item-modal').modal('toggle');
-        }
-        calculateGrandAmt();
-        clear_modal_add_item();
-    });
-    $('#item-code').keypress(function (event) {
-        var keycode = (event.keyCode ? event.keyCode : event.which);
-        if (keycode == '13') {
-            var href = "/items/view/" + $("#item-code").val();
-            $.get(href, function (data) {
-                $("#item-name").val(data.item_name);
-                $("#item-cost").val(data.cost);
-            });
-            $("#item-cost").focus();
-        }
-    });
-
-    $('#item-cost, #item-qty, #item-disc').keyup(function (event) {
-        calculateSubAmt();
-    });
-
-    function calculateSubAmt() {
-        var cost = toNumber($("#item-cost").val());
-        var qty = toNumber($("#item-qty").val());
-        var disc = toNumber($("#item-disc").val());
-        var subAmt = (cost * qty);
-        var total = subAmt - disc;
-        $("#item-subAmt").val(subAmt.toFixed(2));
-        $("#item-totalAmt").val(total.toFixed(2));
-    }
-    function calculateGrandAmt() {
-        $("#total_subAmt").val(calculateColumn(6).toFixed(2));
-        $("#total_disc").val(calculateColumn(5).toFixed(2));
-        $("#total_amt").val((calculateColumn(6) - calculateColumn(5)).toFixed(2));
-    }
-
     jQuery.extend(jQuery.expr[':'], {
         focusable: function (el, index, selector) {
             return $(el).is('a, button, :input, [tabindex]');
@@ -124,17 +16,6 @@ $(document).ready(function () {
         }
     });
 
-    function calculateColumn(index) {
-        var total = 0;
-        $('#item_received tr').each(function () {
-            var value = parseInt($('td', this).eq(index).text());
-            if (!isNaN(value)) {
-                total += value;
-            }
-        });
-        return total;
-    }
-
     /* SAVE BILL */
     $(document).on('submit', "#frm-stock-in", function (event) {
         event.preventDefault();
@@ -149,9 +30,9 @@ $(document).ready(function () {
         var ref_no = $("#ref_no").val();
         var remark = $("#remark").val();
         var address = $("#address").val();
-        var sub_amt = toNumber($("#total_subAmt").val());
-        var disc_amt = toNumber($("#total_disc").val());
-        var total_amt = toNumber($("#total_amt").val());
+        var sub_amt = toNumber($("#total-subAmt").val());
+        var disc_amt = toNumber($("#total-disc").val());
+        var total_amt = toNumber($("#total-amt").val());
         $.ajax({
             async: false,
             dataType: "json",
@@ -171,12 +52,11 @@ $(document).ready(function () {
                 alert_message("Error:" + e);
             }
         });
-
     });
 
     /* LOAD BILL DETAIL INTO TABLE */
     function saveItemDetail(bill_id) {
-        $('#item_received > tbody  > tr').each(function () {
+        $('#tbl-item-stock-in > tbody  > tr').each(function () {
             var item_code = $(this).closest("tr").find("td:eq(1)").text();
             var item_desc = $(this).closest("tr").find("td:eq(2)").text();
             var item_qty = toNumber($(this).closest("tr").find("td:eq(3)").text());
@@ -210,35 +90,23 @@ $(document).ready(function () {
 
     });
 
+    /* EVENT ADD STOCK IN ITEM */
+    $("#btn-add-stock-in-item").on('click', function (event) {
+        clear_modal_add_item();
+        $("#status").html("[new]");
+        $("#status").attr("aria-valuetext", "[new]");
+        $("#status").removeClass("label-primary");
+        $("#status").addClass("label-success");
+        global_variables.gbl_item_table_name = 'tbl-item-stock-in';
+        $("#add-item-modal").modal();
+    });
+
     /* CLEAR FORM CREATE BILL */
     function clear_frm_stock_in() {
         $('input:text, input:password, input:file, select, textarea', '#frm-stock-in').val('');
-        $("#item_received > tbody").html("");
-        var row = "<tr>" +
-            "<td>" +
-            "<a class=\"btn btn-xs btn-success add-item\">" +
-            "<i class=\"fa fa-plus-square-o\"></i></a>" +
-            " <a class=\"btn btn-xs btn-primary edit-item\">" +
-            "<i class=\"fa fa-edit\"></i></a>" +
-            " <a class=\"btn btn-xs btn-danger remove-item\">" +
-            "<i class=\"fa fa-trash-o\"></i></a>" +
-            "</td>" +
-            "<td></td>" +
-            "<td></td>" +
-            "<td></td>" +
-            "<td></td>" +
-            "<td></td>" +
-            "<td></td>" +
-            "<td></td>" +
-            "</tr>";
-        $("#item_received").append(row);
+        $("#tbl-item-stock-in > tbody").html("");
     }
 
-    /* CLEAR MODAL ADD ITEM */
-    function clear_modal_add_item() {
-        $('input:text, input:password, input:file, select, textarea', '#add-item-modal').val('');
-        $('#item-cost, #item-qty, #item-disc').val("");
-    }
 
     /* SET EVENT ON DATE CONTROL */
     $('#bill_date').datepicker({

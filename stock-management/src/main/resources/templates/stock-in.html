@@ -127,12 +127,12 @@
                                                     </section>
                                                 </div>
                                             </fieldset>
-                                            <header>
-                                                <h3>Item Received</h3>
-                                            </header>
                                             <fieldset>
+                                                <div style="margin:0px 0px 10px 0px;">
+                                                    <a id="btn-add-stock-in-item" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Add Stock Items</a>
+                                                </div>
                                                 <div class="table-responsive">
-                                                    <table id="item_received" class="table table-bordered">
+                                                    <table id="tbl-item-stock-in" class="table table-bordered">
                                                         <thead>
                                                             <tr>
                                                                 <th>Action</th>
@@ -146,23 +146,7 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <td>
-                                                                    <a class="btn btn-xs btn-success add-item">
-                                                                        <i class="fa fa-plus-square-o"></i></a>
-                                                                    <a class="btn btn-xs btn-primary edit-item">
-                                                                        <i class="fa fa-edit"></i></a>
-                                                                    <a class="btn btn-xs btn-danger remove-item">
-                                                                        <i class="fa fa-trash-o"></i></a>
-                                                                </td>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td>0</td>
-                                                                <td>0</td>
-                                                                <td>0</td>
-                                                                <td>0</td>
-                                                                <td>0</td>
-                                                            </tr>
+
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -175,8 +159,8 @@
                                                         <label class="label">Sub Amount:</label>
                                                     </section>
                                                     <section class="col col-2">
-                                                        <label for="total_subAmt" class="input">
-                                                            <input type="text" id="total_subAmt" readonly>
+                                                        <label for="total-subAmt" class="input">
+                                                            <input id="total-subAmt" name="total_subAmt" type="text" readonly>
                                                         </label>
                                                     </section>
                                                 </div>
@@ -187,8 +171,8 @@
                                                         <label class="label">Discount:</label>
                                                     </section>
                                                     <section class="col col-2">
-                                                        <label for="total_disc" class="input">
-                                                            <input type="text" name="total_disc" id="total_disc" readonly>
+                                                        <label for="total-disc" class="input">
+                                                            <input id="total-disc" name="total_disc" type="text" readonly>
                                                         </label>
                                                     </section>
                                                 </div>
@@ -199,8 +183,8 @@
                                                         <label class="label">Grand Amount:</label>
                                                     </section>
                                                     <section class="col col-2">
-                                                        <label for="total_amt" class="input">
-                                                            <input type="text" name="total_amt" id="total_amt" readonly>
+                                                        <label for="total-amt" class="input">
+                                                            <input id="total-amt" name="total_amt" type="text" readonly>
                                                         </label>
                                                     </section>
                                                 </div>

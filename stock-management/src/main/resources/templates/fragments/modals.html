@@ -195,7 +195,7 @@
 <th:block th:fragment="add-item-modal">
     <div class="modal" id="add-item-modal" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <form id="frm-add-item-modal" class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                         &times;
@@ -209,11 +209,12 @@
                                 <div class="input-group-btn" style="min-width: 120px;">
                                     <label class="form-control ctl_label">Item Code:</label>
                                 </div>
-                                <input id="item-code" class="form-control ctl_textbox" type="text" oninput="this.value = this.value.toUpperCase()" tabindex="1" >
+                                <input id="md-item-code" name="md_item_code" type="text" class="form-control ctl_textbox"
+                                       oninput="this.value = this.value.toUpperCase()" tabindex="1" maxlength="10">
                             </div>
                         </div>
                         <div class="col-md-6" style="margin-top: 10px">
-                            <input id="item-name" class="form-control ctl_textbox" type="text"
+                            <input id="md-item-name" name="md_item_name" class="form-control ctl_textbox" type="text"
                                    value="iPhone 5s Earphone" readonly>
                         </div>
                     </div>
@@ -223,7 +224,7 @@
                                 <div class="input-group-btn" style="min-width: 120px;">
                                     <label class="form-control ctl_label">Cost:</label>
                                 </div>
-                                <input id="item-cost" class="form-control ctl_textbox" type="number" tabindex="2"
+                                <input id="md-item-cost" class="form-control ctl_textbox" type="number" tabindex="2"
                                        placeholder="0.00">
                             </div>
                         </div>
@@ -234,7 +235,7 @@
                                 <div class="input-group-btn" style="min-width: 120px;">
                                     <label class="form-control ctl_label">Qty:</label>
                                 </div>
-                                <input id="item-qty" class="form-control ctl_textbox" type="number" tabindex="3"
+                                <input id="md-item-qty" name="md_item_qty" class="form-control ctl_textbox" type="number" tabindex="3"
                                        placeholder="0.00">
                             </div>
                         </div>
@@ -245,7 +246,7 @@
                                 <div class="input-group-btn" style="min-width: 120px;">
                                     <label class="form-control ctl_label">Discount:</label>
                                 </div>
-                                <input id="item-disc" class="form-control ctl_textbox" type="number" tabindex="4"
+                                <input id="md-item-disc" name="md_item_disc" class="form-control ctl_textbox" type="number" tabindex="4"
                                        placeholder="0.00">
                             </div>
                         </div>
@@ -257,7 +258,7 @@
                                     <label class="form-control ctl_label">Sub.Amt:
                                     </label>
                                 </div>
-                                <input id="item-subAmt" class="form-control ctl_textbox" type="text" readonly>
+                                <input id="md-item-subAmt" name="md_item_subAmt" class="form-control ctl_textbox" type="text" readonly>
                             </div>
                         </div>
                     </div>
@@ -268,7 +269,7 @@
                                     <label class="form-control ctl_label">Total.Amt:
                                     </label>
                                 </div>
-                                <input id="item-totalAmt" class="form-control ctl_textbox" type="text" readonly>
+                                <input id="md-item-totalAmt" name="md_item_totalAmt" class="form-control ctl_textbox" type="text" readonly>
                             </div>
                         </div>
                     </div>
@@ -276,15 +277,13 @@
                 <div class="modal-footer">
                     <div class="row">
                         <div class="col-sm-12">
-                            <a id="btn-add-item" class="btn btn-labeled btn-success" tabindex="5"> <span
-                                    class="btn-label">
-                                        <i class="glyphicon glyphicon-plus-sign"></i></span>Add</a>
+                            <button id="md-btn-add-item" type="submit" form="frm-add-item-modal" class="btn btn-labeled btn-success" tabindex="5">
+                                <span class="btn-label"><i class="glyphicon glyphicon-plus-sign"></i></span>Add</button>
                             <a class="btn btn-default" data-dismiss="modal">Close</a>
-
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </th:block>
