@@ -20,10 +20,9 @@ import java.util.Date;
 @Controller
 public class BillController {
 
-    @Autowired
-    private VendorRepository vendorRepository;
-    private BillRepository billRepository;
-    private BillDetailRepository billDetailRepository;
+    private final VendorRepository vendorRepository;
+    private final BillRepository billRepository;
+    private final BillDetailRepository billDetailRepository;
 
     @Autowired
     public BillController(VendorRepository vendorRepository, BillRepository billRepository, BillDetailRepository billDetailRepository){

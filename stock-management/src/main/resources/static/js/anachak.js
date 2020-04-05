@@ -24,7 +24,7 @@ function toNumber(string){
 
 /* CONVERT TO DATE */
 function toDate(dateStr) {
-    var parts = dateStr.split("-")
+    let parts = dateStr.split("-")
     return new Date(parts[2], parts[1] - 1, parts[0])
 }
 
@@ -133,13 +133,13 @@ $(document).on('click', ".gb-edit-item", function (event) {
     $("status").attr("data-loading-text", "");
     $("#status").removeClass("label-success");
     $("#status").addClass("label-primary");
-    var item_code = $(this).closest("tr").find("td:eq(1)").text();
-    var decs = $(this).closest("tr").find("td:eq(2)").text();
-    var qty = $(this).closest("tr").find("td:eq(3)").text();
-    var cost = $(this).closest("tr").find("td:eq(4)").text();
-    var disc = $(this).closest("tr").find("td:eq(5)").text();
-    var subAmt = $(this).closest("tr").find("td:eq(6)").text();
-    var totalAmt = $(this).closest("tr").find("td:eq(7)").text();
+    let item_code = $(this).closest("tr").find("td:eq(1)").text();
+    let decs = $(this).closest("tr").find("td:eq(2)").text();
+    let qty = $(this).closest("tr").find("td:eq(3)").text();
+    let cost = $(this).closest("tr").find("td:eq(4)").text();
+    let disc = $(this).closest("tr").find("td:eq(5)").text();
+    let subAmt = $(this).closest("tr").find("td:eq(6)").text();
+    let totalAmt = $(this).closest("tr").find("td:eq(7)").text();
     $("#md-item-code").val(item_code);
     $("#md-item-name").val(decs);
     $("#md-item-cost").val(cost);
@@ -156,9 +156,36 @@ $(document).on('click', ".gb-edit-item", function (event) {
 /* EVENT FOR REMOVE ITEM FROM TABLE */
 $(document).on('click', '.gb-remove-item', function () {
     global_variables.gbl_rowindex  = $(this).closest('td').parent()[0].sectionRowIndex + 1;
+    let item_code = $(this).closest("tr").find("td:eq(1)").text();
+    let decs = $(this).closest("tr").find("td:eq(2)").text();
+    $.SmartMessageBox({
+        title: "Anachak Store",
+        content: "Do you want to delete item: " + item_code + "-" +  decs + "?",
+        buttons: '[No][Yes]'
+    }, function (ButtonPressed) {
+        if (ButtonPressed === "Yes") {
+            gb_remove_item_row(global_variables.gbl_rowindex);
+            $.smallBox({
+                title: "Anachak Store",
+                content: "<i class='fa fa-clock-o'></i> <i>Deleted Successfully!</i>",
+                color: "#659265",
+                iconSmall: "fa fa-check",
+                timeout: 1000
+            });
+        }
+    });
+    e.preventDefault();
+
+    /* global_variables.gbl_rowindex  = $(this).closest('td').parent()[0].sectionRowIndex + 1;
     $("table tr:eq(" + global_variables.gbl_rowindex + ")").remove();
-    calculateGrandAmt();
+    calculateGrandAmt(); */
 });
+
+/* REMOVE ITEM ROW FROM TABLE */
+function gb_remove_item_row(rowindex) {
+    $("table tr:eq(" + rowindex + ")").remove();
+    calculateGrandAmt();
+}
 
 
 /* VALIDATIONS */

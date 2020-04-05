@@ -1,75 +1,65 @@
-package lasolutions.stockmanagement.Bill;
+package lasolutions.stockmanagement.PurchaseOrder;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
 @Entity
-@Table(name = "tbl_bills")
-public class BillModel {
+@Table(name = "tbl_purchase_orders")
+public class PurchaseOrderModel {
+    public PurchaseOrderModel(){
 
+    }
     @Id
-    @Column(name = "bill_id", insertable = false, updatable = false)
-    private String bill_id;
+    @Column(name = "purchase_id", insertable = false, updatable = false)
+    private  String purchase_id;
 
-    @Column(name = "bill_date")
-    private Date bill_date;
-
-    @Column(name = "bill_due")
-    private Date bill_due;
+    @Column(name = "purchase_date")
+    private Date purchase_date;
 
     @Column(name = "vendor_id")
-    private  String vendor_id;
+    private String vendor_id;
 
-    @Column (name = "ref_no")
+    @Column(name = "ref_no")
     private String ref_no;
 
-    @Column (name = "remark")
+    @Column(name = "remark")
     private String remark;
 
-    @Column (name = "address")
+    @Column(name = "address")
     private String address;
 
-    @Column (name = "sub_amt")
+    @Column(name = "sub_amt")
     private float sub_amt;
 
-    @Column (name = "disc_amt")
+    @Column(name = "disc_amt")
     private float disc_amt;
 
-    @Column (name = "total_amt")
+    @Column(name = "total_amt")
     private float total_amt;
 
-    @Column (name = "inactive")
+    @Column(name = "inactive")
     private boolean inactive;
 
-    @Column (name = "inactive_date")
-    private  Date inactive_date;
+    @Column(name = "inactive_date")
+    private Date inactive_date;
 
-    public BillModel(){
-
+    public String getPurchase_id() {
+        return purchase_id;
     }
 
-    public String getBill_id() {
-        return bill_id;
+    public void setPurchase_id(String purchase_id) {
+        this.purchase_id = purchase_id;
     }
 
-    public void setBill_id(String bill_id) {
-        this.bill_id = bill_id;
+    public Date getPurchase_date() {
+        return purchase_date;
     }
 
-    public Date getBill_date() {
-        return bill_date;
-    }
-
-    public void setBill_date(Date bill_date) {
-        this.bill_date = bill_date;
-    }
-
-    public Date getBill_due() {
-        return bill_due;
-    }
-
-    public void setBill_due(Date bill_due) {
-        this.bill_due = bill_due;
+    public void setPurchase_date(Date purchase_date) {
+        this.purchase_date = purchase_date;
     }
 
     public String getVendor_id() {
@@ -132,8 +122,8 @@ public class BillModel {
         return inactive;
     }
 
-    public void setInactive(boolean inaction) {
-        this.inactive = inaction;
+    public void setInactive(boolean inactive) {
+        this.inactive = inactive;
     }
 
     public Date getInactive_date() {

@@ -19,20 +19,20 @@ $(document).ready(function () {
     /* SAVE BILL */
     $(document).on('submit', "#frm-stock-in", function (event) {
         event.preventDefault();
-        var bill_id = $("#bill_id").val();
+        let bill_id = $("#bill_id").val();
         if (bill_id !== "") {
-            alert_message("this bill id is already exist!")
+            alert_message("This data is already exist!")
             return;
         }
-        var bill_date = toDate($("#bill_date").val());
-        var bill_due = toDate($("#bill_due").val());
-        var vendor_id = $("#vendors").val();
-        var ref_no = $("#ref_no").val();
-        var remark = $("#remark").val();
-        var address = $("#address").val();
-        var sub_amt = toNumber($("#total-subAmt").val());
-        var disc_amt = toNumber($("#total-disc").val());
-        var total_amt = toNumber($("#total-amt").val());
+        let bill_date = toDate($("#bill_date").val());
+        let bill_due = toDate($("#bill_due").val());
+        let vendor_id = $("#vendors").val();
+        let ref_no = $("#ref_no").val();
+        let remark = $("#remark").val();
+        let address = $("#address").val();
+        let sub_amt = toNumber($("#total-subAmt").val());
+        let disc_amt = toNumber($("#total-disc").val());
+        let total_amt = toNumber($("#total-amt").val());
         $.ajax({
             async: false,
             dataType: "json",
@@ -43,7 +43,7 @@ $(document).ready(function () {
                 ref_no: ref_no, remark: remark, address: address, sub_amt: sub_amt, disc_amt: disc_amt, total_amt: total_amt
             },
             success: function (data) {
-                var bill_id = data.bill_id;
+                let bill_id = data.bill_id;
                 saveItemDetail(bill_id);
                 alert_message("You have committed successfully!");
                 $("#bill_id").val(bill_id);
@@ -54,16 +54,16 @@ $(document).ready(function () {
         });
     });
 
-    /* LOAD BILL DETAIL INTO TABLE */
+    /* LOAD BILL DETAIL INTO DB */
     function saveItemDetail(bill_id) {
         $('#tbl-item-stock-in > tbody  > tr').each(function () {
-            var item_code = $(this).closest("tr").find("td:eq(1)").text();
-            var item_desc = $(this).closest("tr").find("td:eq(2)").text();
-            var item_qty = toNumber($(this).closest("tr").find("td:eq(3)").text());
-            var item_rate = toNumber($(this).closest("tr").find("td:eq(4)").text());
-            var item_disc = toNumber($(this).closest("tr").find("td:eq(5)").text());
-            var item_sub_amt = toNumber($(this).closest("tr").find("td:eq(6)").text());
-            var item_total_amt = toNumber($(this).closest("tr").find("td:eq(7)").text());
+            let item_code = $(this).closest("tr").find("td:eq(1)").text();
+            let item_desc = $(this).closest("tr").find("td:eq(2)").text();
+            let item_qty = toNumber($(this).closest("tr").find("td:eq(3)").text());
+            let item_rate = toNumber($(this).closest("tr").find("td:eq(4)").text());
+            let item_disc = toNumber($(this).closest("tr").find("td:eq(5)").text());
+            let item_sub_amt = toNumber($(this).closest("tr").find("td:eq(6)").text());
+            let item_total_amt = toNumber($(this).closest("tr").find("td:eq(7)").text());
 
             $.ajax({
                 async: false,
