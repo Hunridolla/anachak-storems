@@ -39,10 +39,10 @@
                         <a th:href="@{/stock-in}">Stock In <span class="label label-success">done</span> </a>
                     </li>
                     <li th:classappend="${active_page == 'purchase-orders'} ? 'active'">
-                        <a th:href="@{/purchase-orders}">Purchase Orders <span class="label label-warning">pending</span> </a>
+                        <a th:href="@{/purchase-orders}">Purchase Orders <span class="label label-success">done</span> </a>
                     </li>
                     <li th:classappend="${active_page == 'sale-orders'} ? 'active'">
-                        <a th:href="@{/sale-orders}">Sale Orders <span class="label label-warning">pending</span> </a>
+                        <a th:href="@{/sale-orders}">Sale Orders <span class="label label-warning">done</span> </a>
                     </li>
                     <li th:classappend="${active_page == 'pay-bills'} ? 'active'">
                         <a th:href="@{/pay-bills}">Pay Bills <span class="label label-warning">pending</span> </a>
