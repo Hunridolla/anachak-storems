@@ -11,6 +11,7 @@ $(document).ready(function () {
         $("#status").removeClass("label-primary");
         $("#status").addClass("label-success");
         global_variables.gbl_item_table_name = 'tbl-purchase-item';
+        global_variables.gbl_rate_type = 'cost';
         $("#add-item-modal").modal();
     });
 

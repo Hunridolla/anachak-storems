@@ -31,27 +31,35 @@ function toDate(dateStr) {
 /* EVENT IN ADD ITEM MODEL */
 /* EVENT ITEM CODE KEY ENTER */
 $('#md-item-code').keypress(function (event) {
-    var keycode = (event.keyCode ? event.keyCode : event.which);
+    let keycode = (event.keyCode ? event.keyCode : event.which);
     if (keycode == '13'){
-        var href = "/items/view/" + $("#md-item-code").val();
+        let href = "/items/view/" + $("#md-item-code").val();
         $.get(href, function (data) {
             $("#md-item-name").val(data.item_name);
-            $("#md-item-cost").val(data.cost.toFixed(2));
+            if (global_variables.gbl_rate_type === 'cost'){
+                $("#md-item-rate").val(data.cost.toFixed(2));
+            }else if (global_variables.gbl_rate_type === 'sale-price') {
+                $("#md-item-rate").val(data.sale_price.toFixed(2));
+            }else{
+                alert_message("Rate type is not define!")
+                return;
+            }
+
         });
         $("#md-item-qty").val("");
         $("#md-item-disc").val("");
-        $("#md-item-cost").focus();
+        $("#md-item-rate").focus();
     }
 });
 
 /* AUTO CALCULATE SUB AMOUNT */
-$('#md-item-cost, #md-item-qty, #md-item-disc').keyup(function (event) {
+$('#md-item-rate, #md-item-qty, #md-item-disc').keyup(function (event) {
     calculateSubAmt();
 });
 
 /* FUNCTION CAL SUB AMOUNT */
 function calculateSubAmt() {
-    var cost = toNumber($("#md-item-cost").val());
+    var cost = toNumber($("#md-item-rate").val());
     var qty = toNumber($("#md-item-qty").val());
     var disc = toNumber($("#md-item-disc").val());
     var subAmt = (cost * qty);
@@ -81,7 +89,7 @@ function calculateColumn(index) {
 /* CLEAR MODAL ADD ITEM */
 function clear_modal_add_item() {
     $('input:text, input:password, input:file, select, textarea', '#add-item-modal').val('');
-    $('#md-item-cost, #md-item-qty, #md-item-disc').val("");
+    $('#md-item-rate, #md-item-qty, #md-item-disc').val("");
     $(function () {
         $("#md-item-code").focus();
     });
@@ -93,7 +101,7 @@ $(document).on('submit', "#frm-add-item-modal", function (event) {
     var item_code = $("#md-item-code").val();
     var decs = $("#md-item-name").val();
     var qty = $("#md-item-qty").val();
-    var cost = toNumber($("#md-item-cost").val());
+    var cost = toNumber($("#md-item-rate").val());
     var disc = toNumber($("#md-item-disc").val());
     var subAmt = toNumber($("#md-item-subAmt").val());
     var totalAmt = toNumber($("#md-item-totalAmt").val());
@@ -142,14 +150,14 @@ $(document).on('click', ".gb-edit-item", function (event) {
     let totalAmt = $(this).closest("tr").find("td:eq(7)").text();
     $("#md-item-code").val(item_code);
     $("#md-item-name").val(decs);
-    $("#md-item-cost").val(cost);
+    $("#md-item-rate").val(cost);
     $("#md-item-qty").val(qty);
     $("#md-item-disc").val(disc);
     $("#md-item-subAmt").val(subAmt);
     $("#md-item-totalAmt").val(totalAmt);
     $("#add-item-modal").modal();
     $(function () {
-        $("#md-item-cost").focus();
+        $("#md-item-rate").focus();
     });
 });
 

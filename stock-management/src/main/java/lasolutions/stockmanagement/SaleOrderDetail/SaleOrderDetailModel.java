@@ -1,19 +1,19 @@
-package lasolutions.stockmanagement.PurchaseOrderDetail;
+package lasolutions.stockmanagement.SaleOrderDetail;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "tbl_purchase_order_details")
-public class PurchaseOrderDetailModel {
-    public PurchaseOrderDetailModel(){
+@Table(name = "tbl_sale_order_details")
+public class SaleOrderDetailModel {
+    public  SaleOrderDetailModel(){
 
     }
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
-    @Column(name = "purchase_id")
-    private String purchase_id;
+    @Column(name = "sale_order_id")
+    private String sale_order_id;
 
     @Column(name = "item_id")
     private String item_id;
@@ -44,12 +44,12 @@ public class PurchaseOrderDetailModel {
         this.id = id;
     }
 
-    public String getPurchase_id() {
-        return purchase_id;
+    public String getSale_order_id() {
+        return sale_order_id;
     }
 
-    public void setPurchase_id(String purchase_id) {
-        this.purchase_id = purchase_id;
+    public void setSale_order_id(String sale_order_id) {
+        this.sale_order_id = sale_order_id;
     }
 
     public String getItem_id() {
