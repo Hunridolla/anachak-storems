@@ -9,11 +9,9 @@ import java.util.Date;
 @Entity
 @Table(name = "tbl_exchange_rates")
 public class ExModel {
-
     public ExModel(){
 
     }
-
     @Id
     @Column(name = "ex_id", insertable = false, updatable = false)
     private String ex_id;

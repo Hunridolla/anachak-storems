@@ -1,19 +1,14 @@
 package lasolutions.stockmanagement.controller;
 
-import com.sun.tools.javac.util.List;
 import lasolutions.stockmanagement.Profile.ProfileModel;
 import lasolutions.stockmanagement.Profile.ProfileRepository;
 import lasolutions.stockmanagement.Profile.ProfileService;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.ArrayList;
-
 
 @Controller
 public class ProfileController {
