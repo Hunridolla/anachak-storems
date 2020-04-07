@@ -1,410 +1,228 @@
 <!DOCTYPE html>
 <html th:with="active_page = 'invoices'" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<th:block th:include="fragments/head :: head" />
+    <th:block th:include="fragments/head :: head" />
+    <body class="smart-style-4">
+        <!-- HEADER -->
+        <header id="header">
+            <th:block th:include="fragments/head :: logo" />
+            <th:block th:include="fragments/head :: toggle"/>
+        </header>
+        <!-- END HEADER -->
 
-<body class="smart-style-4">
-    <!-- #HEADER -->
-    <header id="header">
-        <th:block th:include="fragments/head :: logo" />
-        <!-- #TOGGLE LAYOUT BUTTONS -->
-        <!-- pulled right: nav area -->
-        <div class="pull-right">
-
-            <!-- collapse menu button -->
-            <div id="hide-menu" class="btn-header pull-right">
-                <span> <a href="javascript:void(0);" data-action="toggleMenu" title="Collapse Menu"><i
-                            class="fa fa-reorder"></i></a>
-                </span>
-            </div>
-            <!-- end collapse menu -->
-
-            <!-- #MOBILE -->
-            <!-- Top menu profile link : this shows only when top menu is active -->
-            <ul id="mobile-profile-img" class="header-dropdown-list hidden-xs padding-5">
-                <li class="">
-                    <a href="#" class="dropdown-toggle no-margin userdropdown" data-toggle="dropdown">
-                        <img src="img/avatars/sunny.png" alt="John Doe" class="online" />
+        <!-- NAVIGATION -->
+        <aside id="left-panel">
+            <!-- USER INFORMATION -->
+            <div class="login-info">
+                <span>
+                    <a href="" id="show-shortcut" data-action="toggleShortcut">
+                        <img src="img/avatars/sunny.png" alt="me" class="online" />
+                        <span>Hunridolla</span><i class="fa fa-angle-down"></i>
                     </a>
-                    <ul class="dropdown-menu pull-right">
-                        <li>
-                            <a href="javascript:void(0);" class="padding-10 padding-top-0 padding-bottom-0"><i
-                                    class="fa fa-cog"></i>
-                                Setting</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="profile.html" class="padding-10 padding-top-0 padding-bottom-0"> <i
-                                    class="fa fa-user"></i> <u>P</u>rofile</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="javascript:void(0);" class="padding-10 padding-top-0 padding-bottom-0"
-                                data-action="toggleShortcut"><i class="fa fa-arrow-down"></i> <u>S</u>hortcut</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="javascript:void(0);" class="padding-10 padding-top-0 padding-bottom-0"
-                                data-action="launchFullscreen"><i class="fa fa-arrows-alt"></i> Full <u>S</u>creen</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="login.html" class="padding-10 padding-top-5 padding-bottom-5"
-                                data-action="userLogout"><i class="fa fa-sign-out fa-lg"></i>
-                                <strong><u>L</u>ogout</strong></a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-
-            <!-- logout button -->
-            <div id="logout" class="btn-header transparent pull-right">
-                <span> <a href="login.html" title="Sign Out" data-action="userLogout"
-                        data-logout-msg="You can improve your security further after logging out by closing this opened browser"><i
-                            class="fa fa-sign-out"></i></a> </span>
-            </div>
-            <!-- end logout button -->
-
-            <!-- search mobile button (this is hidden till mobile view port) -->
-            <div id="search-mobile" class="btn-header transparent pull-right">
-                <span> <a href="javascript:void(0)" title="Search"><i class="fa fa-search"></i></a> </span>
-            </div>
-            <!-- end search mobile button -->
-
-            <!-- #SEARCH -->
-            <!-- input: search field -->
-            <form action="search.html" class="header-search pull-right">
-                <input id="search-fld" type="text" name="param" placeholder="Find reports and more">
-                <button type="submit">
-                    <i class="fa fa-search"></i>
-                </button>
-                <a href="javascript:void(0);" id="cancel-search-js" title="Cancel Search"><i
-                        class="fa fa-times"></i></a>
-            </form>
-            <!-- end input: search field -->
-
-            <!-- fullscreen button -->
-            <div id="fullscreen" class="btn-header transparent pull-right">
-                <span> <a href="javascript:void(0);" data-action="launchFullscreen" title="Full Screen"><i
-                            class="fa fa-arrows-alt"></i></a>
                 </span>
             </div>
-            <!-- end fullscreen button -->
-
-            <!-- #Voice Command: Start Speech -->
-            <div id="speech-btn" class="btn-header transparent pull-right hidden-sm hidden-xs">
-                <div>
-                    <a href="javascript:void(0)" title="Voice Command" data-action="voiceCommand"><i
-                            class="fa fa-microphone"></i></a>
-                    <div class="popover bottom">
-                        <div class="arrow"></div>
-                        <div class="popover-content">
-                            <h4 class="vc-title">Voice command activated <br>
-                                <small>Please speak clearly into the mic</small>
-                            </h4>
-                            <h4 class="vc-title-error text-center">
-                                <i class="fa fa-microphone-slash"></i> Voice command failed
-                                <br>
-                                <small class="txt-color-red">Must <strong>"Allow"</strong> Microphone</small>
-                                <br>
-                                <small class="txt-color-red">Must have <strong>Internet Connection</strong></small>
-                            </h4>
-                            <a href="javascript:void(0);" class="btn btn-success" onclick="commands.help()">See
-                                Commands</a>
-                            <a href="javascript:void(0);" class="btn bg-color-purple txt-color-white"
-                                onclick="$('#speech-btn .popover').fadeOut(50);">Close
-                                Popup</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- end voice command -->
-        </div>
-        <!-- end pulled right: nav area -->
-
-    </header>
-    <!-- END HEADER -->
-
-    <!-- #NAVIGATION -->
-    <!-- Left panel : Navigation area -->
-    <!-- Note: This width of the aside area can be adjusted through LESS variables -->
-    <aside id="left-panel">
-
-        <!-- UserModel info -->
-        <div class="login-info">
-            <span>
-                <!-- UserModel image size is adjusted inside CSS, it should stay as it -->
-
-                <a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
-                    <img src="img/avatars/sunny.png" alt="me" class="online" />
-                    <span>
-                        john.doe
-                    </span>
-                    <i class="fa fa-angle-down"></i>
-                </a>
-
+            <!-- END USER INFORMATION -->
+            <th:block th:include="fragments/nav :: nav" />
+            <span class="minifyme" data-action="minifyMenu">
+                <i class="fa fa-arrow-circle-left hit"></i>
             </span>
-        </div>
-        <!-- end user info -->
+        </aside>
+        <!-- END NAVIGATION -->
 
-        <!--BEGIN Navigator-->
+        <!-- MAIN PANEL -->
+        <div id="main" role="main">
+            <!-- RIBBON -->
+            <div>
+                <ol class="breadcrumb">
+                    <li><button id="btn-new-invoice" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> New</button></li>
+                    <li><button id="btn-save-invoice" type="submit" form="frm-create-invoice" class="btn btn-sm btn-success"><i class="fa fa-check"></i> Commit</button></li>
+                    <li><button id="btn-print-invoice" class="btn btn-sm btn-success"><i class="fa fa-print"></i> Print</button></li>
+                    <li><button id="btn-find-invoice" class="btn btn-sm btn-primary" data-toggle="modal"
+                            data-target="#find-item-modal"><i class="fa fa-search"></i> Find</button></li>
+                </ol>
+            </div>
+            <!-- END RIBBON -->
+            <!-- MAIN CONTENT -->
+            <div id="content">
+                <!-- widget grid -->
+                <section id="widget-grid" class="">
+                    <!-- row -->
+                    <div class="row">
+                        <!-- NEW WIDGET START -->
+                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-10">
+                            <div id="wid-id-0"  class="jarviswidget jarviswidget-color-white" data-widget-editbutton="false"
+                            data-widget-colorbutton="false" data-widget-deletebutton="false"
+                            data-widget-togglebutton="true">
+                                <header>
+                                    <ul class="nav nav-tabs pull-left in">
+                                        <li class="active">
+                                            <a id="tab-create-invoice" data-toggle="tab" href="#create-invoice">
+                                                <i class="fa fa-lg fa-plus"></i> Create Invoice</a>
+                                        </li>
+                                        <li>
+                                            <a id="tab-invoice-list" data-toggle="tab" href="#invoice-list">
+                                                <i class="fa fa-lg fa-list"></i> Invoice List</a>
+                                        </li>
+                                    </ul>
+                                </header>
+                                <!-- widget div-->
+                                <div>
+                                    <!-- widget edit box -->
+                                    <div class="jarviswidget-editbox">
+                                        <!-- This area used as dropdown edit box -->
+                                        <input class="form-control" type="text">
+                                    </div>
+                                    <!-- end widget edit box -->
 
-        <th:block th:include="fragments/nav :: nav" />
+                                    <!-- widget content -->
+                                    <div class="widget-body no-padding">
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="create-invoice">
+                                                <form id="frm-create-invoice" class="smart-form" novalidate="novalidate">
+                                                    <fieldset>
+                                                        <div class="row">
+                                                            <section class="col col-3">
+                                                                <label class="label">Invoice ID</label>
+                                                                <label for="invoice-id" class="input">
+                                                                    <input type="text" name="invoice_id" id="invoice-id" readonly>
+                                                                </label>
+                                                            </section>
+                                                        </div>
+                                                        <div class="row">
+                                                            <section class="col col-4">
+                                                                <label class="label">Invoice Date:</label>
+                                                                <label class="input"> <i class="icon-append fa fa-calendar"></i>
+                                                                    <input type="text" id="invoice-date" name="invoice_date" >
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-4">
+                                                                <label class="label">Customer</label>
+                                                                <label class="select">
+                                                                    <select id="customers" name="customers" >
+                                                                        <option th:each="data :${customers}"
+                                                                                th:value="${data.customer_id}"
+                                                                                th:text="${data.company_name}"></option>
+                                                                    </select>
+                                                                    <i></i>
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-4">
+                                                                <label class="label">Seller</label>
+                                                                <label class="select">
+                                                                    <select name="seller">
+                                                                        <option value="1" selected="selected">Seller 1</option>
+                                                                        <option value="2">Seller 2</option>
+                                                                    </select>
+                                                                    <i></i>
+                                                                </label>
+                                                            </section>
+                                                        </div>
+                                                        <div class="row">
+                                                            <section class="col col-4">
+                                                                <label class="label">Ship Date</label>
+                                                                <label class="input"> <i class="icon-append fa fa-calendar"></i>
+                                                                    <input type="text" name="ship_date" id="ship-date">
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-4">
+                                                                <label class="label">Ship To</label>
+                                                                <label for="ship-to" class="input">
+                                                                    <input type="text" name="ship_to" id="ship-to">
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-4">
+                                                                <label class="label">Remark</label>
+                                                                <label for="remark" class="input">
+                                                                    <input type="text" name="remark" id="remark">
+                                                                </label>
+                                                            </section>
+                                                        </div>
+                                                    </fieldset>
+                                                    <fieldset>
+                                                        <div style="margin:0px 0px 10px 0px;">
+                                                            <a id="btn-add-invoice-item" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Add Items</a>
+                                                        </div>
+                                                        <div class="table-responsive">
+                                                            <table id="tbl-invoice-item" class="table table-bordered">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th>Action</th>
+                                                                    <th>Item.Code</th>
+                                                                    <th>Description</th>
+                                                                    <th>Qty</th>
+                                                                    <th>Rate</th>
+                                                                    <th>Disc.Value</th>
+                                                                    <th>Sub.Amt</th>
+                                                                    <th>Total.Amt</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
 
-        <!--END Navigator-->
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </fieldset>
+                                                    <fieldset>
+                                                        <div class="row">
+                                                            <section class="col col-8">
+                                                            </section>
+                                                            <section class="col col-2">
+                                                                <label class="label">Sub Amount:</label>
+                                                            </section>
+                                                            <section class="col col-2">
+                                                                <label for="total-subAmt" class="input">
+                                                                    <input id="total-subAmt" name="total_subAmt" type="text" readonly>
+                                                                </label>
+                                                            </section>
+                                                        </div>
+                                                        <div class="row">
+                                                            <section class="col col-8">
+                                                            </section>
+                                                            <section class="col col-2">
+                                                                <label class="label">Discount:</label>
+                                                            </section>
+                                                            <section class="col col-2">
+                                                                <label for="total-disc" class="input">
+                                                                    <input id="total-disc" name="total_disc" type="text" readonly>
+                                                                </label>
+                                                            </section>
+                                                        </div>
+                                                        <div class="row">
+                                                            <section class="col col-8">
+                                                            </section>
+                                                            <section class="col col-2">
+                                                                <label class="label">Grand Amount:</label>
+                                                            </section>
+                                                            <section class="col col-2">
+                                                                <label for="total-amt" class="input">
+                                                                    <input id="total-amt" name="total_amt" type="text" readonly>
+                                                                </label>
+                                                            </section>
+                                                        </div>
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                            <!--TAB LIST-->
+                                            <div class="tab-pane" id="invoice-list">
 
-        <span class="minifyme" data-action="minifyMenu">
-            <i class="fa fa-arrow-circle-left hit"></i>
-        </span>
-
-    </aside>
-    <!-- END NAVIGATION -->
-
-    <!-- MAIN PANEL -->
-    <div id="main" role="main">
-        <!-- RIBBON -->
-        <div>
-            <ol class="breadcrumb">
-                <li><a id="btn-new-item" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> New</a></li>
-                <li><a id="btn-save-item" class="btn btn-sm btn-success"><i class="fa fa-check"></i> Commmit</a></li>
-                <li><a id="btn-find-item" class="btn btn-sm btn-primary" data-toggle="modal"
-                        data-target="#find-item-modal"><i class="fa fa-search"></i> Find</a></li>
-            </ol>
-        </div>
-        <!-- END RIBBON -->
-        <!-- MAIN CONTENT -->
-        <div id="content">
-            <!-- widget grid -->
-            <section id="widget-grid" class="">
-
-                <!-- row -->
-                <div class="row">
-
-                    <!-- NEW WIDGET START -->
-                    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
-                        <!-- Widget ID (each widget will need unique ID)-->
-                        <div class="jarviswidget" id="wid-id-0">
-                            <header>
-                                <span class="widget-icon"> <i class="fa fa-comments"></i> </span>
-                                <h2>INVOICE</h2>
-                            </header>
-
-                            <!-- widget div-->
-                            <div>
-
-                                <!-- widget edit box -->
-                                <div class="jarviswidget-editbox">
-                                    <!-- This area used as dropdown edit box -->
-                                    <input class="form-control" type="text">
+                                            </div>
+                                            <!--END-->
+                                        </div>
+                                    </div>
+                                    <!-- end widget content -->
                                 </div>
-                                <!-- end widget edit box -->
-
-                                <!-- widget content -->
-                                <div class="widget-body no-padding">
-
-                                    <!-- this is what the user will see -->
-                                    <form id="order-form" class="smart-form" novalidate="novalidate">
-                                        <header>
-                                            <h3> Create New Invoice </h3>
-                                        </header>
-                                        <fieldset>
-                                            <div class="row">
-                                                <section class="col col-4">
-                                                    <label class="label">Invoice Date:</label>
-                                                    <label class="input"> <i class="icon-append fa fa-calendar"></i>
-                                                        <input type="text" name="invoicedate" id="invoicedate"
-                                                            placeholder="Choose...">
-                                                    </label>
-                                                </section>
-                                                <section class="col col-4">
-                                                    <label class="label">Customer</label>
-                                                    <label class="select">
-                                                        <select name="customers">
-                                                            <option value="0" selected="" disabled="">Customers</option>
-                                                            <option value="1">Customer 1</option>
-                                                            <option value="2">Customer 2</option>
-                                                        </select>
-                                                        <i></i>
-                                                    </label>
-                                                </section>
-                                                <section class="col col-4">
-                                                    <label class="label">Seller</label>
-                                                    <label class="select">
-                                                        <select name="sellers">
-                                                            <option value="0" selected="" disabled="">Sellers</option>
-                                                            <option value="1">Seller 1</option>
-                                                            <option value="2">Seller 2</option>
-                                                        </select>
-                                                        <i></i>
-                                                    </label>
-                                                </section>
-                                            </div>
-                                            <div class="row">
-                                                <section class="col col-4">
-                                                    <label class="label">Ship Date</label>
-                                                    <label class="input"> <i class="icon-append fa fa-calendar"></i>
-                                                        <input type="text" name="shipdate" id="shipdate"
-                                                            placeholder="Choose...">
-                                                    </label>
-                                                </section>
-                                                <section class="col col-4">
-                                                    <label class="label">Ship To</label>
-                                                    <label for="shipto" class="input">
-                                                        <input type="text" name="shopto" id="shipto" placeholder="">
-                                                    </label>
-                                                </section>
-                                                <section class="col col-4">
-                                                    <label class="label">Remark</label>
-                                                    <label for="remark" class="input">
-                                                        <input type="text" name="remark" id="remark" placeholder="">
-                                                    </label>
-                                                </section>
-                                            </div>
-                                        </fieldset>
-                                        <header>
-                                            <h3>Invoice Item(s)</h3>
-                                        </header>
-                                        <fieldset id="invoice-container">
-                                            <div class="row">
-                                                <section class="col col-2">
-                                                    <label class="select">
-                                                        <select name="item-code">
-                                                            <option value="0" selected="" disabled="">Item Code</option>
-                                                            <option value="1">I-001</option>
-                                                            <option value="2">I-002</option>
-                                                        </select>
-                                                        <i></i>
-                                                    </label>
-                                                </section>
-                                                <section class="col col-2">
-                                                    <label for="description" class="input">
-                                                        <input type="text" name="description" id="description"
-                                                            placeholder="">
-                                                    </label>
-                                                </section>
-                                                <section class="col col-2">
-                                                    <label for="qty" class="input">
-                                                        <input type="text" name="qty" id="qty" placeholder="0">
-                                                    </label>
-                                                </section>
-                                                <section class="col col-2">
-                                                    <label for="rate" class="input">
-                                                        <input type="text" name="rate" id="rate" placeholder="0.00">
-                                                    </label>
-                                                </section>
-                                                <section class="col col-2">
-                                                    <label for="discount-value" class="input">
-                                                        <input type="text" name="discount-value" id="discount-value"
-                                                            placeholder="0.00">
-                                                    </label>
-                                                </section>
-                                                <section class="col col-2">
-                                                    <label for="sub-amount" class="input">
-                                                        <input type="text" name="sub-amount" id="sub-amount"
-                                                            placeholder="0.00">
-                                                    </label>
-                                                </section>
-                                            </div>
-                                        </fieldset>
-                                        <fieldset>
-                                            <div class="row">
-                                                <section class="col col-8">
-                                                    <a class="btn btn-primary btn-sm" id="add">
-                                                        <i class="fa fa-plus-square"></i> Add</a>
-                                                    <a class="btn btn-danger btn-sm" id="remove">
-                                                        <i class="fa fa-minus-square"></i> Remove</a>
-                                                </section>
-                                                <section class="col col-2">
-                                                    <label class="label">Sub Amount:</label>
-                                                </section>
-                                                <section class="col col-2">
-                                                    <label for="sub-amount" class="input">
-                                                        <input type="text" name="sub-amount" id="sub-amount"
-                                                            placeholder="0.00" disabled="disabled">
-                                                    </label>
-                                                </section>
-                                            </div>
-                                            <div class="row">
-                                                <section class="col col-8">
-                                                </section>
-                                                <section class="col col-2">
-                                                    <label class="label">Discount:</label>
-                                                </section>
-                                                <section class="col col-2">
-                                                    <label for="sub-amount" class="input">
-                                                        <input type="text" name="sub-amount" id="sub-amount"
-                                                            placeholder="0.00" disabled="disabled">
-                                                    </label>
-                                                </section>
-                                            </div>
-                                            <div class="row">
-                                                <section class="col col-8">
-                                                </section>
-                                                <section class="col col-2">
-                                                    <label class="label">Grand Amount:</label>
-                                                </section>
-                                                <section class="col col-2">
-                                                    <label for="sub-amount" class="input">
-                                                        <input type="text" name="sub-amount" id="sub-amount"
-                                                            placeholder="0.00" disabled="disabled">
-                                                    </label>
-                                                </section>
-                                            </div>
-                                        </fieldset>
-                                        <fieldset>
-                                            <div class="row">
-                                                <section class="col col-2">
-                                                    <a class="btn btn-primary btn-sm">
-                                                        <i class="fa fa-print"></i> Print</a>
-                                                </section>
-                                                <section class="col col-6">
-
-                                                </section>
-                                                <section class="col col-2">
-                                                    <a class="btn btn-primary btn-sm">
-                                                        <i class="fa fa-reply"></i> Back</a>
-                                                </section>
-                                                <section class="col col-2">
-                                                    <a class="btn btn-primary btn-sm">
-                                                        <i class="fa fa-save"></i> Save</a>
-                                                </section>
-                                            </div>
-                                        </fieldset>
-                                    </form>
-                                </div>
-                                <!-- end widget content -->
-
+                                <!-- end widget div -->
                             </div>
-                            <!-- end widget div -->
-
-                        </div>
-                        <!-- end widget -->
-                </div>
-
-                <!-- end row -->
-
-                <!-- row -->
-
-                <div class="row">
-
-                    <!-- a blank row to get started -->
-                    <div class="col-sm-12">
-                        <!-- your contents here -->
+                            <!-- end widget -->
+                        </article>
                     </div>
-
-                </div>
-
-                <!-- end row -->
-
-            </section>
-            <!-- end widget grid -->
-
+                    <!-- end row -->
+                </section>
+                <!-- end widget grid -->
+            </div>
+            <!-- END MAIN CONTENT -->
         </div>
-        <!-- END MAIN CONTENT -->
-    </div>
-    <!-- END MAIN PANEL -->
-    <th:block th:include="fragments/foot :: foot" />
-
-</body>
-
+        <!-- END MAIN PANEL -->
+        <th:block th:include="fragments/modals :: add-item-modal"/>
+        <th:block th:include="fragments/foot :: foot" />
+    </body>
 </html>
