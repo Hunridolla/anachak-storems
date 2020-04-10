@@ -28,8 +28,72 @@ $(document).ready(function () {
             alert_message("This data is already exist!");
             return;
         }
-
+        let invoice_date = toDate($("#invoice-date").val());
+        let customer_id = $("#customers").val();
+        let seller = $("#seller").val();
+        let ship_date = toDate($("#ship-date").val());
+        /*
+        if ($("#ship-date").val() == ""){
+            ship_date = null;
+        }else{
+            ship_date = toDate($("#ship-date").val());
+        }*/
+        let ship_to= $("#ship-to").val();
+        let remark = $("#remark").val();
+        let sub_amt = toNumber($("#total-subAmt").val());
+        let disc_amt = toNumber($("#total-disc").val());
+        let total_amt = toNumber($("#total-amt").val());
+        alert_message('ship_date -> ' + ship_date);
+        $.ajax({
+            async: false,
+            dataType: "json",
+            type: "POST",
+            url: "/save-invoice",
+            data: {
+                inv_id: invoice_id, inv_date: invoice_date, customer_id: customer_id, seller: seller,
+                ship_date: ship_date, ship_to: ship_to, remark: remark, sub_amt: sub_amt, disc_amt: disc_amt,
+                total_amt: total_amt
+            },
+            success: function (data) {
+                let invoice_id = data.inv_id;
+                /* SAVE INVOICE DETAIL HERE */
+                saveInvoiceDetail(invoice_id);
+                alert_message("You have committed successfully!");
+                $("#invoice-id").val(invoice_id);
+            },
+            error: function (e) {
+                alert_message("Error:" + e);
+            }
+        });
     });
+
+    /* LOAD BILL DETAIL INTO DB */
+    function saveInvoiceDetail(invoice_id) {
+        $('#tbl-invoice-item > tbody  > tr').each(function () {
+            let item_code = $(this).closest("tr").find("td:eq(1)").text();
+            let item_desc = $(this).closest("tr").find("td:eq(2)").text();
+            let item_qty = toNumber($(this).closest("tr").find("td:eq(3)").text());
+            let item_rate = toNumber($(this).closest("tr").find("td:eq(4)").text());
+            let item_disc = toNumber($(this).closest("tr").find("td:eq(5)").text());
+            let item_sub_amt = toNumber($(this).closest("tr").find("td:eq(6)").text());
+            let item_total_amt = toNumber($(this).closest("tr").find("td:eq(7)").text());
+
+            $.ajax({
+                async: false,
+                dataType: "json",
+                type: "POST",
+                url: "/save-invoice-detail",
+                data: {
+                    inv_id: invoice_id, item_code: item_code, item_desc: item_desc, item_qty: item_qty,
+                    item_rate: item_rate, item_disc: item_disc, item_sub_amt: item_sub_amt, item_total_amt: item_total_amt
+                },
+                success: function () {
+                },
+                error: function () {
+                }
+            });
+        });
+    }
 
     /* EVENTS FOR BUTTON NEW, PRINT */
     $("#btn-new-invoice").on("click", function () {
@@ -73,6 +137,9 @@ $(document).ready(function () {
             },
             total_amt: {
                 required: true
+            },
+            ship_date: {
+                required: true
             }
         },
 
@@ -88,6 +155,9 @@ $(document).ready(function () {
                 required: 'Required*'
             },
             total_amt: {
+                required: 'Required*'
+            },
+            ship_date: {
                 required: 'Required*'
             }
         },

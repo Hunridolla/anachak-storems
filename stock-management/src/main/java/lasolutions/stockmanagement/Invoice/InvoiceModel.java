@@ -4,16 +4,20 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Date;
 
 @Entity
 @Table(name = "tbl_invoices")
 public class InvoiceModel {
+    public InvoiceModel() {
+
+    }
     @Id
     @Column(name = "inv_id", insertable = false, updatable = false)
     private String inv_id;
 
     @Column(name = "inv_date")
-    private String inv_date;
+    private Date inv_date;
 
     @Column(name = "customer_id")
     private String customer_id;
@@ -22,44 +26,28 @@ public class InvoiceModel {
     private String seller;
 
     @Column(name = "ship_date")
-    private String ship_date;
+    private Date ship_date;
 
     @Column(name = "ship_to")
     private String ship_to;
 
     @Column(name = "remark")
-    private Double remark;
+    private String remark;
 
     @Column(name = "sub_amt")
-    private Double sub_amt;
+    private float sub_amt;
 
     @Column(name = "disc_amt")
-    private Double disc_amt;
+    private float disc_amt;
 
     @Column(name = "total_amt")
-    private Double total_amt;
+    private float total_amt;
 
     @Column(name = "inactive")
-    private Integer inactive;
+    private boolean inactive;
 
     @Column(name = "inactive_date")
-    private String inactive_date;
-
-
-    public InvoiceModel() {
-        this.inv_id = inv_id;
-        this.inv_date = inv_date;
-        this.customer_id = customer_id;
-        this.seller = seller;
-        this.ship_date = ship_date;
-        this.ship_to = ship_to;
-        this.remark = remark;
-        this.sub_amt = sub_amt;
-        this.disc_amt = disc_amt;
-        this.total_amt = total_amt;
-        this.inactive = inactive;
-        this.inactive_date = inactive_date;
-    }
+    private Date inactive_date;
 
     public String getInv_id() {
         return inv_id;
@@ -69,11 +57,11 @@ public class InvoiceModel {
         this.inv_id = inv_id;
     }
 
-    public String getInv_date() {
+    public Date getInv_date() {
         return inv_date;
     }
 
-    public void setInv_date(String inv_date) {
+    public void setInv_date(Date inv_date) {
         this.inv_date = inv_date;
     }
 
@@ -93,11 +81,11 @@ public class InvoiceModel {
         this.seller = seller;
     }
 
-    public String getShip_date() {
+    public Date getShip_date() {
         return ship_date;
     }
 
-    public void setShip_date(String ship_date) {
+    public void setShip_date(Date ship_date) {
         this.ship_date = ship_date;
     }
 
@@ -109,51 +97,51 @@ public class InvoiceModel {
         this.ship_to = ship_to;
     }
 
-    public Double getRemark() {
+    public String getRemark() {
         return remark;
     }
 
-    public void setRemark(Double remark) {
+    public void setRemark(String remark) {
         this.remark = remark;
     }
 
-    public Double getSub_amt() {
+    public float getSub_amt() {
         return sub_amt;
     }
 
-    public void setSub_amt(Double sub_amt) {
+    public void setSub_amt(float sub_amt) {
         this.sub_amt = sub_amt;
     }
 
-    public Double getDisc_amt() {
+    public float getDisc_amt() {
         return disc_amt;
     }
 
-    public void setDisc_amt(Double disc_amt) {
+    public void setDisc_amt(float disc_amt) {
         this.disc_amt = disc_amt;
     }
 
-    public Double getTotal_amt() {
+    public float getTotal_amt() {
         return total_amt;
     }
 
-    public void setTotal_amt(Double total_amt) {
+    public void setTotal_amt(float total_amt) {
         this.total_amt = total_amt;
     }
 
-    public Integer getInactive() {
+    public boolean isInactive() {
         return inactive;
     }
 
-    public void setInactive(int inactive) {
+    public void setInactive(boolean inactive) {
         this.inactive = inactive;
     }
 
-    public String getInactive_date() {
+    public Date getInactive_date() {
         return inactive_date;
     }
 
-    public void setInactive_date(String inactive_date) {
+    public void setInactive_date(Date inactive_date) {
         this.inactive_date = inactive_date;
     }
 }

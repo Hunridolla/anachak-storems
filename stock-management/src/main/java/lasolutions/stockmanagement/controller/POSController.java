@@ -72,7 +72,7 @@ public class POSController {
         ItemModel itemModel = itemRepository.getItemByBarcode(barcode);
         return new ResponseEntity<>(itemModel, HttpStatus.OK);
     }
-
+    /*
     @RequestMapping(value = "/save-invoice", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<Object> saveItem(
@@ -83,7 +83,7 @@ public class POSController {
             @RequestParam("customer") String customer
     ) {
         //Generate Invoice ID and Receipt ID
-        String MaxId= invoiceService.getMaxId().getInv_id();
+        //String MaxId= invoiceService.getMaxId().getInv_id();
         String RecMaxId= receiptService.getMaxId().getReceipt_id();
 
         MaxId = (MaxId=="0") ? "0" :  MaxId.substring(MaxId.lastIndexOf('-') + 1);
@@ -155,6 +155,6 @@ public class POSController {
 //
 //        return new ResponseEntity<>(invoiceDetailRepository, HttpStatus.OK);
 //    }
-
+*/
 
 }

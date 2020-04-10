@@ -12,7 +12,7 @@ public interface InvoiceRepository extends JpaRepository<InvoiceModel, String> {
                                 @Param("disc_amt") Double disc_amt,
                                 @Param("total_amt") Double total_amt);
 
-    String getMaxId = "CALL GBL_GET_MAX_INV_ID";
+    String getMaxId = "CALL GBL_GET_INV_ID";
     @Query(value = getMaxId,nativeQuery = true)
-    InvoiceModel getMaxId();
+    String getInvoiceId();
 }
