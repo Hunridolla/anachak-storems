@@ -48,7 +48,7 @@
                         <a th:href="@{/pay-bills}">Pay Bills <span class="label label-warning">pending</span> </a>
                     </li>
                     <li th:classappend="${active_page == 'invoices'} ? 'active'">
-                        <a th:href="@{/invoices}">Invoices <span class="label label-warning">pending</span> </a>
+                        <a th:href="@{/invoices}">Invoices <span class="label label-success">done</span> </a>
                     </li>
                     <li th:classappend="${active_page == 'invoice-payments'} ? 'active'">
                         <a th:href="@{/invoice-payments}">Invoice Payments <span class="label label-warning">pending</span> </a>

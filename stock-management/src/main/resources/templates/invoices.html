@@ -100,7 +100,8 @@
                                                                     <select id="customers" name="customers" >
                                                                         <option th:each="data :${customers}"
                                                                                 th:value="${data.customer_id}"
-                                                                                th:text="${data.company_name}"></option>
+                                                                                th:text="${data.company_name}">
+                                                                        </option>
                                                                     </select>
                                                                     <i></i>
                                                                 </label>
@@ -109,8 +110,10 @@
                                                                 <label class="label">Seller</label>
                                                                 <label class="select">
                                                                     <select id="seller" name="seller">
-                                                                        <option value="1" selected="selected">Seller 1</option>
-                                                                        <option value="2">Seller 2</option>
+                                                                        <option th:each="data :${users}"
+                                                                                th:value="${data.user_id}"
+                                                                                th:text="${data.user_name}">
+                                                                        </option>
                                                                     </select>
                                                                     <i></i>
                                                                 </label>

@@ -43,7 +43,6 @@ $(document).ready(function () {
         let sub_amt = toNumber($("#total-subAmt").val());
         let disc_amt = toNumber($("#total-disc").val());
         let total_amt = toNumber($("#total-amt").val());
-        alert_message('ship_date -> ' + ship_date);
         $.ajax({
             async: false,
             dataType: "json",

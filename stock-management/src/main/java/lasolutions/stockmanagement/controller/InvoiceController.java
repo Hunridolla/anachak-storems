@@ -5,6 +5,7 @@ import lasolutions.stockmanagement.Invoice.InvoiceModel;
 import lasolutions.stockmanagement.Invoice.InvoiceRepository;
 import lasolutions.stockmanagement.InvoiceDetail.InvoiceDetailModel;
 import lasolutions.stockmanagement.InvoiceDetail.InvoiceDetailRepository;
+import lasolutions.stockmanagement.User.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -21,17 +22,20 @@ public class InvoiceController {
     private final CustomerRepository customerRepository;
     private final InvoiceRepository invoiceRepository;
     private final InvoiceDetailRepository invoiceDetailRepository;
+    private final UserRepository userRepository;
 
-    public InvoiceController(CustomerRepository customerRepository, InvoiceRepository invoiceRepository, InvoiceDetailRepository invoiceDetailRepository) {
+    public InvoiceController(CustomerRepository customerRepository, InvoiceRepository invoiceRepository, InvoiceDetailRepository invoiceDetailRepository, UserRepository userRepository) {
         this.customerRepository = customerRepository;
         this.invoiceRepository = invoiceRepository;
         this.invoiceDetailRepository = invoiceDetailRepository;
+        this.userRepository = userRepository;
     }
 
     @RequestMapping(value = "/invoices", method = RequestMethod.GET)
     public ModelAndView showInvoices(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("customers", customerRepository.getCustomers());
+        modelAndView.addObject("users", userRepository.getUsers());
         modelAndView.setViewName("invoices");
         return modelAndView;
     }
