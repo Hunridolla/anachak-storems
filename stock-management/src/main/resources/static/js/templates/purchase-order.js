@@ -20,7 +20,7 @@ $(document).ready(function () {
         event.preventDefault();
         let purchase_id = $('#purchase-id').val();
         if(purchase_id !== "") {
-            alert_message("This data is already exist!")
+            alert_message("This data is already exist!");
             return;
         }
         let purchase_date = toDate($("#purchase-date").val());
@@ -63,7 +63,6 @@ $(document).ready(function () {
             let item_disc = toNumber($(this).closest("tr").find("td:eq(5)").text());
             let item_sub_amt = toNumber($(this).closest("tr").find("td:eq(6)").text());
             let item_total_amt = toNumber($(this).closest("tr").find("td:eq(7)").text());
-
             $.ajax({
                 async: false,
                 dataType: "json",

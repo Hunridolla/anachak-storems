@@ -108,8 +108,8 @@ $(document).ready(function () {
     function SpreadData(data) {
         $("#tbl_customers > tbody").html('');
         $.each(data, function (key) {
-            var customerStatus = getStatus(data[key].inactive);
-            var customers = "<tr>" +
+            let customerStatus = getStatus(data[key].inactive);
+            let customers = "<tr>" +
                 "<td>" + data[key].customer_id + "</td>" +
                 "<td>" + data[key].company_name + "</td>" +
                 "<td>" + data[key].company_name_khmer + "</td>" +

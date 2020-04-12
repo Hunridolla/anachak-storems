@@ -76,7 +76,7 @@ function calculateGrandAmt() {
 }
 
 function calculateColumn(index) {
-    var total = 0;
+    let total = 0;
     $('#'+ global_variables.gbl_item_table_name +' tr').each(function () {
         var value = parseFloat($('td', this).eq(index).text());
         if (!isNaN(value)) {
