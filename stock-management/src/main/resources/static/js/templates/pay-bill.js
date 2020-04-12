@@ -10,8 +10,17 @@ $(document).ready(function () {
         let vendor_id = $("#vendors").val();
         let href = "/get-payable-bill/" + vendor_id;
         $.get(href, function (data) {
-           SpreadBill(data);
-           calculateBillGrandAmt();
+            if(data != null && data != ''){
+                SpreadBill(data);
+                calculateBillGrandAmt();
+            }else{
+                $('#NoPayableBills').dialog('open');
+                $("#tbl-pay-bill > tbody").html('');
+                $("#total-subAmt").val('0.00');
+                $("#total-disc").val('0.00');
+                $("#total-amt").val('0.00');
+                return false;
+            }
         });
     });
 
@@ -95,11 +104,6 @@ $(document).ready(function () {
         });
     });
 
-    $("#btn-show-checked").on('click',function (event) {
-        event.preventDefault();
-        savePaymentDetail('PAY-000001');
-    });
-
     /* SAVE PAY BILL DETAIL INTO DB */
     function savePaymentDetail(paid_id){
         $("#tbl-pay-bill > tbody > tr input[type=checkbox]:checked").each(function () {
@@ -121,6 +125,57 @@ $(document).ready(function () {
             });
         });
     }
+
+    /* EVENTS FOR BUTTON NEW, PRINT */
+    $("#btn-new-pay-bill").on("click", function () {
+        clear_frm_create_payment();
+    });
+    $("#btn-print-pay-bill").on("click", function () {
+
+    });
+
+    /* JS DIALOG */
+    $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
+        _title: function (title) {
+            if (!this.options.title) {
+                title.html("&#160;");
+            } else {
+                title.html(this.options.title);
+            }
+        }
+    }));
+
+    $('#NoPayableBills').dialog({
+        autoOpen: false,
+        width: 600,
+        resizable: false,
+        modal: true,
+        title: "<div class='widget-header'><h5><i class='fa fa-info-circle'></i> Information</h5></div>",
+        buttons: [{
+            html: "<i class='fa fa-check-circle'></i>&nbsp; OK",
+            "class": "btn btn-default",
+            click: function () {
+                $(this).dialog("close");
+            }
+        }]
+    });
+
+    /* CLEAR FORM CREATE PAYMENT */
+    function clear_frm_create_payment(){
+        $('input:text, input:password, input:file, select, textarea', '#frm-create-pay-bill').val('');
+        $("#tbl-pay-bill > tbody").html("");
+    }
+
+    /* EVENT FOR BUTTON CHECK & UNCHECK */
+    $("#btn-check-all").on("click", function () {
+        $("#tbl-pay-bill .checked").prop("checked", true);
+        calculateBillGrandAmt();
+    });
+
+    $("#btn-uncheck-all").on("click", function () {
+        $("#tbl-pay-bill .checked").prop("checked", false);
+        calculateBillGrandAmt();
+    });
 
     /* VALIDATIONS */
     /* ADDED BY DOLLA 29-MAR-2020 */

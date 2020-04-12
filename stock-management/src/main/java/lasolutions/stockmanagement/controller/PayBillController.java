@@ -23,6 +23,7 @@ public class PayBillController {
     private final T3N3Repository t3N3Repository;
     private final PayBillRepository payBillRepository;
     private final PayBillDetailRepository payBillDetailRepository;
+    String vReturn;
 
     public PayBillController(VendorRepository vendorRepository, T3N3Repository t3N3Repository, PayBillRepository payBillRepository, PayBillDetailRepository payBillDetailRepository) {
         this.vendorRepository = vendorRepository;
@@ -87,6 +88,7 @@ public class PayBillController {
         payBillDetailModel.setDisc_amt(disc_amt);
         payBillDetailModel.setPay_amt(pay_amt);
         payBillDetailRepository.save(payBillDetailModel);
+        vReturn = payBillDetailRepository.RefreshBill(bill_id);
         return new ResponseEntity<>(payBillDetailModel, HttpStatus.OK);
     }
 }

@@ -38,6 +38,7 @@
                 <ol class="breadcrumb">
                     <li><button id="btn-new-pay-bill" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> New</button></li>
                     <li><button id="btn-save-pay-bill" type="submit" form="frm-create-pay-bill" class="btn btn-sm btn-success"><i class="fa fa-check"></i> Commit</button></li>
+                    <li><button id="btn-print-pay-bill" class="btn btn-sm btn-success"><i class="fa fa-print"></i> Print</button></li>
                     <li><button id="btn-find-pay-bill" class="btn btn-sm btn-primary" data-toggle="modal"
                            data-target="#find-item-modal"><i class="fa fa-search"></i> Find</button></li>
                 </ol>
@@ -129,8 +130,9 @@
                                                     </fieldset>
                                                     <fieldset>
                                                         <div style="margin:0px 0px 10px 0px;">
-                                                            <a id="btn-show-bill" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Show Bills</a>
-                                                            <a id="btn-show-checked" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Show Checked</a>
+                                                            <button id="btn-show-bill" type="button" class="btn btn-sm btn-success"> Show Bills</button>
+                                                            <button id="btn-uncheck-all" type="button" class="btn btn-sm btn-primary"> Uncheck All</button>
+                                                            <button id="btn-check-all" type="button" class="btn btn-sm btn-primary"> Check All</button>
                                                         </div>
                                                         <div class="table-responsive">
                                                             <table id="tbl-pay-bill" class="table table-bordered">
@@ -210,6 +212,11 @@
                         <!-- WIDGET END -->
                     </div>
                     <!-- end row -->
+                    <div id="NoPayableBills" title="Information">
+                        <p>
+                            There is no any payable bills for this vendor. So please choose other vendor!
+                        </p>
+                    </div>
                 </section>
                 <!-- end widget grid -->
             </div>
