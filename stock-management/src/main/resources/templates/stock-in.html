@@ -48,7 +48,7 @@
             <!-- MAIN CONTENT -->
             <div id="content">
                 <!-- widget grid -->
-                <section id="widget-grid" class="">
+                <section id="widget-grid">
                     <!-- row -->
                     <div class="row">
                         <!-- NEW WIDGET START -->
@@ -57,6 +57,16 @@
                                 data-widget-colorbutton="false" data-widget-deletebutton="true"
                                 data-widget-togglebutton="true">
                                 <header>
+                                    <ul class="nav nav-tabs pull-left in">
+                                        <li class="active">
+                                            <a id="tab-create-stock-in" data-toggle="tab" href="#create-stock-in">
+                                                <i class="fa fa-lg fa-plus"></i> Stock In</a>
+                                        </li>
+                                        <li>
+                                            <a id="tab-stock-in-list" data-toggle="tab" href="#stock-in-list">
+                                                <i class="fa fa-lg fa-list"></i> Stock In List</a>
+                                        </li>
+                                    </ul>
                                 </header>
                                 <!-- widget div-->
                                 <div>
@@ -66,130 +76,134 @@
                                     </div>
                                     <!-- widget content -->
                                     <div class="widget-body no-padding">
-                                        <form id="frm-stock-in" class="smart-form" novalidate="novalidate">
-                                            <header>
-                                                <h3> Stock In </h3>
-                                            </header>
-                                            <fieldset>
-                                                <div class="row">
-                                                    <section class="col col-3">
-                                                        <label class="label">Bill ID</label>
-                                                        <label for="bill_id" class="input">
-                                                            <input type="text" name="bill_id" id="bill_id" readonly>
-                                                        </label>
-                                                    </section>
-                                                </div>
-                                                <div class="row">
-                                                    <section class="col col-3">
-                                                        <label class="label">Date:</label>
-                                                        <label class="input">
-                                                            <i class="icon-append fa fa-calendar"></i>
-                                                            <input type="text" name="date" id="bill_date" placeholder="">
-                                                        </label>
-                                                    </section>
-                                                    <section class="col col-3">
-                                                        <label class="label">Bill Due:</label>
-                                                        <label class="input">
-                                                            <i class="icon-append fa fa-calendar"></i>
-                                                            <input type="text" name="bill_due" id="bill_due" placeholder="">
-                                                        </label>
-                                                    </section>
-                                                    <section class="col col-3">
-                                                        <label class="label">Ref.No</label>
-                                                        <label for="ref_no" class="input">
-                                                            <input type="text" name="ref_no" id="ref_no" placeholder="">
-                                                        </label>
-                                                    </section>
-                                                    <section class="col col-3">
-                                                        <label class="label">Remark</label>
-                                                        <label for="Remark" class="input">
-                                                            <input type="text" name="remark" id="remark">
-                                                        </label>
-                                                    </section>
-                                                </div>
-                                                <div class="row">
-                                                    <section class="col col-3">
-                                                        <label class="label">Vendors</label>
-                                                        <label class="select">
-                                                            <select name="vendors" id="vendors">
-                                                                <option th:each="data :${vendors}"
-                                                                        th:value="${data.vendor_id}"
-                                                                        th:text="${data.company_name}"></option>
-                                                            </select>
-                                                            <i></i>
-                                                        </label>
-                                                    </section>
-                                                    <section class="col col-6">
-                                                        <label class="label">Address</label>
-                                                        <label for="address" class="input">
-                                                            <input type="text" name="address" id="address" placeholder="">
-                                                        </label>
-                                                    </section>
-                                                </div>
-                                            </fieldset>
-                                            <fieldset>
-                                                <div style="margin:0px 0px 10px 0px;">
-                                                    <a id="btn-add-stock-in-item" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Add Stock Items</a>
-                                                </div>
-                                                <div class="table-responsive">
-                                                    <table id="tbl-item-stock-in" class="table table-bordered">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Action</th>
-                                                                <th>Item.Code</th>
-                                                                <th>Description</th>
-                                                                <th>Qty</th>
-                                                                <th>Rate</th>
-                                                                <th>Disc.Value</th>
-                                                                <th>Sub.Amt</th>
-                                                                <th>Total.Amt</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
+                                        <div class="tab-content">
+                                            <div id="create-stock-in" class="tab-pane active">
+                                                <form id="frm-stock-in" class="smart-form" novalidate="novalidate">
+                                                    <fieldset>
+                                                        <div class="row">
+                                                            <section class="col col-3">
+                                                                <label class="label">Bill ID</label>
+                                                                <label for="bill_id" class="input">
+                                                                    <input type="text" name="bill_id" id="bill_id" readonly>
+                                                                </label>
+                                                            </section>
+                                                        </div>
+                                                        <div class="row">
+                                                            <section class="col col-3">
+                                                                <label class="label">Date:</label>
+                                                                <label class="input">
+                                                                    <i class="icon-append fa fa-calendar"></i>
+                                                                    <input type="text" name="date" id="bill_date" placeholder="">
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-3">
+                                                                <label class="label">Bill Due:</label>
+                                                                <label class="input">
+                                                                    <i class="icon-append fa fa-calendar"></i>
+                                                                    <input type="text" name="bill_due" id="bill_due" placeholder="">
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-3">
+                                                                <label class="label">Ref.No</label>
+                                                                <label for="ref_no" class="input">
+                                                                    <input type="text" name="ref_no" id="ref_no" placeholder="">
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-3">
+                                                                <label class="label">Remark</label>
+                                                                <label for="Remark" class="input">
+                                                                    <input type="text" name="remark" id="remark">
+                                                                </label>
+                                                            </section>
+                                                        </div>
+                                                        <div class="row">
+                                                            <section class="col col-3">
+                                                                <label class="label">Vendors</label>
+                                                                <label class="select">
+                                                                    <select name="vendors" id="vendors">
+                                                                        <option th:each="data :${vendors}"
+                                                                                th:value="${data.vendor_id}"
+                                                                                th:text="${data.company_name}"></option>
+                                                                    </select>
+                                                                    <i></i>
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-6">
+                                                                <label class="label">Address</label>
+                                                                <label for="address" class="input">
+                                                                    <input type="text" name="address" id="address" placeholder="">
+                                                                </label>
+                                                            </section>
+                                                        </div>
+                                                    </fieldset>
+                                                    <fieldset>
+                                                        <div style="margin:0px 0px 10px 0px;">
+                                                            <a id="btn-add-stock-in-item" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Add Stock Items</a>
+                                                        </div>
+                                                        <div class="table-responsive">
+                                                            <table id="tbl-item-stock-in" class="table table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Action</th>
+                                                                        <th>Item.Code</th>
+                                                                        <th>Description</th>
+                                                                        <th>Qty</th>
+                                                                        <th>Rate</th>
+                                                                        <th>Disc.Value</th>
+                                                                        <th>Sub.Amt</th>
+                                                                        <th>Total.Amt</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
 
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </fieldset>
-                                            <fieldset>
-                                                <div class="row">
-                                                    <section class="col col-8">
-                                                    </section>
-                                                    <section class="col col-2">
-                                                        <label class="label">Sub Amount:</label>
-                                                    </section>
-                                                    <section class="col col-2">
-                                                        <label for="total-subAmt" class="input">
-                                                            <input id="total-subAmt" name="total_subAmt" type="text" readonly>
-                                                        </label>
-                                                    </section>
-                                                </div>
-                                                <div class="row">
-                                                    <section class="col col-8">
-                                                    </section>
-                                                    <section class="col col-2">
-                                                        <label class="label">Discount:</label>
-                                                    </section>
-                                                    <section class="col col-2">
-                                                        <label for="total-disc" class="input">
-                                                            <input id="total-disc" name="total_disc" type="text" readonly>
-                                                        </label>
-                                                    </section>
-                                                </div>
-                                                <div class="row">
-                                                    <section class="col col-8">
-                                                    </section>
-                                                    <section class="col col-2">
-                                                        <label class="label">Grand Amount:</label>
-                                                    </section>
-                                                    <section class="col col-2">
-                                                        <label for="total-amt" class="input">
-                                                            <input id="total-amt" name="total_amt" type="text" readonly>
-                                                        </label>
-                                                    </section>
-                                                </div>
-                                            </fieldset>
-                                        </form>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </fieldset>
+                                                    <fieldset>
+                                                        <div class="row">
+                                                            <section class="col col-8">
+                                                            </section>
+                                                            <section class="col col-2">
+                                                                <label class="label">Sub Amount:</label>
+                                                            </section>
+                                                            <section class="col col-2">
+                                                                <label for="total-subAmt" class="input">
+                                                                    <input id="total-subAmt" name="total_subAmt" type="text" readonly>
+                                                                </label>
+                                                            </section>
+                                                        </div>
+                                                        <div class="row">
+                                                            <section class="col col-8">
+                                                            </section>
+                                                            <section class="col col-2">
+                                                                <label class="label">Discount:</label>
+                                                            </section>
+                                                            <section class="col col-2">
+                                                                <label for="total-disc" class="input">
+                                                                    <input id="total-disc" name="total_disc" type="text" readonly>
+                                                                </label>
+                                                            </section>
+                                                        </div>
+                                                        <div class="row">
+                                                            <section class="col col-8">
+                                                            </section>
+                                                            <section class="col col-2">
+                                                                <label class="label">Grand Amount:</label>
+                                                            </section>
+                                                            <section class="col col-2">
+                                                                <label for="total-amt" class="input">
+                                                                    <input id="total-amt" name="total_amt" type="text" readonly>
+                                                                </label>
+                                                            </section>
+                                                        </div>
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                            <div id="stock-in-list" class="tab-pane" >
+                                                <!-- LIST HERE -->
+                                            </div>
+                                        </div>
                                     </div>
                                     <!-- end widget content -->
                                 </div>
