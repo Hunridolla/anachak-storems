@@ -2,15 +2,11 @@ package lasolutions.stockmanagement.controller;
 
 import lasolutions.stockmanagement.Catagory.CategoryRepository;
 import lasolutions.stockmanagement.Customer.CustomerRepository;
-import lasolutions.stockmanagement.Invoice.InvoiceModel;
 import lasolutions.stockmanagement.Invoice.InvoiceRepository;
 import lasolutions.stockmanagement.Invoice.InvoiceService;
 import lasolutions.stockmanagement.Item.ItemModel;
 import lasolutions.stockmanagement.Item.ItemRepository;
 import lasolutions.stockmanagement.User.UserRepository;
-import lasolutions.stockmanagement.Receipt.ReceiptModel;
-import lasolutions.stockmanagement.Receipt.ReceiptRepository;
-import lasolutions.stockmanagement.Receipt.ReceiptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,25 +19,20 @@ import java.util.List;
 @Controller
 public class POSController {
     @Autowired
-
     private CategoryRepository categoryRepository;
     private ItemRepository itemRepository;
     private InvoiceRepository invoiceRepository;
     private CustomerRepository customerRepository;
     private InvoiceService invoiceService;
-    private ReceiptService receiptService;
-    private ReceiptRepository receiptRepository;
 
     @Autowired
-    public POSController(ReceiptService receiptService, ReceiptRepository receiptRepository, InvoiceService invoiceService, CustomerRepository customerRepository, CategoryRepository categoryRepository, ItemRepository itemRepository, UserRepository userRepository, InvoiceRepository invoiceRepository) {
+    public POSController(InvoiceService invoiceService, CustomerRepository customerRepository, CategoryRepository categoryRepository, ItemRepository itemRepository, UserRepository userRepository, InvoiceRepository invoiceRepository) {
 
         this.categoryRepository = categoryRepository;
         this.itemRepository = itemRepository;
         this.invoiceRepository = invoiceRepository;
         this.customerRepository = customerRepository;
         this.invoiceService = invoiceService;
-        this.receiptRepository = receiptRepository;
-        this.receiptService = receiptService;
 
     }
     @RequestMapping(value = "/pos", method = RequestMethod.GET)

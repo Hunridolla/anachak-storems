@@ -3,7 +3,7 @@ $(document).ready(function () {
     /* read data into modal */
     $(document).on("click", ".table .btn-primary", function (event) {
         event.preventDefault();
-        var href = $(this).attr('href');
+        let href = $(this).attr('href');
         $.get(href, function (data, status) {
             $('#create-unit-measure-modal #unit_measure_id').val(data.unit_measure_id);
             $('#create-unit-measure-modal #unit_measure_name').val(data.unit_measure_name);
@@ -27,10 +27,10 @@ $(document).ready(function () {
     /* SAVE NEW MEASURE */
     $(document).on('submit',"#create-unit-measure", function (event) {
         event.preventDefault();
-        var unit_measure_id = $('#unit_measure_id').val();
-        var unit_measure_name = $('#unit_measure_name').val();
-        var remark = $('#remark').val();
-        var inactive = false;
+        let unit_measure_id = $('#unit_measure_id').val();
+        let unit_measure_name = $('#unit_measure_name').val();
+        let remark = $('#remark').val();
+        let inactive = false;
         if ($('#inactive').is(":checked")) {
             inactive = $('#inactive').val();
         }
@@ -68,8 +68,8 @@ $(document).ready(function () {
     function loadProfilesIntoTable(data) {
         $("#tbl_unit_measure > tbody").html('');
         $.each(data, function (key, nums) {
-            var UnitMeasureStatus = getStatus(data[key].inactive);
-            var UnitMeasures = "<tr>" +
+            let UnitMeasureStatus = getStatus(data[key].inactive);
+            let UnitMeasures = "<tr>" +
                 "<td>" + data[key].unit_measure_id + "</td>" +
                 "<td>" + data[key].unit_measure_name + "</td>" +
                 "<td>" + data[key].remark + "</td>" +
@@ -85,7 +85,7 @@ $(document).ready(function () {
 
     /* VALIDATIONS */
     /* ADDED BY DOLLA 29-MAR-2020 */
-    var $frm_create_unit_measure = $('#create-unit-measure').validate({
+    let $frm_create_unit_measure = $('#create-unit-measure').validate({
         errorClass: global_variables.gbl_errorClass,
         errorElement: global_variables.gbl_errorElement,
         highlight: function (element) {

@@ -3,7 +3,7 @@ $(document).ready(function () {
     /* GET ITEM INTO FORM */
     $(document).on("click", "#tbl_items .btn-primary", function (event) {
         event.preventDefault();
-        var href = $(this).attr('href');
+        let href = $(this).attr('href');
         $.get(href, function (data) {
             $('#frm-create-item #stock_type').val(data.stock_type);
             $('#frm-create-item #item_id').val(data.item_id);
@@ -31,20 +31,20 @@ $(document).ready(function () {
     /* SAVE ITEM */
     $(document).on('submit', "#frm-create-item", function (event) {
         event.preventDefault();
-        var item_id = $('#item_id').val();
-        var item_name = $('#item_name').val();
-        var stock_type = $('#stock_type').val();
-        var category_id = $('#category_id').val();
-        var um = $('#um').val();
-        var cost_method = $('#cost_method').val();
-        var cost = $('#cost').val();
-        var sale_price = $('#sale_price').val();
-        var prefered_supplier = $('#prefered_supplier').val();
-        var min_balance = $('#min_balance').val();
-        var max_balance = $('#max_balance').val();
-        var barcode = $('#barcode').val();
-        var remark = $('#remark').val();
-        var inactive = false;
+        let item_id = $('#item_id').val();
+        let item_name = $('#item_name').val();
+        let stock_type = $('#stock_type').val();
+        let category_id = $('#category_id').val();
+        let um = $('#um').val();
+        let cost_method = $('#cost_method').val();
+        let cost = $('#cost').val();
+        let sale_price = $('#sale_price').val();
+        let prefered_supplier = $('#prefered_supplier').val();
+        let min_balance = $('#min_balance').val();
+        let max_balance = $('#max_balance').val();
+        let barcode = $('#barcode').val();
+        let remark = $('#remark').val();
+        let inactive = false;
         if ($('#inactive').is(":checked")) {
             inactive = $('#inactive').val();
         }
@@ -83,7 +83,7 @@ $(document).ready(function () {
 
     $('#tab-item-list').on('click', function (event) {
         event.preventDefault();
-        var href = "/items/get/all";
+        let href = "/items/get/all";
         $.get(href, function (data) {
             SpreadData(data);
         });
@@ -95,8 +95,8 @@ $(document).ready(function () {
     function SpreadData(data) {
         $("#tbl_items > tbody").html("");
         $.each(data, function (key) {
-           var itemStatus = getStatus(data[key].inactive);
-           var items = "<tr>" +
+           let itemStatus = getStatus(data[key].inactive);
+           let items = "<tr>" +
                "<td>"+ data[key].item_id + "</td>" +
                "<td>"+ data[key].item_name + "</td>" +
                "<td>"+ data[key].category_id + "</td>" +
@@ -126,7 +126,7 @@ $(document).ready(function () {
 
     /* VALIDATIONS */
     /* ADDED BY DOLLA 29-MAR-2020 */
-    var $frm_create_item = $('#frm-create-item').validate({
+    let $frm_create_item = $('#frm-create-item').validate({
         errorClass: global_variables.gbl_errorClass,
         errorElement: global_variables.gbl_errorElement,
         highlight: function (element) {

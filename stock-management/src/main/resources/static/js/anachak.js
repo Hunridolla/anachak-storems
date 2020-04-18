@@ -59,11 +59,11 @@ $('#md-item-rate, #md-item-qty, #md-item-disc').keyup(function (event) {
 
 /* FUNCTION CAL SUB AMOUNT */
 function calculateSubAmt() {
-    var cost = toNumber($("#md-item-rate").val());
-    var qty = toNumber($("#md-item-qty").val());
-    var disc = toNumber($("#md-item-disc").val());
-    var subAmt = (cost * qty);
-    var total = subAmt - disc;
+    let cost = toNumber($("#md-item-rate").val());
+    let qty = toNumber($("#md-item-qty").val());
+    let disc = toNumber($("#md-item-disc").val());
+    let subAmt = (cost * qty);
+    let total = subAmt - disc;
     $("#md-item-subAmt").val(subAmt.toFixed(2));
     $("#md-item-totalAmt").val(total.toFixed(2));
 }
@@ -78,7 +78,7 @@ function calculateGrandAmt() {
 function calculateColumn(index) {
     let total = 0;
     $('#'+ global_variables.gbl_item_table_name +' tr').each(function () {
-        var value = parseFloat($('td', this).eq(index).text());
+        let value = parseFloat($('td', this).eq(index).text());
         if (!isNaN(value)) {
             total += value;
         }
@@ -98,16 +98,16 @@ function clear_modal_add_item() {
 /* ADD ITEM FROM MODAL INTO TABLE */
 $(document).on('submit', "#frm-add-item-modal", function (event) {
     event.preventDefault();
-    var item_code = $("#md-item-code").val();
-    var decs = $("#md-item-name").val();
-    var qty = $("#md-item-qty").val();
-    var cost = toNumber($("#md-item-rate").val());
-    var disc = toNumber($("#md-item-disc").val());
-    var subAmt = toNumber($("#md-item-subAmt").val());
-    var totalAmt = toNumber($("#md-item-totalAmt").val());
-    var status = $("#status").attr("aria-valuetext");
+    let item_code = $("#md-item-code").val();
+    let decs = $("#md-item-name").val();
+    let qty = $("#md-item-qty").val();
+    let cost = toNumber($("#md-item-rate").val());
+    let disc = toNumber($("#md-item-disc").val());
+    let subAmt = toNumber($("#md-item-subAmt").val());
+    let totalAmt = toNumber($("#md-item-totalAmt").val());
+    let status = $("#status").attr("aria-valuetext");
     if (status === "[new]") {
-        var row = "<tr>" +
+        let row = "<tr>" +
             "<td align=\'center\'> <a class=\"btn btn-xs btn-primary gb-edit-item\"> <i class=\"fa fa-edit\"></i></a> <a class=\"btn btn-xs btn-danger gb-remove-item\"> <i class=\"fa fa-trash-o\"></i></a></td>" +
             "<td>" + item_code + "</td>" +
             "<td>" + decs + "</td>" +
@@ -198,7 +198,7 @@ function gb_remove_item_row(rowindex) {
 
 /* VALIDATIONS */
 /* ADDED BY DOLLA 29-MAR-2020 */
-var $frm_add_item_modal = $('#frm-add-item-modal').validate({
+let $frm_add_item_modal = $('#frm-add-item-modal').validate({
     errorClass: global_variables.gbl_errorClass,
     errorElement: global_variables.gbl_errorElement,
     highlight: function (element) {

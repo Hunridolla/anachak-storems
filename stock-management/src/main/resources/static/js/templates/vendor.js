@@ -3,7 +3,7 @@ $(document).ready(function () {
     /* GET VENDOR INTO FORM */
     $(document).on("click", ".table .btn-primary", function (event) {
         event.preventDefault();
-        var href = $(this).attr('href');
+        let href = $(this).attr('href');
         $.get(href, function (data) {
             $('#frm-create-vendor #vendor_id').val(data.vendor_id);
             $('#frm-create-vendor #vendor_type').val(data.vendor_type);
@@ -31,20 +31,20 @@ $(document).ready(function () {
     /* SAVE VENDOR */
     $(document).on('submit',"#frm-create-vendor", function (event) {
         event.preventDefault();
-        var vendor_id = $('#vendor_id').val();
-        var vendor_type = $('#vendor_type').val();
-        var company_name = $('#company_name').val();
-        var company_name_khmer = $('#company_name_khmer').val();
-        var title = $('#title').val();
-        var first_name = $('#first_name').val();
-        var last_name = $('#last_name').val();
-        var contact = $('#contact').val();
-        var phone = $('#phone').val();
-        var email = $('#email').val();
-        var website = $('#website').val();
-        var address_detail = $('#address-detail').val();
-        var remark = $('#remark').val();
-        var inactive = false;
+        let vendor_id = $('#vendor_id').val();
+        let vendor_type = $('#vendor_type').val();
+        let company_name = $('#company_name').val();
+        let company_name_khmer = $('#company_name_khmer').val();
+        let title = $('#title').val();
+        let first_name = $('#first_name').val();
+        let last_name = $('#last_name').val();
+        let contact = $('#contact').val();
+        let phone = $('#phone').val();
+        let email = $('#email').val();
+        let website = $('#website').val();
+        let address_detail = $('#address-detail').val();
+        let remark = $('#remark').val();
+        let inactive = false;
         if ($('#inactive').is(":checked")) {
             inactive = true;
         }
@@ -89,7 +89,7 @@ $(document).ready(function () {
 
     $('#tab-vendor-list').on('click', function (event) {
         event.preventDefault();
-        var href = "/vendors/get/all";
+        let href = "/vendors/get/all";
         $.get(href, function (data) {
             SpreadData(data);
         });
@@ -108,8 +108,8 @@ $(document).ready(function () {
     function SpreadData(data) {
         $("#tbl_vendors > tbody").html('');
         $.each(data, function (key) {
-            var vendorStatus = getStatus(data[key].inactive);
-            var vendors = "<tr>" +
+            let vendorStatus = getStatus(data[key].inactive);
+            let vendors = "<tr>" +
                 "<td>" + data[key].vendor_id + "</td>" +
                 "<td>" + data[key].company_name + "</td>" +
                 "<td>" + data[key].company_name_khmer + "</td>" +
@@ -136,7 +136,7 @@ $(document).ready(function () {
 
     /* VALIDATIONS */
     /* ADDED BY DOLLA 29-MAR-2020 */
-    var $frm_create_vendor = $('#frm-create-vendor').validate({
+    let $frm_create_vendor = $('#frm-create-vendor').validate({
         errorClass: global_variables.gbl_errorClass,
         errorElement: global_variables.gbl_errorElement,
         highlight: function (element) {

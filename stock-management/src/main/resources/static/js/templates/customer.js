@@ -4,7 +4,7 @@ $(document).ready(function () {
     /* GET CUSTOMER INTO FORM*/
     $(document).on("click", ".table .btn-primary", function (event) {
         event.preventDefault();
-        var href = $(this).attr('href');
+        let href = $(this).attr('href');
         $.get(href, function (data) {
             $('#frm-create-customer #customer_id').val(data.customer_id);
             $('#frm-create-customer #company_name').val(data.company_name);
@@ -31,19 +31,19 @@ $(document).ready(function () {
     /* SAVE CUSTOMER */
     $(document).on('submit',"#frm-create-customer", function (event) {
         event.preventDefault();
-        var customer_id = $('#customer_id').val();
-        var company_name = $('#company_name').val();
-        var company_name_khmer = $('#company_name_khmer').val();
-        var title = $('#title').val();
-        var first_name = $('#first_name').val();
-        var last_name = $('#last_name').val();
-        var contact = $('#contact').val();
-        var phone = $('#phone').val();
-        var email = $('#email').val();
-        var website = $('#website').val();
-        var address_detail = $('#address-detail').val();
-        var remark = $('#remark').val();
-        var inactive = false;
+        let customer_id = $('#customer_id').val();
+        let company_name = $('#company_name').val();
+        let company_name_khmer = $('#company_name_khmer').val();
+        let title = $('#title').val();
+        let first_name = $('#first_name').val();
+        let last_name = $('#last_name').val();
+        let contact = $('#contact').val();
+        let phone = $('#phone').val();
+        let email = $('#email').val();
+        let website = $('#website').val();
+        let address_detail = $('#address-detail').val();
+        let remark = $('#remark').val();
+        let inactive = false;
         if ($('#inactive').is(":checked")) {
             inactive = true;
         }
@@ -88,7 +88,7 @@ $(document).ready(function () {
 
     $('#tab-customer-list').on('click', function (event) {
         event.preventDefault();
-        var href = "/customers/get/all";
+        let href = "/customers/get/all";
         $.get(href, function (data) {
             SpreadData(data);
         });
@@ -136,7 +136,7 @@ $(document).ready(function () {
 
     /* VALIDATIONS */
     /* ADDED BY DOLLA 29-MAR-2020 */
-    var $frm_create_customer = $('#frm-create-customer').validate({
+    let $frm_create_customer = $('#frm-create-customer').validate({
         errorClass: global_variables.gbl_errorClass,
         errorElement: global_variables.gbl_errorElement,
         highlight: function (element) {

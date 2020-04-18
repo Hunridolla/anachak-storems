@@ -10,4 +10,8 @@ public interface T3N3Repository extends JpaRepository<T3N3Model, Integer> {
     String getPayableBill = "CALL GBL_GET_PAYABLE_BILL(:vendor_id)";
     @Query(value = getPayableBill, nativeQuery = true)
     List<T3N3Model> getPayableBill(@Param("vendor_id") String vendor_id);
+
+    String getReceivableInvoice = "CALL GBL_GET_RECEIVABLE_INVOICE(:customer_id)";
+    @Query(value = getReceivableInvoice, nativeQuery = true)
+    List<T3N3Model> getReceivableInvoice(@Param("customer_id") String customer_id);
 }

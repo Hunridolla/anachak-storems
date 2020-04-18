@@ -33,10 +33,11 @@
             <!-- RIBBON -->
             <div>
                 <ol class="breadcrumb">
-                    <li><a id="btn-new-invoice-payment" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> New</a></li>
-                    <li><a id="btn-save-invoice-payment" class="btn btn-sm btn-success"><i class="fa fa-check"></i> Commit</a></li>
-                    <li><a id="btn-find-invoice-payment" class="btn btn-sm btn-primary" data-toggle="modal"
-                           data-target="#find-item-modal"><i class="fa fa-search"></i> Find</a></li>
+                    <li><button id="btn-new-invoice-payment" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> New</button></li>
+                    <li><button id="btn-save-invoice-payment" type="submit" form="frm-create-invoice-payment" class="btn btn-sm btn-success"><i class="fa fa-check"></i> Commit</button></li>
+                    <li><button id="btn-print-invoice-payment" class="btn btn-sm btn-success"><i class="fa fa-check"></i> Print</button></li>
+                    <li><button id="btn-find-invoice-payment" class="btn btn-sm btn-primary" data-toggle="modal"
+                           data-target="#find-item-modal"><i class="fa fa-search"></i> Find</button></li>
                 </ol>
             </div>
             <!-- END RIBBON -->
@@ -49,8 +50,6 @@
                     <div class="row">
                         <!-- NEW WIDGET START -->
                         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-10">
-
-                            <!-- Widget ID (each widget will need unique ID)-->
                             <div class="jarviswidget jarviswidget-color-white" id="wid-id-0" data-widget-editbutton="false"
                                  data-widget-colorbutton="false" data-widget-deletebutton="false"
                                  data-widget-togglebutton="true">
@@ -126,9 +125,9 @@
                                                     </fieldset>
                                                     <fieldset>
                                                         <div style="margin:0px 0px 10px 0px;">
-                                                            <button id="btn-show-bill" type="button" class="btn btn-sm btn-success"> Show Bills</button>
-                                                            <button id="btn-uncheck-all" type="button" class="btn btn-sm btn-primary"> Uncheck All</button>
-                                                            <button id="btn-check-all" type="button" class="btn btn-sm btn-primary"> Check All</button>
+                                                            <button id="btn-show-receivable" type="button" class="btn btn-sm btn-success"> Show Receivable</button>
+                                                            <button id="btn-uncheck-invoices" type="button" class="btn btn-sm btn-primary"> Uncheck All</button>
+                                                            <button id="btn-check-invoices" type="button" class="btn btn-sm btn-primary"> Check All</button>
                                                         </div>
                                                         <div class="table-responsive">
                                                             <table id="tbl-receivable-invoice" class="table table-bordered">
@@ -138,6 +137,7 @@
                                                                     <th>Action</th>
                                                                     <th>Inv.ID</th>
                                                                     <th>Inv.Date</th>
+                                                                    <th>Ship.Date</th>
                                                                     <th>Orig.Amt</th>
                                                                     <th>Disc.Amt</th>
                                                                     <th>Receive.Amt</th>
@@ -207,6 +207,11 @@
                         <!-- WIDGET END -->
                     </div>
                     <!-- end row -->
+                    <div id="NoReceivable" title="Information">
+                        <p>
+                            There is no any receivable invoices for this customer. So please choose other customer!
+                        </p>
+                    </div>
                 </section>
                 <!-- end widget grid -->
             </div>

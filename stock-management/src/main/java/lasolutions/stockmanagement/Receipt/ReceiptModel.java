@@ -4,17 +4,19 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Date;
 
 @Entity
 @Table(name = "tbl_receipts")
 public class ReceiptModel {
-
+    public ReceiptModel() {
+    }
     @Id
     @Column(name = "receipt_id", insertable = false, updatable = false)
     private String receipt_id;
 
     @Column(name = "receipt_date")
-    private String receipt_date;
+    private Date receipt_date;
 
     @Column(name = "customer_id")
     private String customer_id;
@@ -26,24 +28,13 @@ public class ReceiptModel {
     private String remark;
 
     @Column(name = "sub_amt")
-    private Double sub_amt;
+    private float sub_amt;
 
     @Column(name = "disc_amt")
-    private Double disc_amt;
+    private float disc_amt;
 
     @Column(name = "total_amt")
-    private Double total_amt;
-
-    public ReceiptModel() {
-        this.receipt_id = receipt_id;
-        this.receipt_date = receipt_date;
-        this.customer_id = customer_id;
-        this.ref_no = ref_no;
-        this.remark = remark;
-        this.sub_amt = sub_amt;
-        this.disc_amt = disc_amt;
-        this.total_amt = total_amt;
-    }
+    private float total_amt;
 
     public String getReceipt_id() {
         return receipt_id;
@@ -53,11 +44,11 @@ public class ReceiptModel {
         this.receipt_id = receipt_id;
     }
 
-    public String getReceipt_date() {
+    public Date getReceipt_date() {
         return receipt_date;
     }
 
-    public void setReceipt_date(String receipt_date) {
+    public void setReceipt_date(Date receipt_date) {
         this.receipt_date = receipt_date;
     }
 
@@ -85,27 +76,27 @@ public class ReceiptModel {
         this.remark = remark;
     }
 
-    public Double getSub_amt() {
+    public float getSub_amt() {
         return sub_amt;
     }
 
-    public void setSub_amt(Double sub_amt) {
+    public void setSub_amt(float sub_amt) {
         this.sub_amt = sub_amt;
     }
 
-    public Double getDisc_amt() {
+    public float getDisc_amt() {
         return disc_amt;
     }
 
-    public void setDisc_amt(Double disc_amt) {
+    public void setDisc_amt(float disc_amt) {
         this.disc_amt = disc_amt;
     }
 
-    public Double getTotal_amt() {
+    public float getTotal_amt() {
         return total_amt;
     }
 
-    public void setTotal_amt(Double total_amt) {
+    public void setTotal_amt(float total_amt) {
         this.total_amt = total_amt;
     }
 }

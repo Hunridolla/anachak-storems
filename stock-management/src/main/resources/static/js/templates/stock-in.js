@@ -9,8 +9,8 @@ $(document).ready(function () {
     $(document).on('keypress', 'input,select', function (e) {
         if (e.which == 13) {
             e.preventDefault();
-            var $canfocus = $(':focusable');
-            var index = $canfocus.index(document.activeElement) + 1;
+            let $canfocus = $(':focusable');
+            let index = $canfocus.index(document.activeElement) + 1;
             if (index >= $canfocus.length) index = 0;
             $canfocus.eq(index).focus();
         }
@@ -106,6 +106,9 @@ $(document).ready(function () {
     function clear_frm_stock_in() {
         $('input:text, input:password, input:file, select, textarea', '#frm-stock-in').val('');
         $("#tbl-item-stock-in > tbody").html("");
+        $(function(){
+            $("#bill_date").focus();
+        });
     }
 
 
@@ -124,7 +127,7 @@ $(document).ready(function () {
 
     /* VALIDATIONS */
     /* ADDED BY DOLLA 29-MAR-2020 */
-    var $frm_stock_in = $('#frm-stock-in').validate({
+    let $frm_stock_in = $('#frm-stock-in').validate({
         errorClass: global_variables.gbl_errorClass,
         errorElement: global_variables.gbl_errorElement,
         highlight: function (element) {

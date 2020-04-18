@@ -93,6 +93,9 @@ $(document).ready(function () {
     function clear_frm_create_sale_order(){
         $('input:text, input:password, input:file, select, textarea', '#frm-create-sale-order').val('');
         $("#tbl-sale-order-item > tbody").html("");
+        $(function(){
+            $("#sale-order-date").focus();
+        });
     }
 
     /* VALIDATIONS */

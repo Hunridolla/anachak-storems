@@ -1,21 +1,22 @@
 $(document).ready(function () {
-    $('#paid-date').datepicker({
+    $('#receipt-date').datepicker({
         dateFormat: 'dd-mm-yy',
         prevText: '<i class="fa fa-chevron-left"></i>',
         nextText: '<i class="fa fa-chevron-right"></i>'
     });
-    /* SHOW PAYABLE BILLS */
-    $("#btn-show-bill").on('click', function (event) {
+
+    /* SHOW RECEIVABLE INVOICES */
+    $("#btn-show-receivable").on("click", function (event) {
         event.preventDefault();
-        let vendor_id = $("#vendors").val();
-        let href = "/get-payable-bill/" + vendor_id;
+        let customer_id = $("#customers").val();
+        let href = "/get-receivable-invoice/" + customer_id;
         $.get(href, function (data) {
-            if(data != null && data != ''){
-                SpreadBill(data);
-                calculateBillGrandAmt();
+            if(data != null && data != ""){
+                SpreadInvoice(data);
+                calculateInvoiceGrandAmt();
             }else{
-                $('#NoPayableBills').dialog('open');
-                $("#tbl-pay-bill > tbody").html('');
+                $("#NoReceivable").dialog("open");
+                $("#tbl-receivable-invoice > tbody").html('');
                 $("#total-subAmt").val('0.00');
                 $("#total-disc").val('0.00');
                 $("#total-amt").val('0.00');
@@ -24,36 +25,37 @@ $(document).ready(function () {
         });
     });
 
-    /* LOAD BILLS INTO TABLE */
-    function SpreadBill(data) {
-        $("#tbl-pay-bill > tbody").html('');
+    /* LOAD INVOICES INTO TABLE */
+    function SpreadInvoice(data) {
+        $("#tbl-receivable-invoice > tbody").html('');
         $.each(data, function (key) {
             let orig_amt = data[key].nfield1;
             let disc_amt = data[key].nfield2;
-            let pay_amt = data[key].nfield3;
-            let vBill = "<tr>" +
+            let receive_amt = data[key].nfield3;
+            let vInvoice = "<tr>" +
                 "<td style=\"width:10px\" align=\'center\'><label class=\'checkbox\'> <input class='checked' type=\'checkbox\' checked=\'checked\'><i></i></label></td>" +
-                "<td align=\'center\'><a class=\"btn btn-xs btn-primary gb-edit-bill\"> <i class=\"fa fa-edit\"></i></a></td>"  +
+                "<td align=\'center\'><a class=\"btn btn-xs btn-primary gb-edit-invoice\"> <i class=\"fa fa-edit\"></i></a></td>"  +
                 "<td>" + data[key].tfield1 + "</td>" +
                 "<td>" + data[key].tfield2 + "</td>" +
                 "<td>" + data[key].tfield3 + "</td>" +
                 "<td>" + orig_amt.toFixed(2) + "</td>" +
                 "<td>" + disc_amt.toFixed(2) + "</td>" +
-                "<td>" + pay_amt.toFixed(2) + "</td>" +
+                "<td>" + receive_amt.toFixed(2) + "</td>" +
                 "</tr>";
-            $("#tbl-pay-bill > tbody:last-child").append(vBill);
+            $("#tbl-receivable-invoice > tbody:last-child").append(vInvoice);
         });
     }
+
     /* FUNCTION CAL GRAND TOTAL */
-    function calculateBillGrandAmt() {
-        $("#total-subAmt").val(calculateBillColumn(7).toFixed(2));
-        $("#total-disc").val(calculateBillColumn(6).toFixed(2));
-        $("#total-amt").val((calculateBillColumn(7) - calculateBillColumn(6)).toFixed(2));
+    function calculateInvoiceGrandAmt() {
+        $("#total-subAmt").val(calculateInvoiceColumn(7).toFixed(2));
+        $("#total-disc").val(calculateInvoiceColumn(6).toFixed(2));
+        $("#total-amt").val((calculateInvoiceColumn(7) - calculateInvoiceColumn(6)).toFixed(2));
     }
     /* FUNCTION CAL TOTAL BY COLUMN */
-    function calculateBillColumn(index) {
+    function calculateInvoiceColumn(index) {
         let total = 0;
-        $("#tbl-pay-bill input[type=checkbox]:checked").each(function () {
+        $("#tbl-receivable-invoice input[type=checkbox]:checked").each(function () {
             let row = $(this).closest("tr")[0];
             let value = parseFloat(row.cells[index].innerHTML);
             if (!isNaN(value)) {
@@ -63,20 +65,20 @@ $(document).ready(function () {
         return total;
     }
     /* EVENT FOR CHECK BOX CHANGE */
-    $(document).on('change', "#tbl-pay-bill .checked", function (event) {
-        calculateBillGrandAmt();
+    $(document).on('change', "#tbl-receivable-invoice .checked", function (event) {
+        calculateInvoiceGrandAmt();
     });
 
-    /* SAVE PAYMENT */
-    $(document).on('submit', '#frm-create-pay-bill', function (event) {
+    /* SAVE RECEIPT */
+    $(document).on("submit", "#frm-create-invoice-payment", function (event) {
         event.preventDefault();
-        let paid_id = $("#paid-id").val();
-        if(paid_id !== ""){
+        let receipt_id = $("#receipt-id").val();
+        if(receipt_id !== ""){
             alert_message("This data is already exist!");
             return;
         }
-        let paid_date = toDate($("#paid-date").val());
-        let vendor_id = $("#vendors").val();
+        let receipt_date = toDate($("#receipt-date").val());
+        let customer_id = $("#customers").val();
         let ref_no = $("#ref-no").val();
         let remark = $("#remark").val();
         let sub_amt = toNumber($("#total-subAmt").val());
@@ -86,17 +88,17 @@ $(document).ready(function () {
             async: false,
             dataType: "json",
             type: "POST",
-            url: "/save-pay-bill",
+            url: "/save-receipt",
             data: {
-                paid_id: paid_id, paid_date: paid_date, vendor_id: vendor_id, ref_no: ref_no,
+                receipt_id: receipt_id, receipt_date: receipt_date, customer_id: customer_id, ref_no: ref_no,
                 remark: remark,sub_amt: sub_amt, disc_amt: disc_amt, total_amt: total_amt
             },
             success: function (data) {
-                let paid_id  = data.paid_id;
+                let receipt_id  = data.receipt_id;
                 /* SAVE DETAIL HERE */
-                savePaymentDetail(paid_id);
+                saveReceiptDetail(receipt_id);
                 alert_message("You have committed successfully!");
-                $("#paid-id").val(paid_id);
+                $("#receipt-id").val(receipt_id);
             },
             error: function (event) {
                 alert_message("Error: " + event);
@@ -104,19 +106,19 @@ $(document).ready(function () {
         });
     });
 
-    /* SAVE PAY BILL DETAIL INTO DB */
-    function savePaymentDetail(paid_id){
-        $("#tbl-pay-bill > tbody > tr input[type=checkbox]:checked").each(function () {
-            let bill_id = $(this).closest("tr").find("td:eq(2)").text();
+    /* SAVE RECEIPT DETAIL INTO DB */
+    function saveReceiptDetail(receipt_id){
+        $("#tbl-receivable-invoice > tbody > tr input[type=checkbox]:checked").each(function () {
+            let inv_id = $(this).closest("tr").find("td:eq(2)").text();
             let disc_amt = toNumber($(this).closest("tr").find("td:eq(6)").text());
-            let pay_amt = toNumber($(this).closest("tr").find("td:eq(7)").text());
+            let receive_amt = toNumber($(this).closest("tr").find("td:eq(7)").text());
             $.ajax({
                 async: false,
                 dataType: "json",
                 type: "POST",
-                url: "/save-pay-bill-detail",
+                url: "/save-receipt-detail",
                 data: {
-                    paid_id: paid_id, bill_id: bill_id, disc_amt: disc_amt, pay_amt: pay_amt
+                    receipt_id: receipt_id, inv_id: inv_id, disc_amt: disc_amt, receive_amt: receive_amt
                 },
                 success: function () {
                 },
@@ -127,10 +129,10 @@ $(document).ready(function () {
     }
 
     /* EVENTS FOR BUTTON NEW, PRINT */
-    $("#btn-new-pay-bill").on("click", function () {
-        clear_frm_create_payment();
+    $("#btn-new-invoice-payment").on("click", function () {
+        clear_frm_create_invoice_payment();
     });
-    $("#btn-print-pay-bill").on("click", function () {
+    $("#btn-print-invoice-payment").on("click", function () {
 
     });
 
@@ -145,7 +147,7 @@ $(document).ready(function () {
         }
     }));
 
-    $('#NoPayableBills').dialog({
+    $('#NoReceivable').dialog({
         autoOpen: false,
         width: 600,
         resizable: false,
@@ -161,28 +163,28 @@ $(document).ready(function () {
     });
 
     /* CLEAR FORM CREATE PAYMENT */
-    function clear_frm_create_payment(){
-        $('input:text, input:password, input:file, select, textarea', '#frm-create-pay-bill').val('');
-        $("#tbl-pay-bill > tbody").html("");
+    function clear_frm_create_invoice_payment(){
+        $('input:text, input:password, input:file, select, textarea', '#frm-create-invoice-payment').val('');
+        $("#tbl-receivable-invoice  > tbody").html("");
         $(function(){
-            $("#paid-date").focus();
+            $("#receipt-date").focus();
         });
     }
 
     /* EVENT FOR BUTTON CHECK & UNCHECK */
-    $("#btn-check-all").on("click", function () {
-        $("#tbl-pay-bill .checked").prop("checked", true);
-        calculateBillGrandAmt();
+    $("#btn-check-invoices").on("click", function () {
+        $("#tbl-receivable-invoice .checked").prop("checked", true);
+        calculateInvoiceGrandAmt();
     });
 
-    $("#btn-uncheck-all").on("click", function () {
-        $("#tbl-pay-bill .checked").prop("checked", false);
-        calculateBillGrandAmt();
+    $("#btn-uncheck-invoices").on("click", function () {
+        $("#tbl-receivable-invoice .checked").prop("checked", false);
+        calculateInvoiceGrandAmt();
     });
 
     /* VALIDATIONS */
     /* ADDED BY DOLLA 29-MAR-2020 */
-    let $frm_create_pay_bill = $('#frm-create-pay-bill').validate({
+    let $frm_create_pay_bill = $('#frm-create-invoice-payment').validate({
         errorClass: global_variables.gbl_errorClass,
         errorElement: global_variables.gbl_errorElement,
         highlight: function (element) {
@@ -197,10 +199,10 @@ $(document).ready(function () {
         /* FIELDS THAT WILL CHECK VALIDATE */
         /* BY NAME OF ATTRIBUTE */
         rules: {
-            paid_date: {
+            receipt_date: {
                 required: true
             },
-            vendors: {
+            customers: {
                 required: true
             },
             total_amt: {
@@ -210,10 +212,10 @@ $(document).ready(function () {
 
         /* MESSAGE INVALID FOR EACH  FIELDS ABOVE */
         messages: {
-            paid_date: {
+            receipt_date: {
                 required: 'Required*'
             },
-            vendors: {
+            customers: {
                 required: 'Required*'
             },
             total_amt: {

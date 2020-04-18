@@ -106,6 +106,9 @@ $(document).ready(function () {
     function clear_frm_create_invoice(){
         $('input:text, input:password, input:file, select, textarea', '#frm-create-invoice').val('');
         $("#tbl-invoice-item > tbody").html("");
+        $(function(){
+            $("#invoice-date").focus();
+        });
     }
 
     /* VALIDATIONS */

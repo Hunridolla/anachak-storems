@@ -21,7 +21,7 @@
                         <a th:href="@{/unit-measures}">Unit Measures <span class="label label-success">done</span> </a>
                     </li>
                     <li th:classappend="${active_page == 'pos'} ? 'active'">
-                        <a th:href="@{/pos}">POS <span class="label label-success">done</span></a>
+                        <a th:href="@{/pos}">POS <span class="label label-warning">pending</span></a>
                     </li>
                     <li th:classappend="${active_page == 'categories'} ? 'active'">
                         <a th:href="@{/categories}">Categories <span class="label label-success">done</span> </a>
@@ -51,7 +51,7 @@
                         <a th:href="@{/invoices}">Invoices <span class="label label-success">done</span> </a>
                     </li>
                     <li th:classappend="${active_page == 'invoice-payments'} ? 'active'">
-                        <a th:href="@{/invoice-payments}">Invoice Payments <span class="label label-warning">pending</span> </a>
+                        <a th:href="@{/invoice-payments}">Invoice Payments <span class="label label-success">done</span> </a>
                     </li>
                     <li th:classappend="${active_page == 'exchange-rate'} ? 'active'">
                         <a th:href="@{/exchange-rate}">Exchange Rate <span class="label label-success">done</span> </a>

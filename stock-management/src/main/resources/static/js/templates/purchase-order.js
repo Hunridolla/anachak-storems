@@ -92,6 +92,9 @@ $(document).ready(function () {
     function clear_frm_create_purchase_order(){
         $('input:text, input:password, input:file, select, textarea', '#frm-create-purchase-order').val('');
         $("#tbl-purchase-item > tbody").html("");
+        $(function(){
+            $("#purchase-date").focus();
+        });
     }
 
     /* VALIDATIONS */

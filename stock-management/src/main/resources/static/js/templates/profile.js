@@ -2,7 +2,7 @@ $(document).ready(function () {
     /* read data into modal */
     $(document).on("click", ".table .btn-primary", function (event) {
         event.preventDefault();
-        var href = $(this).attr('href');
+        let href = $(this).attr('href');
         $.get(href, function (data, status) {
             $('#create-profile-modal #profile_id').val(data.profile_id);
             $('#create-profile-modal #profile_name').val(data.profile_name);
@@ -19,7 +19,7 @@ $(document).ready(function () {
     /* view data into modal */
     $(document).on("click", ".table a.btn-success", function (event) {
         event.preventDefault();
-        var href = $(this).attr('href');
+        let href = $(this).attr('href');
         $.ajax({
             type: "GET",
             url: href,
@@ -49,10 +49,10 @@ $(document).ready(function () {
     /* save new profile or edit profile info */
     $('#btn-save-profile').on('click', function (event) {
         event.preventDefault();
-        var profile_id = $('#profile_id').val();
-        var profile_name = $('#profile_name').val();
-        var remark = $('#remark').val();
-        var inactive = false;
+        let profile_id = $('#profile_id').val();
+        let profile_name = $('#profile_name').val();
+        let remark = $('#remark').val();
+        let inactive = false;
         if ($('#inactive').is(":checked")) {
             inactive = $('#inactive').val();
         }
@@ -84,8 +84,8 @@ $(document).ready(function () {
     function loadProfilesIntoTable(data) {
         $("#sys_profiles > tbody").html('');
         $.each(data, function (key, nums) {
-            var profileStatus = getStatus(data[key].inactive);
-            var profiles = "<tr>" +
+            let profileStatus = getStatus(data[key].inactive);
+            let profiles = "<tr>" +
                 "<td>" + data[key].profile_id + "</td>" +
                 "<td>" + data[key].profile_name + "</td>" +
                 "<td>" + data[key].remark + "</td>" +

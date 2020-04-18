@@ -3,7 +3,7 @@ $(document).ready(function () {
     /* read user info into modal */
     $(document).on("click", ".table .btn-primary", function (event) {
         event.preventDefault();
-        var href = $(this).attr('href');
+        let href = $(this).attr('href');
         $.get(href, function (data, status) {
             $('#create-user-modal #user_id').val(data.user_id);
             $('#create-user-modal #user_name').val(data.user_name);
@@ -30,7 +30,7 @@ $(document).ready(function () {
     /* view user info into modal */
     $(document).on("click", ".table .btn-success", function (event) {
         event.preventDefault();
-        var href = $(this).attr('href');
+        let href = $(this).attr('href');
         $.get(href, function (data, status) {
             $('#create-user-modal #user_id').val(data.user_id);
             $('#create-user-modal #user_name').val(data.user_name);
@@ -73,14 +73,14 @@ $(document).ready(function () {
     /* save new user or edit user info */
     $('#btn-save-user').on('click', function (event) {
         event.preventDefault();
-        var user_id = $('#user_id').val();
-        var user_name = $('#user_name').val();
-        var login_name = $('#login_name').val();
-        var password = $('#password').val();
-        var profile_id = $('#profile_id').val();
-        var remark = $('#remark').val();
-        var inactive = false;
-        var pwd_expiry = false;
+        let user_id = $('#user_id').val();
+        let user_name = $('#user_name').val();
+        let login_name = $('#login_name').val();
+        let password = $('#password').val();
+        let profile_id = $('#profile_id').val();
+        let remark = $('#remark').val();
+        let inactive = false;
+        let pwd_expiry = false;
         if ($('#inactive').is(":checked")) {
             inactive = true;
         }
@@ -116,8 +116,8 @@ $(document).ready(function () {
     function loadUsersIntoTable(data) {
         $("#sys_users > tbody").html('');
         $.each(data, function (key, num) {
-            var userStatus = getStatus(data[key].inactive);
-            var users = "<tr>" +
+            let userStatus = getStatus(data[key].inactive);
+            let users = "<tr>" +
                 "<td>" + data[key].user_id + "</td>" +
                 "<td>" + data[key].user_name + "</td>" +
                 "<td>" + data[key].login_name + "</td>" +

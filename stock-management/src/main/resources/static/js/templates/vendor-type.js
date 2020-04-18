@@ -3,7 +3,7 @@ $(document).ready(function () {
     /* GET VENDOR TYPE INTO FORM */
     $(document).on("click", ".table .btn-primary", function (event) {
         event.preventDefault();
-        var href = $(this).attr('href');
+        let href = $(this).attr('href');
         $.get(href, function (data) {
             $('#frm-create-vendor-type #vendor_type_id').val(data.vendor_type_id);
             $('#frm-create-vendor-type #vendor_type_name').val(data.vendor_type_name);
@@ -21,10 +21,10 @@ $(document).ready(function () {
     /* SAVE VENDOR TYPE */
     $(document).on('submit',"#frm-create-vendor-type", function (event) {
         event.preventDefault();
-        var vendor_type_id = $('#vendor_type_id').val();
-        var vendor_type_name = $('#vendor_type_name').val();
-        var remark = $('#remark').val();
-        var inactive = false;
+        let vendor_type_id = $('#vendor_type_id').val();
+        let vendor_type_name = $('#vendor_type_name').val();
+        let remark = $('#remark').val();
+        let inactive = false;
         if ($('#inactive').is(":checked")) {
             inactive = true;
         }
@@ -60,7 +60,7 @@ $(document).ready(function () {
 
     $('#tab-vendor-type-list').on('click', function (event) {
         event.preventDefault();
-        var href = "/vendor-types/get/all";
+        let href = "/vendor-types/get/all";
         $.get(href, function (data) {
             SpreadData(data);
         });
@@ -81,8 +81,8 @@ $(document).ready(function () {
     function SpreadData(data) {
         $("#tbl_vendor_Types > tbody").html('');
         $.each(data, function (key) {
-            var categoryStatus = getStatus(data[key].inactive);
-            var vendorTypes = "<tr>" +
+            let categoryStatus = getStatus(data[key].inactive);
+            let vendorTypes = "<tr>" +
                 "<td>" + data[key].vendor_type_id + "</td>" +
                 "<td>" + data[key].vendor_type_name + "</td>" +
                 "<td>" + data[key].remark + "</td>" +
@@ -107,7 +107,7 @@ $(document).ready(function () {
 
     /* VALIDATIONS */
     /* ADDED BY DOLLA 29-MAR-2020 */
-    var $frm_create_vendor_type = $('#frm-create-vendor-type').validate({
+    let $frm_create_vendor_type = $('#frm-create-vendor-type').validate({
         errorClass: global_variables.gbl_errorClass,
         errorElement: global_variables.gbl_errorElement,
         highlight: function (element) {

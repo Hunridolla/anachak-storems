@@ -3,7 +3,7 @@ $(document).ready(function () {
     /* GET CATEGORY INTO FORM */
     $(document).on("click", ".table .btn-primary", function (event) {
         event.preventDefault();
-        var href = $(this).attr('href');
+        let href = $(this).attr('href');
         $.get(href, function (data) {
             $('#frm-create-category #category_id').val(data.category_id);
             $('#frm-create-category #category_name').val(data.category_name);
@@ -21,10 +21,10 @@ $(document).ready(function () {
     /* SAVE CATEGORY */
     $(document).on('submit',"#frm-create-category", function (event) {
         event.preventDefault();
-        var category_id = $('#category_id').val();
-        var category_name = $('#category_name').val();
-        var remark = $('#remark').val();
-        var inactive = false;
+        let category_id = $('#category_id').val();
+        let category_name = $('#category_name').val();
+        let remark = $('#remark').val();
+        let inactive = false;
         if ($('#inactive').is(":checked")) {
             inactive = true;
         }
@@ -59,7 +59,7 @@ $(document).ready(function () {
 
     $('#tab-category-list').on('click', function (event) {
         event.preventDefault();
-        var href = "/categories/get/all";
+        let href = "/categories/get/all";
         $.get(href, function (data) {
             SpreadData(data);
         });
@@ -79,8 +79,8 @@ $(document).ready(function () {
     function SpreadData(data) {
         $("#tbl_categories > tbody").html('');
         $.each(data, function (key) {
-            var categoryStatus = getStatus(data[key].inactive);
-            var categories = "<tr>" +
+            let categoryStatus = getStatus(data[key].inactive);
+            let categories = "<tr>" +
                 "<td>" + data[key].category_id + "</td>" +
                 "<td>" + data[key].category_name + "</td>" +
                 "<td>" + data[key].remark + "</td>" +
@@ -106,7 +106,7 @@ $(document).ready(function () {
 
     /* VALIDATIONS */
     /* ADDED BY DOLLA 29-MAR-2020 */
-    var $frm_create_category= $('#frm-create-category').validate({
+    let $frm_create_category= $('#frm-create-category').validate({
         errorClass: global_variables.gbl_errorClass,
         errorElement: global_variables.gbl_errorElement,
         highlight: function (element) {
