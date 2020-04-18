@@ -13,14 +13,13 @@ $(document).ready(function () {
 function getItembyCat(data) {
     $(".group-item").html("");
     $.each(data, function (key) {
-        // var itemStatus = getStatus(data[key].inactive);
         var items = " <div class=\"col-md-3 col-sm-6\" style=\"margin-top: 10px;\">" +
             "<div class=\"product-grid\" id=\"" + data[key].item_id + "\"> " +
             "<div class=\"product-image\">" +
-            "<img class=\"pic-1 img-fluid m-100\" src=\"https://via.placeholder.com/100x80\" id=\"" + data[key].item_id + "\">" +
+            "<img class=\"pic-1 img-fluid m-100\" src=\"img/caramel-frappe-100x80.jpg\" id=\"" + data[key].item_id + "\">" +
             "</div>" +
             "<div class=\"product-content\">" +
-            "<h5  class=\"title\"> " + data[key].item_name + "</h5>" +
+            "<h5 class=\"title\"> " + data[key].item_name + "</h5>" +
             "</div>" +
             "</div>" +
             "</div>";
