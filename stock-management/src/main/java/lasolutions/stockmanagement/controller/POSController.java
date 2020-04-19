@@ -48,7 +48,6 @@ public class POSController {
     @RequestMapping(value = "/pos/{cat_id}", method = RequestMethod.GET)
     public ResponseEntity<Object> viewItem(@PathVariable("cat_id") String cat_id) {
         List<ItemModel> itemModel = itemRepository.getItemByCat(cat_id);
-//        ItemModel itemModel = itemRepository.getItemByCat(cat_id);
         return new ResponseEntity<>(itemModel, HttpStatus.OK);
     }
 

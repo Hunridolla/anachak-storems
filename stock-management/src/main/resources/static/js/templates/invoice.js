@@ -66,7 +66,7 @@ $(document).ready(function () {
         });
     });
 
-    /* LOAD BILL DETAIL INTO DB */
+    /* LOAD INVOICE DETAIL INTO DB */
     function saveInvoiceDetail(invoice_id) {
         $('#tbl-invoice-item > tbody  > tr').each(function () {
             let item_code = $(this).closest("tr").find("td:eq(1)").text();

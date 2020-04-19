@@ -24,7 +24,4 @@ public interface ItemRepository extends JpaRepository<ItemModel, String> {
     @Query(value = getItemByCat, nativeQuery = true)
     List<ItemModel> getItemByCat(@Param("cat_id") String cat_id);
 
-
-
-
 }
