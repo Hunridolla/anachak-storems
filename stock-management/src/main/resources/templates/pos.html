@@ -6,12 +6,10 @@
         <meta charset="UTF-8">
         <title>POS</title>
         <style>
-            #button-group {
-                -webkit-background-clip: padding-box;
-                /* for Safari */
-                background-clip: padding-box;
-                /* for IE9+, Firefox 4+, Opera, Chrome */
-            }
+            /*#button-group {*/
+            /*    -webkit-background-clip: padding-box;*/
+            /*    background-clip: padding-box;*/
+            /*}*/
             .product-grid {
                 font-family: Arial, Helvetica, sans-serif;
                 text-align: center;
@@ -21,26 +19,21 @@
                 position: relative;
                 z-index: 1
             }
-
             .product-grid .product-image {
                 position: relative;
                 transition: all .3s ease 0s
             }
-
             .product-grid .product-image a {
                 display: block
             }
-
             .product-grid .product-image img {
                 width: 100%;
                 height: auto
             }
-
             .product-grid .pic-1 {
                 opacity: 1;
                 transition: all .3s ease-out 0s
             }
-
             .product-grid .product-content {
                 background-color: #fff;
                 text-align: center;
@@ -53,8 +46,8 @@
                 transition: all .3s
             }
             .product-grid .product-content h5{
-                font-family: Sans-Serif,Arial,Helvetica,"Open Sans";
-                font-size: 14px;
+                font-family: Sans-Serif,Arial,Helvetica;
+                font-size: 12px;
                 font-weight: bold;
             }
 
@@ -88,16 +81,6 @@
                         <div class="col-sm-6" style="margin-top: 10px">
                             <div class="input-group">
                                 <div class="input-group-btn" style="min-width: 100px;">
-                                    <label class="form-control" style="background: none; border: none; font-weight: bold">Barcode:</label>
-                                </div>
-                                <input type="text" class="form-control" id="barcode" name="barcode">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6" style="margin-top: 10px">
-                            <div class="input-group">
-                                <div class="input-group-btn" style="min-width: 100px;">
                                     <label class="form-control" style="background: none; border: none; font-weight: bold">Customer:</label>
                                 </div>
                                 <label class="select" style="width: 100%">
@@ -109,6 +92,16 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-sm-6" style="margin-top: 10px">
+                            <div class="input-group">
+                                <div class="input-group-btn" style="min-width: 100px;">
+                                    <label class="form-control" style="background: none; border: none; font-weight: bold">Barcode:</label>
+                                </div>
+                                <input type="text" class="form-control" id="barcode" name="barcode">
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-6">
                     <div class="group-category" style="height: 80px;overflow-y: scroll;">
@@ -117,57 +110,48 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div id="button-group">
-                    <button type="button" class="btn btn-success" id="btnCash" data-toggle="modal"
-                            data-target="#moneyModal"><i class="fa fa-money"></i></button>
-                    <button type="button" class="btn btn-success"><i class="fa fa-print"></i></button>
-                    <input type="text" value="admin" id="user" style="display: none">
+            <div class="row" style="margin: 10px 0px 10px 0px">
+                <div class="col-md-6">
+                    <button id="btn-pos-new" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> NEW</button>
+                    <button id="btn-pos-cash" class="btn btn-sm btn-success" data-toggle="modal" data-target="#moneyModal"><i class="fa fa-money"></i> CASH</button>
+                    <button id="btn-pos-print" class="btn btn-sm btn-success"><i class="fa fa-print"></i> PRINT</button>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6" style=" height: 65vh; overflow-y: scroll; border-style: solid; border-width: 2px; border-color: #0aa66e">
-                    <table id="tab_logic" class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th class="text-center"> # </th>
-                                <th class="text-center"> Description </th>
-                                <th class="text-center"> Qty </th>
-                                <th class="text-center"> Price </th>
-                                <th class="text-center"> Amount </th>
-                                <th class="text-center"> Action </th>
-                            </tr>
-                        </thead>
-                        <tbody id="tab_logic1">
-                        </tbody>
-                    </table>
-                    <div class="col-md-6 pull-right" >
-                        <table id="tab_logic_total" class="table table-bordered table-hover" >
+                    <div class="table-responsive">
+                        <table id="tbl_pos_item" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Description</th>
+                                    <th>Qty</th>
+                                    <th>Unit.Price</th>
+                                    <th>Disc.Amt</th>
+                                    <th>Sub.Amt</th>
+                                    <th>Total.Amt</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-6 pull-right" style="padding: 0px">
+                        <table id="tbl_grand_total" class="table table-bordered" style="background-color: #FFFFFF">
                             <tbody>
                                 <tr>
-                                    <th class="text-center" width="40%">Sub Total</th>
-                                    <td class="text-center" width="60%"><input type="number" name='sub_total'
-                                            placeholder='0.00' class="form-control" id="sub_total" readonly /></td>
+                                    <th width="60%">Sub Total</th>
+                                    <td id="total-subAmt" name="total_subAmt" align="right" width="40%" style="font-weight: bold;">0.00</td>
                                 </tr>
                                 <tr>
-                                    <th class="text-center" width="40%">Discount</th>
-                                    <td class="text-center" width="60%">
-                                        <div class="input-group mb-2 mb-sm-0">
-                                            <input type="number" class="form-control" id="discount" placeholder="0">
-                                            <div class="input-group-addon">%</div>
-                                        </div>
-                                    </td>
+                                    <th width="60%">Total Discount</th>
+                                    <td id="total-disc" name="total_disc" align="right" width="40%" style="font-weight: bold;">0.00</td>
                                 </tr>
                                 <tr>
-                                    <th class="text-center" width="40%">Dis. Amount</th>
-                                    <td class="text-center" width="60%"><input type="number" name='dis_amount'
-                                            id="dis_amount" placeholder='0.00' class="form-control" readonly /></td>
-                                </tr>
-                                <tr>
-                                    <th class="text-center" width="40%">Grand Total</th>
-                                    <td class="text-center" width="60%"><input type="number" name='total_amount'
-                                            id="total_amount" placeholder='0.00' class="form-control" readonly />
-                                    </td>
+                                    <th width="60%">Grand Total</th>
+                                    <td id="total-amt" name="total_amt" align="right" width="40%" style="font-weight: bold;">0.00</td>
                                 </tr>
                             </tbody>
                         </table>
