@@ -127,11 +127,40 @@ $(document).ready(function () {
                 "<td style=\"vertical-align:middle\">" + "0.00" + "</td>" +
                 "<td style=\"vertical-align:middle\">" + data.sale_price.toFixed(2) + "</td>" +
                 "<td style=\"vertical-align:middle\">" + data.sale_price.toFixed(2) + "</td>" +
-                "<td align=\'center\'> <a class=\"btn btn-xs btn-primary gb-edit-item\"> <i class=\"fa fa-edit\"></i></a> <a class=\"btn btn-xs btn-danger gb-remove-item\"> <i class=\"fa fa-trash-o\"></i></a></td>" +
+                "<td align=\'center\'> <a class=\"btn btn-xs btn-primary pos-edit-item\"> <i class=\"fa fa-edit\"></i></a> <a class=\"btn btn-xs btn-danger pos-remove-item\"> <i class=\"fa fa-trash-o\"></i></a></td>" +
                 "</tr>";
             $('#tbl-pos-item > tbody:last-child').append(item);
         }
     }
+
+    /* EVENT FOR REMOVE ITEM FROM TABLE */
+    $(document).on('click', '.pos-remove-item', function (event) {
+        event.preventDefault();
+        let rowindex  = $(this).closest('td').parent()[0].sectionRowIndex + 1;
+        let item_code = $(this).closest("tr").find("td:eq(0)").text();
+        let decs = $(this).closest("tr").find("td:eq(1)").text();
+        $.SmartMessageBox({
+            title: "Anachak Store",
+            content: "Do you want to delete item: " + item_code + "-" +  decs + "?",
+            buttons: '[No][Yes]'
+        }, function (ButtonPressed) {
+            if (ButtonPressed === "Yes") {
+                remove_pos_item_row(rowindex);
+            }
+        });
+    });
+
+    /* REMOVE ITEM ROW FROM TABLE */
+    function remove_pos_item_row(rowindex) {
+        $("table tr:eq(" + rowindex + ")").remove();
+        POSCalculateGrandAmt();
+    }
+
+    /* */
+    $(document).on("click", ".pos-edit-item", function (event) {
+        event.preventDefault();
+        dialog.dialog("open");
+    });
 
     /* SAVE POS */
     $(document).on("click","#btn-pos-print", function (event) {
@@ -233,4 +262,29 @@ $(document).ready(function () {
             }
         });
     }
+
+    let dialog = $("#modal-modify-item").dialog({
+        autoOpen: false,
+        width: 400,
+        resizable: false,
+        modal: true,
+        buttons: [{
+            html: "Cancel",
+            "class": "btn btn-default",
+            click: function () {
+                $(this).dialog("close");
+            }
+        }, {
+
+            html: "OK",
+            "class": "btn btn-success",
+            click: function () {
+                $(this).dialog("close");
+            }
+        }]
+    });
+
+    $("#add_tab").button().click(function () {
+        dialog.dialog("open");
+    });
 });
