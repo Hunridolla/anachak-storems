@@ -32,9 +32,26 @@ $(document).ready(function () {
         let href = "/items/view/" + item_id;
         $.get(href, function (data) {
             spreadPOSItem(data);
+            POSCalculateSubAmount();
             POSCalculateGrandAmt();
         });
     });
+
+    /* CALCULATE COLUMN SUBAMT AND TOTAL AMOUNT */
+    function POSCalculateSubAmount() {
+        let item_qty = 0;
+        let item_price = 0;
+        let sub_amount = 0;
+        let disc_amount = 0;
+        $("#tbl-pos-item > tbody > tr").each(function () {
+            item_qty = parseInt($('td', this).eq(2).text());
+            item_price = parseFloat($('td', this).eq(3).text());
+            disc_amount = parseFloat($('td', this).eq(4).text());
+            sub_amount = item_qty * item_price;
+            $(this).closest("tr").find("td:eq(5)").text(sub_amount.toFixed(2));
+            $(this).closest("tr").find("td:eq(6)").text((sub_amount - disc_amount).toFixed(2));
+        });
+    }
 
     /* FUNCTION CAL GRAND TOTAL */
     function POSCalculateGrandAmt() {
@@ -77,6 +94,7 @@ $(document).ready(function () {
             $.get(href, function (data) {
                 if (barcode == data.barcode) {
                     spreadPOSItem(data);
+                    POSCalculateSubAmount();
                     POSCalculateGrandAmt();
                     $("#barcode").val("");
                 }
@@ -87,18 +105,32 @@ $(document).ready(function () {
         }
     });
 
+    /* SPREAD EACH ITEM INTO TABLE */
     function spreadPOSItem(data) {
-        let item = "<tr>" +
-            "<td style=\"vertical-align:middle\">" + data.item_id + "</td>" +
-            "<td style=\"vertical-align:middle\">" + data.item_name + "</td>" +
-            "<td style=\"vertical-align:middle\">1</td>" +
-            "<td style=\"vertical-align:middle\">" + data.sale_price.toFixed(2) + "</td>" +
-            "<td style=\"vertical-align:middle\">" + "0.00" + "</td>" +
-            "<td style=\"vertical-align:middle\">" + data.sale_price.toFixed(2) + "</td>" +
-            "<td style=\"vertical-align:middle\">" + data.sale_price.toFixed(2) + "</td>" +
-            "<td align=\'center\'> <a class=\"btn btn-sm btn-primary gb-edit-item\"> <i class=\"fa fa-edit\"></i></a> <a class=\"btn btn-sm btn-danger gb-remove-item\"> <i class=\"fa fa-trash-o\"></i></a></td>" +
-            "</tr>";
-        $('#tbl-pos-item > tbody:last-child').append(item);
+        let item_qty = 0;
+        let isExist = false;
+        $('#tbl-pos-item > tbody  > tr').each(function () {
+            let item_code = $(this).closest("tr").find("td:eq(0)").text();
+            item_qty = parseInt($(this).closest("tr").find("td:eq(2)").text());
+            if (item_code == data.item_id){
+                $(this).closest("tr").find("td:eq(2)").text(item_qty + 1);
+                isExist = true;
+                return false;
+            }
+        });
+        if(!isExist){
+            let item = "<tr>" +
+                "<td style=\"vertical-align:middle\">" + data.item_id + "</td>" +
+                "<td style=\"vertical-align:middle\">" + data.item_name + "</td>" +
+                "<td style=\"vertical-align:middle\">1</td>" +
+                "<td style=\"vertical-align:middle\">" + data.sale_price.toFixed(2) + "</td>" +
+                "<td style=\"vertical-align:middle\">" + "0.00" + "</td>" +
+                "<td style=\"vertical-align:middle\">" + data.sale_price.toFixed(2) + "</td>" +
+                "<td style=\"vertical-align:middle\">" + data.sale_price.toFixed(2) + "</td>" +
+                "<td align=\'center\'> <a class=\"btn btn-xs btn-primary gb-edit-item\"> <i class=\"fa fa-edit\"></i></a> <a class=\"btn btn-xs btn-danger gb-remove-item\"> <i class=\"fa fa-trash-o\"></i></a></td>" +
+                "</tr>";
+            $('#tbl-pos-item > tbody:last-child').append(item);
+        }
     }
 
     /* SAVE POS */

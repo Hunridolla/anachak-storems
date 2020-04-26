@@ -83,8 +83,8 @@
                                 <div class="input-group-btn" style="min-width: 100px;">
                                     <label class="form-control" style="background: none; border: none; font-weight: bold">Customer:</label>
                                 </div>
-                                <label class="select" style="width: 100%">
-                                    <select id="customers" name="customers" class="form-control">
+                                <label class="select state-disabled" style="width: 100%">
+                                    <select id="customers" name="customers" class="form-control" disabled="disabled">
                                         <option th:each="data : ${customer}" th:value="${data.customer_id}"
                                             th:text="${data.company_name}"></option>
                                     </select>
