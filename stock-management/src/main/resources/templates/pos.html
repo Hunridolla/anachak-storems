@@ -115,7 +115,6 @@
                     <button id="btn-pos-new" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> NEW</button>
                     <button id="btn-pos-cash" class="btn btn-sm btn-success" data-toggle="modal" data-target="#moneyModal" disabled><i class="fa fa-money"></i> CASH</button>
                     <button id="btn-pos-print" class="btn btn-sm btn-success"><i class="fa fa-print"></i> SAVE [PRINT]</button>
-                    <button id="add_tab" class="btn btn-primary"> Add Tab </button>
                 </div>
             </div>
             <div class="row">
@@ -173,10 +172,9 @@
                     <div class="col-md-10" style="margin-top: 10px">
                         <div class="input-group">
                             <div class="input-group-btn" style="min-width: 120px;">
-                                <label class="form-control ctl_label">Rate:</label>
+                                <label class="form-control ctl_label">Qty:</label>
                             </div>
-                            <input id="pos-item-rate" class="form-control ctl_textbox" type="number" tabindex="1"
-                                   placeholder="0.00">
+                            <input id="pos-item-qty" name="md_item_qty" class="form-control ctl_textbox" type="number" tabindex="1" placeholder="0">
                         </div>
                     </div>
                 </div>
@@ -184,10 +182,9 @@
                     <div class="col-md-10" style="margin-top: 10px">
                         <div class="input-group">
                             <div class="input-group-btn" style="min-width: 120px;">
-                                <label class="form-control ctl_label">Qty:</label>
+                                <label class="form-control ctl_label">Rate:</label>
                             </div>
-                            <input id="pos-item-qty" name="md_item_qty" class="form-control ctl_textbox" type="number" tabindex="2"
-                                   placeholder="0">
+                            <input id="pos-item-rate" class="form-control ctl_textbox" type="number" tabindex="2" placeholder="0.00">
                         </div>
                     </div>
                 </div>
@@ -197,8 +194,7 @@
                             <div class="input-group-btn" style="min-width: 120px;">
                                 <label class="form-control ctl_label">Discount:</label>
                             </div>
-                            <input id="pos-item-disc" name="md_item_disc" class="form-control ctl_textbox" type="number" tabindex="3"
-                                   placeholder="0.00">
+                            <input id="pos-item-disc" name="md_item_disc" class="form-control ctl_textbox" type="number" tabindex="3" placeholder="0.00">
                         </div>
                     </div>
                 </div>

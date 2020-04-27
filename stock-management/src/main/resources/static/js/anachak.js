@@ -173,13 +173,6 @@ $(document).on('click', '.gb-remove-item', function () {
     }, function (ButtonPressed) {
         if (ButtonPressed === "Yes") {
             gb_remove_item_row(global_variables.gbl_rowindex);
-            // $.smallBox({
-            //     title: "Anachak Store",
-            //     content: "<i class='fa fa-clock-o'></i> <i>Deleted Successfully!</i>",
-            //     color: "#659265",
-            //     iconSmall: "fa fa-check",
-            //     timeout: 1000
-            // });
         }
     });
     e.preventDefault();

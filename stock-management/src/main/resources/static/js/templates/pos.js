@@ -159,6 +159,13 @@ $(document).ready(function () {
     /* */
     $(document).on("click", ".pos-edit-item", function (event) {
         event.preventDefault();
+        global_variables.gbl_rowindex  = $(this).closest('td').parent()[0].sectionRowIndex + 1;
+        let cur_item_qty = $(this).closest("tr").find("td:eq(2)").text();
+        let cur_rate = $(this).closest("tr").find("td:eq(3)").text();
+        let cur_disc = $(this).closest("tr").find("td:eq(4)").text();
+        $("#pos-item-qty").val(cur_item_qty);
+        $("#pos-item-rate").val(cur_rate);
+        $("#pos-item-disc").val(cur_disc);
         dialog.dialog("open");
     });
 
@@ -263,28 +270,36 @@ $(document).ready(function () {
         });
     }
 
+    /* EVENT GET MODIFY DATA INTO ROW */
+    function getEditedItem(){
+        let qty = $("#pos-item-qty").val();
+        let rate = parseFloat($("#pos-item-rate").val());
+        let disc = parseFloat($("#pos-item-disc").val());
+        $("#tbl-pos-item tr:nth-child(" + global_variables.gbl_rowindex + ") td:nth-child(3)").text(parseInt(qty));
+        $("#tbl-pos-item tr:nth-child(" + global_variables.gbl_rowindex + ") td:nth-child(4)").text(rate.toFixed(2));
+        $("#tbl-pos-item tr:nth-child(" + global_variables.gbl_rowindex + ") td:nth-child(5)").text(disc.toFixed(2));
+        POSCalculateSubAmount();
+        POSCalculateGrandAmt();
+    }
+
     let dialog = $("#modal-modify-item").dialog({
         autoOpen: false,
         width: 400,
         resizable: false,
         modal: true,
         buttons: [{
+            html: "OK",
+            "class": "btn btn-success",
+            click: function () {
+                getEditedItem();
+                $(this).dialog("close");
+            }
+        }, {
             html: "Cancel",
             "class": "btn btn-default",
             click: function () {
                 $(this).dialog("close");
             }
-        }, {
-
-            html: "OK",
-            "class": "btn btn-success",
-            click: function () {
-                $(this).dialog("close");
-            }
         }]
-    });
-
-    $("#add_tab").button().click(function () {
-        dialog.dialog("open");
     });
 });
