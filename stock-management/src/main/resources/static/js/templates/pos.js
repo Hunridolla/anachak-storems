@@ -81,6 +81,7 @@ $(document).ready(function () {
         $("#tbl_grand_total tr:nth-child(2) td:nth-child(2)").text('0.00');
         $("#tbl_grand_total tr:nth-child(3) td:nth-child(2)").text('0.00');
         $("#barcode").val("");
+        $("#receipt-id").val("");
         $(function(){
             $("#barcode").focus();
         });
@@ -172,6 +173,11 @@ $(document).ready(function () {
     /* SAVE POS */
     $(document).on("click","#btn-pos-print", function (event) {
         event.preventDefault();
+        let receipt_id = $("#receipt-id").val();
+        if(receipt_id !== "") {
+            alert_message("This data is already exist!");
+            return;
+        }
         let invoice_id = "";
         let invoice_date = new Date();
         let customer_id = $("#customers").val();
@@ -182,6 +188,9 @@ $(document).ready(function () {
         let sub_amt = toNumber($("#tbl_grand_total tr:nth-child(1) td:nth-child(2)").text());
         let disc_amt = toNumber($("#tbl_grand_total tr:nth-child(2) td:nth-child(2)").text());
         let total_amt = toNumber($("#tbl_grand_total tr:nth-child(3) td:nth-child(2)").text());
+        if(total_amt === 0){
+            return;
+        }
         /* INVOICE */
         $.ajax({
             async: false,
@@ -202,7 +211,7 @@ $(document).ready(function () {
             }
         });
         /* RECEIPT */
-        let receipt_id = "";
+        receipt_id = "";
         $.ajax({
             async: false,
             dataType: "json",
@@ -216,6 +225,7 @@ $(document).ready(function () {
                 let receipt_id  = data.receipt_id;
                 savePOSReceiptDetail(receipt_id, invoice_id);
                 alert_message("You have committed successfully!");
+                $("#receipt-id").val(receipt_id);
             },
             error: function (event) {
                 alert_message("Error: " + event);

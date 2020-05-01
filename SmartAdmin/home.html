@@ -567,7 +567,19 @@
 </script>
 <script>
     $("#btn-show-bill").on('click', function (event){
-        $("#show-bills").modal();
+                var printWindow = window.open('', '', 'height=700,width=900');
+                printWindow.document.write('<html><head><title></title>');
+                printWindow.document.write('<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" >');
+                printWindow.document.write('<link rel="stylesheet" href="/css/custom.css" type="text/css"/>');
+                printWindow.document.write('</head><body>');
+                printWindow.document.write('<table class=\"table table-bordered\"><thead><tr><th>Firstname</th><th>Lastname</th><th>Email</th></tr></thead><tbody><tr><td>John</td><td>Doe</td><td>john@example.com</td></tr><tr><td>Mary</td><td>Moe</td><td>mary@example.com</td></tr></tbody></table>');
+                printWindow.document.write('</body></html>');
+                printWindow.document.close();
+                printWindow.onload=function(){
+                    printWindow.focus();                                         
+                    printWindow.print();
+                    printWindow.close();
+                }
     });
 </script>
 </body>
